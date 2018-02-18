@@ -75,6 +75,18 @@
           <td>{{article.motifs}}</td>
       </tr>
 
+     {% if article.taille %}
+      <tr>
+          <th>{% trans "Taille" %}</th>
+          <td>{{article.get_taille_display}}</td>
+      </tr>
+     {% endif %}
+     {% if article.taille_nombre %}
+      <tr>
+          <th>{% trans "Taille-No" %}</th>
+          <td>{{article.taille_nombre}}</td>
+      </tr>
+     {% endif %}
       <tr>
         <th>{% trans "Quantité en stock" %}</th>
         <td>{{article.quantite}}</td>

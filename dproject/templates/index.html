@@ -100,6 +100,12 @@
                   <!--{% else %}-->
                   <!--<p><em>{% trans "prix inconnu" %}</em></p>-->
                   <!--{% endif %}-->
+                  {% if a.taille %}
+                  <p>{% trans "Taille" %}: {{a.get_taille_display}}</p>
+                  {% endif %}
+                  {% if a.taille_nombre %}
+                  <p>{% trans "Taille" %}: {{a.taille_nombre}}</p>
+                  {% endif %}
                 </div>
                {% endthumbnail %}
             </div>
