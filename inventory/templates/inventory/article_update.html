@@ -1,10 +1,26 @@
 {% extends "inventex.html" %}
 {% load static %}
 {% load i18n %}
+{% load thumbnail %}
 {% load crispy_forms_tags %}
 {% block content %}
 <div class="container">
   <h3>{% trans "Modification de l'article-ID:"%} {{article.pk}}</h3>
 {% crispy form %}
+
+  <div class="pic_container">
+    {% for image in article.photo_set.all %}
+    {% thumbnail image.photo  "200x200" crop="center" as thumbnail %}
+  <div class="pic">
+    <p>
+        <a href="{{ image.photo.url }}" alt="{% trans 'image de ' %}{{article.nom}}-ID: {{article.pk}}">
+        <img src="{{ thumbnail.url }}" alt="The thumbnail" style="width: {{ thumbnail.width }}">
+        </a>
+    </p>
+  </div>
+    {% endthumbnail %}
+{% endfor %}
+</div>
+
 </div>
 {% endblock %}

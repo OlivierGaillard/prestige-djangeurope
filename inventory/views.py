@@ -165,6 +165,12 @@ class ArticleUpdateView(UpdateView):
         return reverse('inventory:articles')
 
 
+class SoldeUpdateView(ArticleUpdateView):
+
+    def get_success_url(self):
+        return reverse('inventory:soldes')
+
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -177,6 +183,49 @@ class ArticlesListView(ListView):
         enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
         qs = Article.objects.filter(entreprise=enterprise_of_current_user)
         return qs
+
+@method_decorator(login_required, name='dispatch')
+class SoldesListView(ListView):
+    context_object_name = 'articles'
+    template_name = 'inventory/soldes.html'
+    model = Article
+
+    def get_queryset(self):
+        enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
+        qs = Article.objects.filter(entreprise=enterprise_of_current_user)
+        qs = qs.filter(solde='S')
+        return qs
+
+    def get_context_data(self, **kwargs):
+        context = super(SoldesListView, self).get_context_data()
+        articles = qs = self.get_queryset()
+        summary = {}
+        summary['count'] = len(articles)
+
+        paginator = Paginator(articles, 25)
+        page = self.request.GET.get('page')
+        start_index = 1
+        try:
+            articles = paginator.page(page)
+            start_index = articles.start_index()
+        except PageNotAnInteger:
+            articles = paginator.page(1)
+        except EmptyPage:
+            articles = paginator.page(paginator.num_pages)  # last page
+            start_index = articles.start_index()
+        context['articles'] = articles
+
+
+        no_selling_prices = qs.filter(prix_total = 0.0)
+        summary['selling_price_zero'] = no_selling_prices_count = len(no_selling_prices)
+        summary['no_selling_price_percent'] = int((no_selling_prices_count / summary['count']) * 100)
+
+        context['summary'] = summary
+        context['start_index'] = start_index
+        return context
+
+
+
 
 @method_decorator(login_required, name='dispatch')
 class ArticleCreateView(CreateView):

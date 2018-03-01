@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% load thumbnail %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+
+<h3>{% trans "Articles en solde" %}</h3>
+
+
+      <table class="table">
+        <thead>
+        <tr>
+          <th colspan="2"></th>
+          <th>{% trans "Count" %}</th>
+          <th>&percnt;</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="row">
+          <th  class="col-xs-2">{% trans "Total" %}</th>
+          <td class="col-xs-1">{{summary.count}}</td>
+          <td class="col-xs-9">&ndash;</td>
+        </tr>
+
+
+        <tr class="row">
+            <th class="col-xs-2">{% trans "Without selling price" %}</th>
+            <td class="col-xs-1">{{summary.selling_price_zero}}</td>
+            <td class="col-xs-9">
+              <div class='progress'>
+                <div title="{{summary.no_name}}" class="progress-bar progress-bar-warning" role="progressbar"
+                   style="width: {{summary.no_selling_price_percent}}%;">
+                    {{summary.no_selling_price_percent}}%
+                </div>
+              </div>
+            </td>
+        </tr>
+        </tbody>
+      </table>
+
+
+
+  <p>Vous pouvez rajouter le prix de vente simplement en cliquant sur le <strong>prix total</strong>.</p>
+
+    <table class="table table-light">
+      <thead class="thead-light">
+      <tr>
+          <th>{% trans 'Nr.' %}</th>
+          <th>{% trans 'Aperçu' %}</th>
+          <th>{% trans "Marque" %}</th>
+          <th>{% trans "Quantité" %}</th>
+          <th>{% trans "Prix total" %}</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+      {% for a in articles %}
+      <tr>
+        <td>{{ forloop.counter0|add:start_index}} </td>
+          {% if a.photo_set.all %}
+          {% thumbnail a.photo_set.first.photo  "50x50" crop="center" as im %}
+          <td><img src="{{ im.url }}" alt="The thumbnail" style="width: {{ im.width }}"></td>
+          {% endthumbnail %}
+          {% else %}
+          <td>pas photo</td>
+          {% endif %}
+          <td>{{ a.marque }}</td>
+          {% if a.quantite > 0 %}
+           <td><span class="badge">{{ a.quantite }}</span></td>
+          {% else %}
+          <td><span class="badge badge-danger">{{ a.quantite }}</span></td>
+          {% endif %}
+          <td><a title="{% trans 'Modifier' %}" href="/inventory/solde_update/{{a.pk}}">{{a.prix_total|intcomma}}</a></td>
+      </tr>
+
+      {% endfor %}
+      </tbody>
+    </table>
+
+  {% if articles.has_other_pages %}
+  <ul class="pagination">
+    {% if articles.has_previous %}
+      <li><a href="?page={{ articles.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+      <li class="disabled"><span>&laquo;</span></li>
+    {% endif %}
+    {% for i in articles.paginator.page_range %}
+      {% if articles.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <!--<li><a href="?page={{ i }}">{{ i }}</a></li>-->
+        <li><a href="?{{ q }}&page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if articles.has_next %}
+
+    <li><a href="?{{ q }}&page={{ articles.next_page_number }}">&raquo;</a></li>
+    <!--<li><a href="?marque__nom__icontains=&nom__icontains=&id=&genre_article=&type_client=&solde=S">&raquo;</a></li>-->
+    {% else %}
+      <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+    </div>
+{% endblock %}
+{% block footer %}
+{% endblock %}
+
