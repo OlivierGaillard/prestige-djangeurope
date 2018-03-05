@@ -36,8 +36,9 @@
           <a class="navbar-brand" href="/">Prestigemikafriq</a>
         </div>
         <ul class="nav navbar-nav">
-            <li><a href="/"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></li>
+            <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
             <li><a href="{% url 'about' %}">{% trans 'About' %}</a></li>
+            <!--Language change menu-->
             <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">{{ LANGUAGE_CODE }}<span class="caret"></span></a>
               <ul class="dropdown-menu">{% for lang in LANGUAGES %}
@@ -73,18 +74,29 @@
                 </ul>
             </li>
             {% endif %}
+
+            {%  if user.is_authenticated %}
+
+            <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
+            {% else %}
+            <li>
+              <a class="active" href="{% url 'login' %}">{% trans 'Log in' %} <span class="fa fa-sign-in"></span></a>
+            </li>
+            {% endif %}
+
+            {% if user.is_authenticated %}
             <li class="dropdown">
-              <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin<span class="caret"></span></a>
+                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin
+                  <span class="caret"></span>
+                </a>
                 <ul class="dropdown-menu">
                   <li><a href="#">{% trans 'Profile' %}</a></li>
                   <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
-                  {% if user.is_authenticated %}
-                  <li><a href="{% url 'logout' %}">{% trans 'Log out' %}</a></li>
-                  {% else %}
-                  <li><a href="{% url 'login' %}">{% trans 'Log in' %}</a></li>
-                  {% endif %}
+
                 </ul>
             </li>
+            {% endif %}
+
           </ul>
 
       </div>
