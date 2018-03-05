@@ -84,18 +84,18 @@
             </li>
             {% endif %}
 
-            {% if user.is_authenticated %}
-            <li class="dropdown">
-                <a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin
-                  <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">{% trans 'Profile' %}</a></li>
-                  <li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>
+            <!--{% if user.is_authenticated %}-->
+            <!--<li class="dropdown">-->
+                <!--<a class="dropdown-toggle" href="#" data-toggle="dropdown">Admin-->
+                  <!--<span class="caret"></span>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                  <!--<li><a href="#">{% trans 'Profile' %}</a></li>-->
+                  <!--<li><a href="{% url 'admin:index' %}">{% trans 'Admin' %}</a></li>-->
 
-                </ul>
-            </li>
-            {% endif %}
+                <!--</ul>-->
+            <!--</li>-->
+            <!--{% endif %}-->
 
           </ul>
 
