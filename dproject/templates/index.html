@@ -106,6 +106,7 @@
                   {% if a.taille_nombre %}
                   <p>{% trans "Taille" %}: {{a.taille_nombre}}</p>
                   {% endif %}
+                  {% if a.prix_total %}<p>Prix: {{ a.prix_total|floatformat:"0"|intcomma }}</p>{% endif %}
                 </div>
                {% endthumbnail %}
             </div>
