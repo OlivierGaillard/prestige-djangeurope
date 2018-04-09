@@ -194,13 +194,14 @@ class SoldesListView(ListView):
         enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
         qs = Article.objects.filter(entreprise=enterprise_of_current_user)
         qs = qs.filter(solde='S')
+        qs = qs.filter(prix_total=0.0)
         return qs
 
     def get_context_data(self, **kwargs):
         context = super(SoldesListView, self).get_context_data()
         articles = qs = self.get_queryset()
         summary = {}
-        summary['count'] = len(articles)
+        summary['count'] = len(Article.objects.filter(solde='S'))
 
         paginator = Paginator(articles, 25)
         page = self.request.GET.get('page')
