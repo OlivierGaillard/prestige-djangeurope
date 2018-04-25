@@ -81,7 +81,6 @@
           <th>{% trans 'Aperçu' %}</th>
           <th>{% trans 'Type de client' %}</th>
           <th>{% trans "Genre d'article" %}</th>
-          <th>{% trans "Date d'ajout" %}</th>
           <th>{% trans "Nom" %}</th>
           <th>{% trans "Marque" %}</th>
           <th>{% trans "Quantité" %}</th>
@@ -106,10 +105,7 @@
           {% endif %}
           <td>{{ a.get_type_client_display}}</td>
           <td>{{ a.get_genre_article_display }}</td>
-          <td>{{ a.date_ajout }} {% if a.notes %}
-              <br><span class="badge">{% trans "Possède une note" %}</span>
-              {% endif %}
-          </td>
+
            <td> <a title="{% trans 'Cliquer pour voir les détails' %}" href="/inventory/article_detail/{{a.pk}}">{{ a.nom }}</a>
            </td>
           <td>{{ a.marque }}</td>

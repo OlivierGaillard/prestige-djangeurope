@@ -27,11 +27,6 @@
 
   <table class="table">
     <tbody>
-    <tr>
-        <th>{% trans 'No photo' %}</th>
-        <td>{{article.photo_no|default_if_none:"à chercher"}}</td>
-    </tr>
-
       <tr>
         <th>{% trans "Date d'arrivage" %}</th><td>{{article.arrivage.date_arrivee}}</td>
       </tr>
@@ -39,10 +34,6 @@
       <tr>
           <th>{% trans "Nom de l'arrivage" %}</th>
         <td>{{article.arrivage.nom}}</td>
-      </tr>
-      <tr>
-          <th>{% trans "Date d'ajout" %}</th>
-        <td>{{article.date_ajout}}</td>
       </tr>
       <tr>
           <th>{% trans "Client" %}</th>
@@ -62,18 +53,6 @@
           <td>{{article.get_solde_display}}</td>
       </tr>
 
-      <tr>
-          <th>{% trans "Couleurs / quantités" %}</th>
-          <td>{{article.couleurs_quantites}}</td>
-      </tr>
-      <tr>
-          <th>{% trans "Notes" %}</th>
-          <td>{{article.notes}}</td>
-      </tr>
-      <tr>
-          <th>{% trans "Motifs" %}</th>
-          <td>{{article.motifs}}</td>
-      </tr>
 
      {% if article.taille %}
       <tr>
@@ -95,6 +74,11 @@
         <th>{% trans "Prix d'achat" %}</th>
         <!--<td>{{article.prix_achat|default_if_none:"<em>à renseigner</em>"}}</td>-->
         <td>{{article.prix_total|default_if_none:"<em>à renseigner</em>"}}</td>
+      </tr>
+
+      <tr>
+        <th>{% trans "Prix de vente" %}</th>
+        <td>{{article.selling_price|default_if_none:"<em>à renseigner</em>"}}</td>
       </tr>
 
     </tbody>
