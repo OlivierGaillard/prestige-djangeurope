@@ -106,7 +106,7 @@
                   {% if a.taille_nombre %}
                   <p>{% trans "Taille" %}: {{a.taille_nombre}}</p>
                   {% endif %}
-                  {% if a.prix_total %}<p>Prix: {{ a.prix_total|floatformat:"0"|intcomma }}</p>{% endif %}
+                  {% if a.selling_price %}<p>Prix: {{ a.selling_price|floatformat:"0"|intcomma }}</p>{% endif %}
                 </div>
                {% endthumbnail %}
             </div>
@@ -139,15 +139,6 @@
 
 {% endif %}
 
-       {% if DEV %}
-       <div class="info alert-success">
-         <h3>{% trans "Info de connexion pour ce site de test" %}</h3>
-         <ul>
-           <li>Login: test</li>
-           <li>Password: blacksnow</li>
-         </ul>
-       </div>
-       {% endif %}
   </div>
 
 

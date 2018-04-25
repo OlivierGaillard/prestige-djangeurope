@@ -43,7 +43,7 @@
 
 
 
-  <p>Vous pouvez rajouter le prix de vente simplement en cliquant sur le <strong>prix total</strong>.</p>
+  <p>Vous pouvez rajouter le prix de vente simplement en cliquant sur le <strong>prix de vente</strong>.</p>
 
     <table class="table table-light">
       <thead class="thead-light">
@@ -52,7 +52,7 @@
           <th>{% trans 'Aperçu' %}</th>
           <th>{% trans "Marque" %}</th>
           <th>{% trans "Quantité" %}</th>
-          <th>{% trans "Prix total" %}</th>
+          <th>{% trans "Prix de vente" %}</th>
       </tr>
       </thead>
 
@@ -74,7 +74,7 @@
           {% else %}
           <td><span class="badge badge-danger">{{ a.quantite }}</span></td>
           {% endif %}
-          <td><a title="{% trans 'Modifier' %}" href="/inventory/solde_update/{{a.pk}}">{{a.prix_total|intcomma}}</a></td>
+          <td><a title="{% trans 'Modifier' %}" href="/inventory/solde_update/{{a.pk}}">{{a.selling_price|intcomma}}</a></td>
       </tr>
 
       {% endfor %}
