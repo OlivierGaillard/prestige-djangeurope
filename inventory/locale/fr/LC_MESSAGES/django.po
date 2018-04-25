@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-01 09:50+0100\n"
+"POT-Creation-Date: 2018-04-25 10:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,8 +38,8 @@ msgstr ""
 msgid "-"
 msgstr ""
 
-#: inventory/models.py:124 inventory/models.py:150
-#: inventory/templates/inventory/articles.html:51 inventory/views.py:34
+#: inventory/models.py:124 inventory/templates/inventory/articles.html:51
+#: inventory/views.py:34
 msgid "en solde"
 msgstr ""
 
@@ -58,8 +58,20 @@ msgstr ""
 msgid "Nom"
 msgstr ""
 
-#: inventory/models.py:142
+#: inventory/models.py:139 inventory/templates/inventory/article.html:95
+msgid "Prix d'achat"
+msgstr ""
+
+#: inventory/models.py:140
+msgid "Prix de vente"
+msgstr ""
+
+#: inventory/models.py:143
 msgid "Arrivage"
+msgstr ""
+
+#: inventory/models.py:151
+msgid "price reduced"
 msgstr ""
 
 #: inventory/templates/inventory/article.html:8
@@ -151,10 +163,6 @@ msgstr ""
 msgid "Quantité en stock"
 msgstr ""
 
-#: inventory/templates/inventory/article.html:95
-msgid "Prix d'achat"
-msgstr ""
-
 #: inventory/templates/inventory/article.html:113
 msgid "Ajouter au panier"
 msgstr ""
@@ -169,7 +177,7 @@ msgstr ""
 
 #: inventory/templates/inventory/article.html:131
 #: inventory/templates/inventory/articles.html:121
-#: inventory/templates/inventory/soldes.html:80
+#: inventory/templates/inventory/soldes.html:77
 msgid "Modifier"
 msgstr ""
 
@@ -306,3 +314,8 @@ msgstr ""
 #: inventory/views.py:40
 msgid "quantité supérieure à"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Without selling price"
+#~ msgid "Selling price"
+#~ msgstr "Sans prix de vente"

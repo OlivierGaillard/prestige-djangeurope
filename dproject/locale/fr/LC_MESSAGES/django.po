@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-01 09:50+0100\n"
+"POT-Creation-Date: 2018-04-25 10:18+0200\n"
 "PO-Revision-Date: 2017-10-11 08:40+0000\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
@@ -51,66 +51,61 @@ msgstr ""
 msgid "Imprint"
 msgstr "Imprimer"
 
-#: dproject/templates/base.html:50
+#: dproject/templates/base.html:40
 msgid "About"
 msgstr "À propos de nous"
 
-#: dproject/templates/base.html:66
+#: dproject/templates/base.html:57
 msgid "Search on the site"
 msgstr "Rechercher sur le site"
 
-#: dproject/templates/base.html:76
+#: dproject/templates/base.html:66
 msgid "Caisse"
 msgstr ""
 
-#: dproject/templates/base.html:80 dproject/templates/base.html:115
+#: dproject/templates/base.html:68
 msgid "Liste des articles"
 msgstr ""
 
-#: dproject/templates/base.html:81 dproject/templates/base.html:116
+#: dproject/templates/base.html:69
 msgid "Gérer les soldes"
 msgstr ""
 
-#: dproject/templates/base.html:82 dproject/templates/base.html:117
+#: dproject/templates/base.html:70
 msgid "Contenu du panier"
 msgstr ""
 
-#: dproject/templates/base.html:83 dproject/templates/base.html:118
+#: dproject/templates/base.html:71
 msgid "Ventes"
 msgstr ""
 
-#: dproject/templates/base.html:84 dproject/templates/base.html:119
+#: dproject/templates/base.html:72
 msgid "Clients"
 msgstr ""
 
-#: dproject/templates/base.html:85 dproject/templates/base.html:120
+#: dproject/templates/base.html:73
 msgid "Ajouter un client"
 msgstr ""
 
-#: dproject/templates/base.html:96
-msgid "Profile"
-msgstr "Profil"
-
-#: dproject/templates/base.html:97 dproject/templates/base.html:121
-msgid "Admin"
-msgstr ""
-
-#: dproject/templates/base.html:98 dproject/templates/base.html:122
+#: dproject/templates/base.html:80
 msgid "Log out"
 msgstr ""
 
-#: dproject/templates/base.html:102 dproject/templates/base.html:124
-#: dproject/templates/registration/login.html:5
+#: dproject/templates/base.html:83 dproject/templates/registration/login.html:5
 #: dproject/templates/registration/login.html:12
 #: dproject/templates/registration/login.html:18
 msgid "Log in"
 msgstr ""
 
-#: dproject/templates/base.html:111
-msgid "Menu pour mobile"
+#: dproject/templates/base.html:93
+msgid "Profile"
+msgstr "Profil"
+
+#: dproject/templates/base.html:94
+msgid "Admin"
 msgstr ""
 
-#: dproject/templates/base.html:148
+#: dproject/templates/base.html:126
 msgid "créé par"
 msgstr ""
 
@@ -228,19 +223,19 @@ msgstr ""
 msgid "Taille"
 msgstr ""
 
-#: dproject/templates/index.html:135
+#: dproject/templates/index.html:136
 msgid "Quelque chose vous tente?"
 msgstr ""
 
-#: dproject/templates/index.html:136
+#: dproject/templates/index.html:137
 msgid "Alors envoyez- nous un petit courriel à cette"
 msgstr ""
 
-#: dproject/templates/index.html:136
+#: dproject/templates/index.html:137
 msgid "adresse"
 msgstr ""
 
-#: dproject/templates/index.html:143
+#: dproject/templates/index.html:144
 msgid "Info de connexion pour ce site de test"
 msgstr ""
 

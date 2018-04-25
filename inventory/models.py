@@ -136,7 +136,8 @@ class Article(models.Model):
     entreprise = models.ForeignKey(Enterprise, default=2)
     quantite   = models.IntegerField(default=1)
     prix_unitaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0)
+    prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Prix d'achat"))
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Prix de vente"))
     remise     = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0.0)
     date_ajout = models.DateField(auto_now_add=True)
     arrivage   = models.ForeignKey(Arrivage, null=True, blank=True, default=3, verbose_name=_('Arrivage'))
@@ -147,7 +148,7 @@ class Article(models.Model):
     taille = models.CharField(max_length=2, choices=tailles_choices, null=True, blank=True)
     taille_nombre = models.PositiveSmallIntegerField(null=True, blank=True)
     local = models.CharField(max_length=20, default='bas')
-    solde = models.CharField(_("en solde"), max_length=1, choices=solde_choices, default='N')
+    solde = models.CharField(_("soldé"), max_length=1, choices=solde_choices, default='N')
     ventes = models.CharField(max_length=200, null=True, blank=True, help_text="25000, 35000")
     tailles_vendues = models.CharField(max_length=200, null=True, blank=True, help_text="(XL, 1), (M, 2)")
 
