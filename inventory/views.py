@@ -38,6 +38,9 @@ class ArticleFilter(FilterSet):
     type_client = ChoiceFilter(choices=clients_choices, label=_('type de client'))
     solde = ChoiceFilter(choices=solde_choices)
     quantite__gt = NumberFilter(name='quantite', lookup_expr='gt', label=_('quantité supérieure à'))
+    # selling_price__gte = NumberFilter(name='selling_price', lookup_expr='gte',
+    #                                  label=_('prix de vente plus grand ou égal'))
+
 
     class Meta:
         model = Article
@@ -45,50 +48,11 @@ class ArticleFilter(FilterSet):
                   'nom': ['icontains'],
                   'id' : ['exact'],
                   'quantite' : ['exact'],
+                  'selling_price' : ['exact'],
+                  'prix_total' : ['exact']
                   }
 
 
-# @method_decorator(login_required, name='dispatch')
-# class ArticleFilteredView(ListView):
-#     filterset_class = ArticleFilter
-#     template_name = 'inventory/articles.html' # filtered list
-#     context_object_name = 'articles'
-#
-#     def get_queryset(self):
-#         enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
-#         queryset = Article.objects.filter(entreprise=enterprise_of_current_user)
-#         filtered_qs = ArticleFilter(self.request.GET,
-#                                  queryset=queryset).qs
-#         return filtered_qs
-#
-#     def test_func(self):
-#         return  Employee.is_current_user_employee(self.request.user)
-#
-#     def get_context_data(self, **kwargs):
-#         context = super(ArticleFilteredView, self).get_context_data(**kwargs)
-#         enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
-#         context['enterprise'] = enterprise_of_current_user
-#
-#         if 'filter' in context.keys():
-#             print('filter in context')
-#         else:
-#             print('filter not in context')
-#         qs = self.get_queryset()
-#         f = ArticleFilter(self.request.GET,
-#                                queryset=qs)
-#         page = self.request.GET.get('page', 1)
-#         paginator = Paginator(qs, 50)
-#         try:
-#             articles = paginator.page(page)
-#         except PageNotAnInteger:
-#             articles = paginator.page(1)
-#         except EmptyPage:
-#             articles = paginator.page(paginator.num_pages)
-#         context['articles'] = articles
-#         context['count'] = qs.count()
-#         context['filter'] = f
-#         return context
-#
 
 @login_required()
 def articles(request):
