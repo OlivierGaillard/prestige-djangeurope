@@ -25,6 +25,18 @@ class TestInventory(TestCase):
 
 
     #@isolate_apps('inventory')
+
+    # def test_create_two_articles_with_same_name_but_two_branches(self):
+    #     # test uniqueness too? One article could have the same name if it belongs to different branches.
+    #     # todo: validate this business case with client
+    #
+    #     boutique = Branch.objects.create(name="Boutique")
+    #     atelier  = Branch.objects.create(name="Atelier")
+    #     a1 = Article.objects.create(branch=atelier, name='aa1', quantity=10, purchasing_price=20, photo='aa')
+    #     a2 = Article.objects.create(branch=boutique, name='aa1', quantity=10, purchasing_price=20, photo='aaa' )
+    #     self.assertIsNotNone(a2)
+
+
     def test_createForm(self):
         data = {'type_client': 'F',
                 'genre_article' : 'V',

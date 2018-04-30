@@ -9,10 +9,10 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter
 from django_filters.views import FilterView
-from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from .models import Article, Employee, Photo
-from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm
+from .models import Branch, Article, Employee, Photo
+from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm, BranchCreateForm, BranchUpdateForm
 from cart.cartutils import article_already_in_cart, get_cart_items
 
 class ArticleFilter(FilterSet):
@@ -247,3 +247,35 @@ def upload_pic(request, pk):
         article = Article.objects.get(pk=pk)
         return render(request, "inventory/photo_add.html", {'article': article})
 
+@method_decorator(login_required, name='dispatch')
+class BranchListView(ListView):
+    model = Branch
+    template_name = 'inventory/branches.html'
+    context_object_name = 'branches'
+
+@method_decorator(login_required, name='dispatch')
+class BranchCreateView(CreateView):
+    model = Branch
+    template_name = 'inventory/branch_create.html'
+    form_class = BranchCreateForm
+
+
+@method_decorator(login_required, name='dispatch')
+class BranchDetailView(DetailView):
+    model = Branch
+    template_name = 'inventory/branch_detail.html'
+    context_object_name = 'branch'
+
+@method_decorator(login_required, name='dispatch')
+class BranchDeleteView(DeleteView):
+    model = Branch
+    template_name = 'inventory/branch_delete.html'
+    success_url = 'inventory/branches'
+    context_object_name = 'branch'
+
+@method_decorator(login_required, name='dispatch')
+class BranchEditView(UpdateView):
+    model = Branch
+    template_name = 'inventory/branch_update.html'
+    context_object_name = 'branch'
+    form_class = BranchUpdateForm

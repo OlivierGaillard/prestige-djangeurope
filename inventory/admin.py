@@ -17,7 +17,7 @@ admin.site.register(Arrivage, ArrivageAdmin)
 
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['id', 'entreprise', 'type_client', 'nom', 'marque', 'local', 'quantite', 'type_taille', 'taille', 'taille_nombre', 'solde',
-                    'couleurs_quantites', 'motifs', 'photo_no', 'notes', 'ventes', 'tailles_vendues']
+                    'couleurs_quantites', 'motifs', 'notes', 'ventes', 'tailles_vendues']
 
 admin.site.register(Article, ArticleAdmin)
 #admin.site.register(Photo)

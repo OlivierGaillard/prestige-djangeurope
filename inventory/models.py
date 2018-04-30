@@ -82,6 +82,24 @@ class Frais(models.Model):
         verbose_name_plural = 'Frais'
 
 
+class Branch(models.Model):
+    """One enterprise can have multiple branches.
+    For sample one shop and one production unit.
+    """
+    name = models.CharField(_('Name'), max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return reverse('inventory:branch_detail', kwargs={'pk' : self.pk})
+
+    class Meta:
+        ordering = ['name']
+        verbose_name = _('Branch')
+
+
+
 class Marque(models.Model):
     nom = models.CharField(max_length=80, unique=True)
 
@@ -128,7 +146,8 @@ class Article(models.Model):
         ('2', 'US'),
         ('3', 'UK')
     )
-    photo_no = models.PositiveSmallIntegerField(null=True, blank=True, help_text="no de la prise de vue", unique=True)
+
+    branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.SET_NULL)
     type_client = models.CharField(_("Type de client"), max_length=1, choices=clients_choices, default='F', )
     genre_article = models.CharField(_("Genre d'article"), max_length=1, choices=genre_choices, default='S')
     nom = models.CharField(_('Nom'), max_length=100, default="ensemble")

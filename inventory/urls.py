@@ -17,6 +17,7 @@ Including another URLconf
 from django.conf.urls import url
 from .views import ArticleCreateView, ArticleDetailView, upload_pic, articles, ArticleUpdateView
 from .views import SoldesListView, SoldeUpdateView
+from .views import BranchEditView, BranchDeleteView, BranchDetailView, BranchListView, BranchCreateView
 
 
 app_name = 'inventory'
@@ -30,5 +31,12 @@ urlpatterns = [
     url(r'solde_update/(?P<pk>[0-9]+)$', SoldeUpdateView.as_view(), name='solde_update'),
     url(r'^article_detail/(?P<pk>[0-9]+)$', ArticleDetailView.as_view(), name='article_detail'),
     url(r'^upload_pic/(?P<pk>[0-9]+)$', upload_pic, name='upload_pic'),
+
+    url('branches/', BranchListView.as_view(), name='branches'),
+    url('branch_create/$', BranchCreateView.as_view(), name='branch_create'),
+    url('branch_detail/(?P<pk>[0-9]+)$', BranchDetailView.as_view(), name='branch_detail'),
+    url('branch_delete/(?P<pk>[0-9]+)$', BranchDeleteView.as_view(), name='branch_delete'),
+    url('branch_update/(?P<pk>[0-9]+)$', BranchEditView.as_view(), name='branch_update'),
+
 ]
 

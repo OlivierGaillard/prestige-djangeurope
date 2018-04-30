@@ -3,7 +3,46 @@ from crispy_forms.bootstrap import TabHolder, Tab, FormActions
 from crispy_forms.layout import Submit, Layout, Fieldset, Field
 from django import forms
 from django.shortcuts import reverse
-from .models import Article
+from .models import Article, Branch
+
+
+class BranchCreateForm(forms.ModelForm):
+    class Meta:
+        model = Branch
+        fields = ('name',)
+
+    def __init__(self, *args, **kwargs):
+        super(BranchCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+
+class BranchUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Branch
+        fields = ('name',)
+
+    def __init__(self, *args, **kwargs):
+        super(BranchUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+
+
 
 class ArticleUpdateForm(forms.ModelForm):
     class Meta:
