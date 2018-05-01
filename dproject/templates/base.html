@@ -70,17 +70,17 @@
                        <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">Preparation</li>
+                        <li class="dropdown-header">{% trans "Preparation" %}</li>
                         <li><a href="{% url "inventory:branch_create" %}">{% trans 'Create Branch' %}</a> </li>
-                        <li><a href="#" title="{% trans 'Create category' %}">{% trans 'Create one Category' %}</a></li>
-                        <li><a href="#" %}" title="{% trans 'Create  Arrival' %}">{% trans 'Create one Arrival' %}</a></li>
+                        <li><a href="{% url "inventory:category_create" %}" title="{% trans 'Create category' %}">{% trans 'Create one Category' %}</a></li>
+                        <li><a href="{% url "inventory:arrival_create" %}" title="{% trans 'Create  Arrival' %}">{% trans 'Create one Arrival' %}</a></li>
                         <li><a href="#" title="{% trans 'Upload pictures ZIP' %}">{% trans 'Upload ZIP pictures' %}</a></li>
                         <li><a href="#" title="{% trans 'Generate articles from pictures' %}">{% trans 'Generate Articles' %}</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">{% trans 'Your Basic Data'%}</li>
                         <li><a href="{% url "inventory:branches" %}">{% trans 'Branches' %}</a> </li>
-                        <li><a href="#" title="{% trans 'Arrivals List' %}">{% trans 'Arrivals' %}</a></li>
-                        <li><a href="#" title="{% trans 'List the categories' %}">{% trans 'Categories' %}</a></li>
+                        <li><a href="{% url "inventory:arrivals" %}" title="{% trans 'Arrivals List' %}">{% trans 'Arrivals' %}</a></li>
+                        <li><a href="{% url "inventory:categories" %}" title="{% trans 'List the categories' %}">{% trans 'Categories' %}</a></li>
                     </ul>
                 </li>
 
@@ -95,7 +95,7 @@
                     <li><a href="{% url "cart:client_create" %}">{% trans 'Ajouter un client' %}</a></li>
                 </ul>
             </li>
-            <li class="dropdown"><a href="#" data-toggle="dropdown">Dashboard<span class="caret"</span></a>
+            <li class="dropdown"><a href="#" data-toggle="dropdown">{% trans "Dashboard" %}<span class="caret"</span></a>
                     <ul class="dropdown-menu">
                       <li><a title="All Branches" href="#">Main</a> </li>
                       {% show_branches %}

@@ -60,26 +60,16 @@ class Employee(models.Model):
 
 
 class Arrivage(models.Model):
-    nom = models.CharField(max_length=50, unique=True)
-    date_arrivee = models.DateField()
+    nom = models.CharField(_("Name"), max_length=50, unique=True)
+    date_arrivee = models.DateField(_("Arrival Date"))
     proprietaire = models.ForeignKey(Enterprise, null=True)
 
     def __str__(self):
         return self.nom
 
+    def get_absolute_url(self):
+        return reverse('inventory:arrival_detail', kwargs={'pk': self.pk})
 
-class Frais(models.Model):
-    montant = models.DecimalField(max_digits=20, decimal_places=2)
-    objet = models.TextField()
-    date = models.DateField()
-    entreprise = models.ForeignKey(Enterprise, null=True)
-    arrivage = models.ForeignKey(Arrivage, null=True)
-
-    def __str__(self):
-        return self.objet + ': ' + str(self.montant)
-
-    class Meta:
-        verbose_name_plural = 'Frais'
 
 
 class Branch(models.Model):
@@ -101,13 +91,24 @@ class Branch(models.Model):
 
 
 class Marque(models.Model):
-    nom = models.CharField(max_length=80, unique=True)
+    nom = models.CharField(_('Brand Name'), max_length=80, unique=True)
 
     def __str__(self):
         return self.nom
 
     class Meta:
         ordering = ['nom']
+
+
+class Category(models.Model):
+    name = models.CharField(_('Category'), max_length=100, unique=True)
+
+    def get_absolute_url(self):
+        return reverse('inventory:category_detail', kwargs={'pk': self.pk})
+
+    def __str__(self):
+        return self.name
+
 
 
 class Article(models.Model):
@@ -148,18 +149,19 @@ class Article(models.Model):
     )
 
     branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.SET_NULL)
-    type_client = models.CharField(_("Type de client"), max_length=1, choices=clients_choices, default='F', )
-    genre_article = models.CharField(_("Genre d'article"), max_length=1, choices=genre_choices, default='S')
-    nom = models.CharField(_('Nom'), max_length=100, default="ensemble")
+    category = models.ForeignKey(Category, null=True, blank=True, verbose_name=_('Category'))
+    type_client = models.CharField(_("Client Type"), max_length=1, choices=clients_choices, default='F', )
+    genre_article = models.CharField(_("Article Type"), max_length=1, choices=genre_choices, default='S')
+    nom = models.CharField(_('Name'), max_length=100, default="ensemble")
     marque = models.ForeignKey(Marque)
     entreprise = models.ForeignKey(Enterprise, default=2)
     quantite   = models.IntegerField(default=1)
     prix_unitaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Prix d'achat"))
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Prix de vente"))
+    prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Purchasing Price"))
+    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Selling Price"))
     remise     = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0.0)
     date_ajout = models.DateField(auto_now_add=True)
-    arrivage   = models.ForeignKey(Arrivage, null=True, blank=True, default=3, verbose_name=_('Arrivage'))
+    arrivage   = models.ForeignKey(Arrivage, null=True, blank=True, default=3, verbose_name=_('Arrival'))
     couleurs_quantites = models.CharField(max_length=200, null=True, blank=True)
     motifs = models.CharField(max_length=200, null=True, blank=True)
     notes  = models.CharField(max_length=200, null=True, blank=True)

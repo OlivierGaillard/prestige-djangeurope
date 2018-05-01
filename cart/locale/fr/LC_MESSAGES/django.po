@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 10:18+0200\n"
+"POT-Creation-Date: 2018-05-01 11:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: cart/models.py:10 cart/templates/cart/clients.html:10
-#: cart/templates/cart/vente.html:80 cart/templates/cart/vente_update.html:15
+#: cart/models.py:10 cart/templates/cart/vente.html:80
+#: cart/templates/cart/vente_update.html:15
 msgid "Nom"
 msgstr ""
 
-#: cart/models.py:11 cart/templates/cart/clients.html:11
+#: cart/models.py:11
 msgid "Prénom"
 msgstr ""
 
@@ -136,8 +136,7 @@ msgid "Quantité"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:40
-#: cart/templates/cart/cart_content.html:68 cart/templates/cart/clients.html:13
-#: cart/templates/cart/clients.html:24
+#: cart/templates/cart/cart_content.html:68
 msgid "Modifier"
 msgstr ""
 
@@ -196,8 +195,20 @@ msgid ""
 "    "
 msgstr ""
 
+#: cart/templates/cart/clients.html:11
+msgid "Last Name"
+msgstr ""
+
 #: cart/templates/cart/clients.html:12
-msgid "Téléphone"
+msgid "First Name"
+msgstr ""
+
+#: cart/templates/cart/clients.html:13
+msgid "Phone"
+msgstr ""
+
+#: cart/templates/cart/clients.html:14 cart/templates/cart/clients.html:25
+msgid "Edit"
 msgstr ""
 
 #: cart/templates/cart/paiement_add.html:9
@@ -230,7 +241,6 @@ msgid "vente terminée"
 msgstr ""
 
 #: cart/templates/cart/vente.html:41 cart/templates/cart/vente.html:46
-#: cart/templates/cart/ventes.html:38
 msgid "Ajouter un paiement"
 msgstr ""
 
@@ -296,21 +306,25 @@ msgid "Effacer la vente"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:14
-msgid "Montant total"
+msgid "Total Amount"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:15
-msgid "Solde à payer"
+msgid "Remaining Balance"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:16
-msgid "Règlement terminé?"
+msgid "Selling closed?"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:23
-msgid "Cliquer pour ajouter un paiement ou voir les détails de la vente"
+msgid "Click to add one payment or see the selling's details"
+msgstr ""
+
+#: cart/templates/cart/ventes.html:38
+msgid "Add one payment"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:39
-msgid "solde"
+msgid "reduced price"
 msgstr ""

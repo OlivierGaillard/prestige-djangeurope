@@ -44,6 +44,12 @@
         <th>{% trans "Nom" %}</th>
         <td>{{article.nom}} - ID: {{article.pk}}</td>
       </tr>
+
+      <tr>
+        <th>{% trans "Category" %}</th>
+        <td>{{article.category|default_if_none:"n.d."}}</td>
+      </tr>
+
       <tr>
         <th>{% trans "Marque" %}</th>
         <td>{{article.marque}}</td>

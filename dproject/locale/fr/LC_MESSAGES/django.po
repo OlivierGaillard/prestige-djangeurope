@@ -7,15 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 10:18+0200\n"
-"PO-Revision-Date: 2017-10-11 08:40+0000\n"
+"POT-Creation-Date: 2018-05-01 11:57+0200\n"
+"PO-Revision-Date: 2018-05-01 11:36+0200\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
-"Language: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #: dproject/templates/403.html:4 dproject/templates/403.html:10
 msgid "Permission denied"
@@ -51,61 +52,134 @@ msgstr ""
 msgid "Imprint"
 msgstr "Imprimer"
 
-#: dproject/templates/base.html:40
+#: dproject/templates/base.html:41
 msgid "About"
 msgstr "À propos de nous"
 
-#: dproject/templates/base.html:57
+#: dproject/templates/base.html:58
 msgid "Search on the site"
 msgstr "Rechercher sur le site"
 
-#: dproject/templates/base.html:66
-msgid "Caisse"
-msgstr ""
-
-#: dproject/templates/base.html:68
-msgid "Liste des articles"
-msgstr ""
-
 #: dproject/templates/base.html:69
-msgid "Gérer les soldes"
-msgstr ""
-
-#: dproject/templates/base.html:70
-msgid "Contenu du panier"
-msgstr ""
-
-#: dproject/templates/base.html:71
-msgid "Ventes"
-msgstr ""
-
-#: dproject/templates/base.html:72
-msgid "Clients"
-msgstr ""
+msgid "First Steps"
+msgstr "Premiers pas"
 
 #: dproject/templates/base.html:73
-msgid "Ajouter un client"
+msgid "Preparation"
+msgstr "Préparation"
+
+#: dproject/templates/base.html:74
+msgid "Create Branch"
+msgstr "Ajouter une branche"
+
+#: dproject/templates/base.html:75
+msgid "Create category"
+msgstr "Ajouter une catégorie"
+
+#: dproject/templates/base.html:75
+msgid "Create one Category"
+msgstr "Créer une catégorie"
+
+#: dproject/templates/base.html:76
+msgid "Create  Arrival"
+msgstr "Créer un arrivage"
+
+#: dproject/templates/base.html:76
+msgid "Create one Arrival"
+msgstr "Créer un arrivage"
+
+#: dproject/templates/base.html:77
+msgid "Upload pictures ZIP"
+msgstr ""
+
+#: dproject/templates/base.html:77
+msgid "Upload ZIP pictures"
+msgstr ""
+
+#: dproject/templates/base.html:78
+msgid "Generate articles from pictures"
+msgstr ""
+
+#: dproject/templates/base.html:78
+msgid "Generate Articles"
 msgstr ""
 
 #: dproject/templates/base.html:80
-msgid "Log out"
+msgid "Your Basic Data"
+msgstr "Vos données de base"
+
+#: dproject/templates/base.html:81
+msgid "Branches"
+msgstr "Branches"
+
+#: dproject/templates/base.html:82
+msgid "Arrivals List"
+msgstr "Liste des arrivages"
+
+#: dproject/templates/base.html:82
+msgid "Arrivals"
+msgstr "Arrivages"
+
+#: dproject/templates/base.html:83
+msgid "List the categories"
+msgstr "Liste des catégories"
+
+#: dproject/templates/base.html:83
+msgid "Categories"
+msgstr "Catégories"
+
+#: dproject/templates/base.html:88
+msgid "Caisse"
 msgstr ""
 
-#: dproject/templates/base.html:83 dproject/templates/registration/login.html:5
-#: dproject/templates/registration/login.html:12
-#: dproject/templates/registration/login.html:18
-msgid "Log in"
+#: dproject/templates/base.html:90
+msgid "Liste des articles"
+msgstr ""
+
+#: dproject/templates/base.html:91
+msgid "Gérer les soldes"
+msgstr ""
+
+#: dproject/templates/base.html:92
+msgid "Contenu du panier"
 msgstr ""
 
 #: dproject/templates/base.html:93
+msgid "Ventes"
+msgstr ""
+
+#: dproject/templates/base.html:94
+msgid "Clients"
+msgstr ""
+
+#: dproject/templates/base.html:95
+msgid "Ajouter un client"
+msgstr ""
+
+#: dproject/templates/base.html:98
+msgid "Dashboard"
+msgstr "Tableau de bord"
+
+#: dproject/templates/base.html:108
+msgid "Log out"
+msgstr "Déconnexion"
+
+#: dproject/templates/base.html:111
+#: dproject/templates/registration/login.html:5
+#: dproject/templates/registration/login.html:12
+#: dproject/templates/registration/login.html:18
+msgid "Log in"
+msgstr "S'annoncer"
+
+#: dproject/templates/base.html:121
 msgid "Profile"
 msgstr "Profil"
 
-#: dproject/templates/base.html:94
+#: dproject/templates/base.html:122
 msgid "Admin"
 msgstr ""
 
-#: dproject/templates/base.html:126
+#: dproject/templates/base.html:154
 msgid "créé par"
 msgstr ""
 
@@ -141,7 +215,7 @@ msgstr ""
 
 #: dproject/templates/index.html:17
 msgid "step-by-step guide"
-msgstr ""
+msgstr "guide pas à pas"
 
 #: dproject/templates/index.html:19
 msgid "Allez à la "
@@ -184,7 +258,7 @@ msgid ""
 msgstr ""
 
 #: dproject/templates/index.html:54
-msgid "Bienvenue dans notre chère boutique!"
+msgid "Bienvenue dans notre petite boutique!"
 msgstr ""
 
 #: dproject/templates/index.html:55
@@ -233,10 +307,6 @@ msgstr ""
 
 #: dproject/templates/index.html:137
 msgid "adresse"
-msgstr ""
-
-#: dproject/templates/index.html:144
-msgid "Info de connexion pour ce site de test"
 msgstr ""
 
 #: dproject/templates/registration/logged_out.html:4

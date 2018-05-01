@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-25 10:18+0200\n"
+"POT-Creation-Date: 2018-05-01 11:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: cart/models.py:10 cart/templates/cart/clients.html:10
-#: cart/templates/cart/vente.html:80 cart/templates/cart/vente_update.html:15
+#: cart/models.py:10 cart/templates/cart/vente.html:80
+#: cart/templates/cart/vente_update.html:15
 msgid "Nom"
 msgstr "Last name"
 
-#: cart/models.py:11 cart/templates/cart/clients.html:11
+#: cart/models.py:11
 msgid "Prénom"
 msgstr "First name"
 
@@ -139,8 +139,7 @@ msgid "Quantité"
 msgstr "Quantity"
 
 #: cart/templates/cart/cart_content.html:40
-#: cart/templates/cart/cart_content.html:68 cart/templates/cart/clients.html:13
-#: cart/templates/cart/clients.html:24
+#: cart/templates/cart/cart_content.html:68
 msgid "Modifier"
 msgstr "Edit"
 
@@ -206,9 +205,21 @@ msgstr ""
 " once you have entered its coordinates.\n"
 "    "
 
+#: cart/templates/cart/clients.html:11
+msgid "Last Name"
+msgstr ""
+
 #: cart/templates/cart/clients.html:12
-msgid "Téléphone"
-msgstr "Phone"
+msgid "First Name"
+msgstr ""
+
+#: cart/templates/cart/clients.html:13
+msgid "Phone"
+msgstr ""
+
+#: cart/templates/cart/clients.html:14 cart/templates/cart/clients.html:25
+msgid "Edit"
+msgstr ""
 
 #: cart/templates/cart/paiement_add.html:9
 msgid "Etape 6"
@@ -240,7 +251,6 @@ msgid "vente terminée"
 msgstr "Selling closed"
 
 #: cart/templates/cart/vente.html:41 cart/templates/cart/vente.html:46
-#: cart/templates/cart/ventes.html:38
 msgid "Ajouter un paiement"
 msgstr "Add a payment"
 
@@ -312,24 +322,46 @@ msgid "Effacer la vente"
 msgstr "Edit the selling"
 
 #: cart/templates/cart/ventes.html:14
-msgid "Montant total"
-msgstr "Total Amount"
+msgid "Total Amount"
+msgstr ""
 
 #: cart/templates/cart/ventes.html:15
-msgid "Solde à payer"
-msgstr "Balance"
+msgid "Remaining Balance"
+msgstr ""
 
 #: cart/templates/cart/ventes.html:16
-msgid "Règlement terminé?"
-msgstr "Selling closed"
+msgid "Selling closed?"
+msgstr ""
 
 #: cart/templates/cart/ventes.html:23
-msgid "Cliquer pour ajouter un paiement ou voir les détails de la vente"
-msgstr "Click to add a payment or see the details"
+msgid "Click to add one payment or see the selling's details"
+msgstr ""
+
+#: cart/templates/cart/ventes.html:38
+msgid "Add one payment"
+msgstr ""
 
 #: cart/templates/cart/ventes.html:39
-msgid "solde"
-msgstr "balance"
+msgid "reduced price"
+msgstr ""
+
+#~ msgid "Téléphone"
+#~ msgstr "Phone"
+
+#~ msgid "Montant total"
+#~ msgstr "Total Amount"
+
+#~ msgid "Solde à payer"
+#~ msgstr "Balance"
+
+#~ msgid "Règlement terminé?"
+#~ msgstr "Selling closed"
+
+#~ msgid "Cliquer pour ajouter un paiement ou voir les détails de la vente"
+#~ msgstr "Click to add a payment or see the details"
+
+#~ msgid "solde"
+#~ msgstr "balance"
 
 #~ msgid "Enregistrement du prix de vente"
 #~ msgstr "Saving the selling price"

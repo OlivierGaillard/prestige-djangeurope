@@ -1,5 +1,6 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.utils.translation import ugettext_lazy as _
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.http import HttpResponse
@@ -11,8 +12,10 @@ from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter
 from django_filters.views import FilterView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from .models import Branch, Article, Employee, Photo
+from .models import Branch, Article, Employee, Photo, Category, Arrivage
 from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm, BranchCreateForm, BranchUpdateForm
+from .forms import CategoryFormDelete, CategoryFormUpdate, CategoryFormCreate
+from .forms import ArrivalUpdateForm, ArrivalCreateForm
 from cart.cartutils import article_already_in_cart, get_cart_items
 
 class ArticleFilter(FilterSet):
@@ -34,10 +37,10 @@ class ArticleFilter(FilterSet):
         ('S', _('en solde')),
     )
 
-    genre_article = ChoiceFilter(choices=genre_choices, label=_(u"Genre d'article"))
-    type_client = ChoiceFilter(choices=clients_choices, label=_('type de client'))
+    genre_article = ChoiceFilter(choices=genre_choices, label=_(u"Article Type"))
+    type_client = ChoiceFilter(choices=clients_choices, label=_('Client Type'))
     solde = ChoiceFilter(choices=solde_choices)
-    quantite__gt = NumberFilter(name='quantite', lookup_expr='gt', label=_('quantité supérieure à'))
+    quantite__gt = NumberFilter(name='quantite', lookup_expr='gt', label=_('quantity greater than'))
     # selling_price__gte = NumberFilter(name='selling_price', lookup_expr='gte',
     #                                  label=_('prix de vente plus grand ou égal'))
 
@@ -201,31 +204,14 @@ class ArticleCreateView(CreateView):
 
     def form_valid(self, form):
         if form.is_valid():
-            print('Form is valid')
             self.object = form.save()
-            #return HttpResponseRedirect(self.success_url)
             return HttpResponseRedirect(self.get_success_url())
         else:
-
-            print('Form is NOT valid')
-
+            pass
 
     def get_success_url(self):
         return reverse('inventory:articles')
 
-    # def form_valid(self, form):
-    #     #self.object = form.save()
-    #     print("inside form_valid")
-    #     #self.object.update_marque_ref(form['marque'].value(), form['marque_ref'].value())
-    #     return HttpResponseRedirect('inventory/articles.html')
-
-    # Todo: filtrer les arrivages de l'utilisateur
-
-
-    # def get_form_kwargs(self):
-    #     kwargs = super(ArticleCreateView, self).get_form_kwargs()
-    #     kwargs['user'] = self.request.user
-    #     return kwargs
 
 
 def upload_pic(request, pk):
@@ -279,3 +265,70 @@ class BranchEditView(UpdateView):
     template_name = 'inventory/branch_update.html'
     context_object_name = 'branch'
     form_class = BranchUpdateForm
+
+@method_decorator(login_required, name='dispatch')
+class CategoryCreateView(CreateView):
+    model = Category
+    template_name = 'inventory/category_create.html'
+    form_class = CategoryFormCreate
+    context_object_name = 'category'
+
+@method_decorator(login_required, name='dispatch')
+class CategoryDetailView(DetailView):
+    model = Category
+    template_name = 'inventory/category_detail.html'
+    context_object_name = 'category'
+
+@method_decorator(login_required, name='dispatch')
+class CategoryUpdateView(UpdateView):
+    model = Category
+    template_name = 'inventory/category_update.html'
+    form_class = CategoryFormUpdate
+    context_object_name = 'category'
+
+@method_decorator(login_required, name='dispatch')
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'inventory/categories.html'
+    context_object_name = 'categories'
+
+@method_decorator(login_required, name='dispatch')
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'inventory/category_delete.html'
+    context_object_name = 'category'
+    success_url = reverse_lazy('inventory:categories')
+
+
+@method_decorator(login_required, name='dispatch')
+class ArrivalCreateView(CreateView):
+    model = Arrivage
+    template_name = 'inventory/arrival_create.html'
+    form_class = ArrivalCreateForm
+    context_object_name = 'arrival'
+
+@method_decorator(login_required, name='dispatch')
+class ArrivalDetailView(DetailView):
+    model = Arrivage
+    template_name = 'inventory/arrival_detail.html'
+    context_object_name = 'arrival'
+
+@method_decorator(login_required, name='dispatch')
+class ArrivalUpdateView(UpdateView):
+    model = Arrivage
+    template_name = 'inventory/arrival_update.html'
+    context_object_name = 'arrival'
+    form_class = ArrivalUpdateForm
+
+@method_decorator(login_required, name='dispatch')
+class ArrivalListView(ListView):
+    model = Arrivage
+    template_name = 'inventory/arrivals.html'
+    context_object_name = 'arrivals'
+
+@method_decorator(login_required, name='dispatch')
+class ArrivalDeleteView(DeleteView):
+    model = Arrivage
+    template_name = 'inventory/arrival_delete.html'
+    success_url = '/inventory/arrivals'
+    context_object_name = 'arrival'

@@ -1,10 +1,10 @@
 from django.contrib import admin
-from .models import Frais, Enterprise, Employee, Arrivage, Article, Marque, Photo
+from .models import Enterprise, Employee, Arrivage, Article, Marque, Photo
 
-class FraisAdmin(admin.ModelAdmin):
-    list_display = ['date', 'montant', 'objet', 'entreprise']
-
-admin.site.register(Frais, FraisAdmin)
+# class FraisAdmin(admin.ModelAdmin):
+#     list_display = ['date', 'montant', 'objet', 'entreprise']
+#
+# admin.site.register(Frais, FraisAdmin)
 
 class EnterpriseAdmin(admin.ModelAdmin):
     list_display = ['id', 'name']
