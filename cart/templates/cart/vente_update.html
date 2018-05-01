@@ -8,6 +8,7 @@
 <div class="container">
 {% crispy form %}
 
+ <div class="table-responsive">
 <table class="table">
       <thead>
       <tr>
@@ -41,6 +42,7 @@
           {% endfor %}
       </tbody>
   </table>
+   </div>
 
   {% if vente.cartitem_set.all|length == 0 %}
 
