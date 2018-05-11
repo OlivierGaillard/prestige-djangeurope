@@ -105,7 +105,6 @@ class MainBalanceView(TemplateView):
 
     def get_context_data(self, start_date=None, end_date=None):
         context = build_context_data_for_main(start_date=start_date, end_date=end_date)
-        print('after context in MainBalanceView')
         return context
 
     def get(self, request, start_date=None, end_date=None):
