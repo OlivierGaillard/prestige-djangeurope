@@ -2,7 +2,8 @@ from django.db import models
 from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
-
+from dashboard.utils import TimeSliceHelper
+from datetime import date
 
 class Enterprise(models.Model):
     name = models.CharField(max_length=80)
@@ -100,6 +101,8 @@ class Marque(models.Model):
         ordering = ['nom']
 
 
+
+
 class Category(models.Model):
     name = models.CharField(_('Category'), max_length=100, unique=True)
 
@@ -108,6 +111,24 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ArticleManager(models.Manager):
+
+
+    def total_purchasing_price(self, branch=None, year=None, start_date=None, end_date=None):
+        total = 0
+        helper = TimeSliceHelper(Article)
+        articles = helper.get_objects(year=year, branch=branch, start_date=start_date, end_date=end_date)
+        total = sum(a.purchasing_price for a in articles)
+        return total
+
+    def total_losses(self, branch=None, year=None, start_date=None, end_date=None):
+        """Return how much money was lost because broken articles or other cause."""
+        helper = TimeSliceHelper(Article)
+        articles = helper.get_objects(year=year, branch=branch, start_date=start_date, end_date=end_date)
+        total = sum(a.get_amount_losses for a in articles)
+        return total
 
 
 
@@ -148,19 +169,46 @@ class Article(models.Model):
         ('3', 'UK')
     )
 
+    ######################
+
+    # zulma
+    # photo = models.ImageField(upload_to='articles', null=True, blank=True, unique=True)
+    # purchasing_price = models.DecimalField(_('Purchasing price'), max_digits=10, decimal_places=2, null=True, blank=True,
+    #                                        default=0)
+    name  = models.CharField(_('Name'), max_length=100, null=True, blank=True, default=_('n.d.'))
+    # description = models.TextField(_('Description'), null=True, blank=True, default=_('n.d.'))
+    # date_added  = models.DateField(default=date.today, null=True)
+    # # initial quantity when article is added to the inventory
+    # initial_quantity = models.IntegerField(_('Initial quantity'), default=1, null=True)
+    quantity = models.PositiveSmallIntegerField(_('Quantity'), default=1)
+    #arrival = models.ForeignKey(Arrivage, null=True, on_delete=models.SET_NULL)
+    # notes = models.TextField(_("Notes"), null=True, blank=True, default=_('n.d.'))
+    #
+
+
+
+
+    ######################
+
+    objects = ArticleManager()
+
     branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey(Category, null=True, blank=True, verbose_name=_('Category'))
     type_client = models.CharField(_("Client Type"), max_length=1, choices=clients_choices, default='F', )
     genre_article = models.CharField(_("Article Type"), max_length=1, choices=genre_choices, default='S')
     nom = models.CharField(_('Name'), max_length=100, default="ensemble")
     marque = models.ForeignKey(Marque)
-    entreprise = models.ForeignKey(Enterprise, default=2)
+    entreprise = models.ForeignKey(Enterprise)
     quantite   = models.IntegerField(default=1)
     prix_unitaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    # new name
+    purchasing_price = models.DecimalField(_('Purchasing price'), max_digits=10, decimal_places=2, null=True,
+                                            blank=True, default=0)
+
     prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Purchasing Price"))
     selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Selling Price"))
     remise     = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0.0)
-    date_ajout = models.DateField(auto_now_add=True)
+    date_ajout = models.DateField(default=date.today, null=True)
     arrivage   = models.ForeignKey(Arrivage, null=True, blank=True, default=3, verbose_name=_('Arrival'))
     couleurs_quantites = models.CharField(max_length=200, null=True, blank=True)
     motifs = models.CharField(max_length=200, null=True, blank=True)
@@ -195,3 +243,66 @@ class Photo(models.Model):
     @property
     def article_ID(self):
         return str(self.article.id)
+
+class LossesManager(models.Manager):
+
+    def total_costs(self, branch=None, year=None, start_date=None, end_date=None):
+        """Return how much money was lost because broken articles or other cause."""
+        helper = TimeSliceHelper(Losses)
+        losses = helper.get_objects(branch=branch, year=year, start_date=start_date, end_date=end_date)
+        total = sum(a.amount_losses for a in losses)
+        return total
+
+    def total_quantity(self, branch=None, year=None, start_date=None, end_date=None):
+        helper = TimeSliceHelper(Losses)
+        losses = helper.get_objects(branch=branch, year=year, start_date=start_date, end_date=end_date)
+        total = sum(a.losses for a in losses)
+        return total
+
+    def total_losses_for_article(self, article):
+        """
+        :param article:
+        :return: total of money lost in losses for this article
+        """
+        qs = Losses.objects.filter(article=article)
+        total = sum(a.amount_losses for a in qs)
+        return total
+
+    def total_losses_quantity_for_article(self, article):
+        """
+
+        :param article:
+        :return: total quantity of losses for this article
+        """
+        qs = Losses.objects.filter(article=article)
+        total = sum(a.losses for a in qs)
+        return total
+
+
+
+class Losses(models.Model):
+    """Losses of one article because article was broken, stolen or other cause, event not sold.
+    More: it can be losses not related to articles or even to a branch.
+    """
+    losses  = models.PositiveSmallIntegerField(_('Losses'), default=0)
+    amount_losses = models.DecimalField(_('Money lost'), max_digits=10, decimal_places=2, null=True, blank=True,
+                                           default=0)
+    date = models.DateField(default=date.today, null=True, blank=True)
+    article = models.ForeignKey(Article, on_delete=models.SET_NULL, null=True, related_name='Pertes')
+    loss_type    = models.CharField(_("Type of loss"), max_length=100, help_text=_("Cause of the loss: not sold, broken, etc."),
+                                    null=True, blank=True)
+
+    branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.SET_NULL)
+    note = models.TextField(_('Note'), blank=True, null=True)
+    objects = LossesManager()
+
+    def delete(self):
+        if self.article:
+            self.article.quantity += self.losses
+            self.article.save()
+        super(Losses, self).delete()
+
+    class Meta:
+        ordering = ['-date']
+
+

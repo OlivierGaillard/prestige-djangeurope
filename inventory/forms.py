@@ -3,7 +3,8 @@ from crispy_forms.bootstrap import TabHolder, Tab, FormActions
 from crispy_forms.layout import Submit, Layout, Fieldset, Field
 from django import forms
 from django.shortcuts import reverse
-from .models import Article, Branch, Category, Arrivage
+from .models import Article, Branch, Category, Arrivage, Losses
+from django.utils.translation import ugettext_lazy as _
 
 
 class ArrivalUpdateForm(forms.ModelForm):
@@ -42,6 +43,22 @@ class ArrivalCreateForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ArrivalCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+
+class ArticleDeleteForm(forms.Form):
+    delete_purchasing_costs = forms.BooleanField(required=False, label=_("Delete Purchasing Costs too?"))
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleDeleteForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
         self.helper.form_method = "POST"
         self.helper.form_class = 'form-horizontal'
@@ -229,3 +246,47 @@ class ArticleCreateForm(forms.ModelForm):
     #
 class AddPhotoForm(forms.Form):
     image   = forms.ImageField()
+
+
+class ArticleLossesForm(forms.Form):
+    losses = forms.IntegerField(required=True, min_value=1, help_text=_("Total of articles lost"))
+    amount_losses = forms.DecimalField(required=True, min_value=0.01, help_text=_("Total of money lost"))
+
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleLossesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+
+class ArticleLossesUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Losses
+        fields = ('amount_losses', 'date', 'loss_type', 'note')
+        widgets = {
+            'date': forms.DateInput(
+                attrs={'id': 'datetimepicker_es'}
+            ),
+        }
+
+
+    def __init__(self, *args, **kwargs):
+        super(ArticleLossesUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+

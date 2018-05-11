@@ -1,4 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
 from django.shortcuts import render
@@ -12,11 +13,19 @@ from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter
 from django_filters.views import FilterView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.models import User
-from .models import Branch, Article, Employee, Photo, Category, Arrivage
+from .models import Branch, Article, Employee, Photo, Category, Arrivage, Losses
 from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm, BranchCreateForm, BranchUpdateForm
 from .forms import CategoryFormDelete, CategoryFormUpdate, CategoryFormCreate
 from .forms import ArrivalUpdateForm, ArrivalCreateForm
 from cart.cartutils import article_already_in_cart, get_cart_items
+import logging
+from django.core.exceptions import ValidationError
+from .forms import ArticleLossesForm
+from .forms import ArticleLossesUpdateForm, ArticleDeleteForm
+from costs.models import Category as CostsCategory, Costs
+
+
+logger = logging.getLogger('django')
 
 class ArticleFilter(FilterSet):
     genre_choices = (
@@ -193,6 +202,43 @@ class SoldesListView(ListView):
         return context
 
 
+@login_required()
+def articleDeleteView(request, pk):
+
+    article = get_object_or_404(Article, pk=pk)
+    if request.method == 'POST':
+        form = ArticleDeleteForm(request.POST)
+        if form.is_valid():
+            if not form.cleaned_data['delete_purchasing_costs']:
+                logger.debug('Deleting article without its purchasing price.')
+                # The purchasing price of the article will be saved in a Costs.
+                # Create a Cost with the purchasing price
+                cat = None
+                if len(Category.objects.filter(name='Purchasing Price')) == 0:
+                    cat =  CostsCategory.objects.create(name='Purchasing Price')
+                else:
+                    cat = CostsCategory.objects.filter(name='Purchasing Price')[0]
+                logger.debug('Costs Category {0} created or used.'.format(cat.name))
+                cost = Costs.objects.create(category=cat,
+                                     amount=article.purchasing_price,
+                                     name='Generated when article was deleted',
+                                            branch=article.branch,
+                                      )
+                logger.info('Purchasing price {0} saved in  Cost-ID {1}.'.format(article.purchasing_price, cost.pk))
+            else:
+                logger.info('Deleting article without saving its purchasing price.')
+
+            article.delete()
+            return HttpResponseRedirect(reverse('inventory:articles'))
+        else:
+            return render(request, context={'article': article, 'form': form},
+                          template_name='inventory/article_delete.html')
+
+    else:
+        form = ArticleDeleteForm()
+        return render(request, context={'article': article, 'form': form},
+                      template_name='inventory/article_delete.html')
+
 
 
 @method_decorator(login_required, name='dispatch')
@@ -332,3 +378,93 @@ class ArrivalDeleteView(DeleteView):
     template_name = 'inventory/arrival_delete.html'
     success_url = '/inventory/arrivals'
     context_object_name = 'arrival'
+
+def quantities_of_article_and_form_are_valid(article, form):
+    """Check if article quantity and losses in form are valid."""
+    new_losses = form.cleaned_data['losses']
+    if article.quantity > 0 and article.quantity >= new_losses and new_losses > 0:
+        logger.debug("Previous losses of article: %s" % article.losses)
+        logger.debug("Losses of form: %s" % form.cleaned_data['losses'])
+        logger.debug("Article quantity >= new_losses: %s >= %s" % (article.quantity, new_losses))
+        return True
+    else:
+        if article.quantity < new_losses:
+            logger.debug("Article quantity < new losses. We add error msg: %s < %s" % (article.quantity, new_losses))
+            error = ValidationError(_("Losses cannot exceed quantity.") )
+            form.add_error(error=error, field='losses')
+        return False
+
+def update_article_stock_quantity(article, form):
+    """Add losses to article losses and substract to quantity."""
+    logger.debug("Updated stock quantity of article: %s" % article.quantity)
+    article.quantity -= form.cleaned_data['losses']
+    article.save()
+
+
+def create_lost(article, form):
+    loss = Losses.objects.create(article=article, amount_losses=form.cleaned_data['amount_losses'],
+                                 losses=form.cleaned_data['losses'], branch=article.branch,
+                                 )
+
+
+@login_required()
+def add_one_loss(request, pk):
+    logger.warning("add_one_loss function.")
+    article = get_object_or_404(Article, pk=pk)
+    logger.debug("Article-ID [%s]. Losses: %s" % (article.pk, article.losses))
+    if request.method == 'POST':
+        form = ArticleLossesForm(request.POST)
+
+        if form.is_valid():
+            logger.debug('form is valid')
+            logger.debug('checking if losses value is compatible with quantity of article...')
+
+            if quantities_of_article_and_form_are_valid(article, form):
+                logger.debug('Losses and article values seem OK.')
+                update_article_stock_quantity(article, form)
+                create_lost(article, form)
+                return HttpResponseRedirect("/inventory/article_detail/%s" % article.pk)
+            else:
+                logger.warning('Losses and articles values seem NOT ok.')
+        else:
+            logger.warning('form is NOT valid for article-ID %s' % article.pk)
+            logger.warning(form.errors.as_data())
+    else: # GET
+        form = ArticleLossesForm()
+
+    return render(request, "inventory/losses_form.html", {'form' : form, 'article' : article })
+
+@method_decorator(login_required, name='dispatch')
+class LossesListView(ListView):
+    model = Losses
+    template_name = 'inventory/losses.html'
+    context_object_name = 'losses'
+
+    def get_context_data(self, q=None):
+        ctx = super(LossesListView, self).get_context_data()
+        ctx['total_money'] = Losses.objects.total_costs()
+        ctx['total_quantity'] = Losses.objects.count()
+        return ctx
+
+@method_decorator(login_required, name='dispatch')
+class LossDeleteView(DeleteView):
+    model = Losses
+    template_name = 'inventory/loss_delete.html'
+    context_object_name = 'loss'
+    success_url = reverse_lazy('inventory:losses')
+
+
+@method_decorator(login_required, name='dispatch')
+class LossUpdateView(UpdateView):
+    model = Losses
+    template_name = 'inventory/losses_update.html'
+    context_object_name = 'loss'
+    form_class = ArticleLossesUpdateForm
+    success_url = reverse_lazy('inventory:losses')
+
+@method_decorator(login_required, name='dispatch')
+class LossDetailView(DetailView):
+    model = Losses
+    template_name = 'inventory/loss_detail.html'
+    context_object_name = 'loss'
+

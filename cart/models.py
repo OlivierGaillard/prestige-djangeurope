@@ -3,7 +3,8 @@ from django.utils import timezone
 from django.shortcuts import reverse
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
-from inventory.models import Article
+from inventory.models import Article, Branch
+from dashboard.utils import TimeSliceHelper
 
 
 class Client(models.Model):
@@ -24,6 +25,15 @@ class Client(models.Model):
         return reverse('cart:client', kwargs={'pk': self.pk})
 
 
+class VenteManager(models.Manager):
+
+    def total_sellings(self, year=None, branch=None, start_date=None, end_date=None):
+        helper = TimeSliceHelper(self.model)
+        ventes = helper.get_objects(year=year, branch=branch, start_date=start_date, end_date=end_date)
+        total = sum(v.montant for v in ventes if v.reglement_termine)
+        return total
+
+
 class Vente(models.Model):
     """Simplistic. Further adds are:
     - le statut: terminé ou pas
@@ -31,16 +41,17 @@ class Vente(models.Model):
     - un lien sur une cliente
     """
     date = models.DateTimeField(default=timezone.now)
-    montant = models.DecimalField(_('montant'), max_digits=20, decimal_places=0, default=0)
-    client  = models.ForeignKey(Client, null=True, blank=True, verbose_name=_('Client'), help_text=_("Laisser le champ vide (---) si le client n'est pas enregistré."))
-    reglement_termine = models.BooleanField(_('Règlement terminé'), default=False)
-
+    montant = models.DecimalField(_('montant'), max_digits=20, decimal_places=2, default=0)
+    branch = models.ForeignKey(Branch, null=True, blank=True)
+    client  = models.ForeignKey(Client, null=True, blank=True, verbose_name=_('Client'), help_text=_("Make the field empty (---) if the customer is not registered."))
+    reglement_termine = models.BooleanField(_('Selling closed'), default=False)
+    objects = VenteManager()
 
     class Meta:
         ordering = ['-date']
 
     def __str__(self):
-        titre = "ID: %s / %s / %s" % (self.pk, self.date, self.montant)
+        titre = "ID: %s / %s / %s / Closed? %s " % (self.pk, self.date, self.montant, self.reglement_termine)
         return titre
 
     def get_absolute_url(self):
@@ -54,6 +65,8 @@ class Vente(models.Model):
 
     def solde_paiements(self):
         return self.montant - self.total_paiements()
+
+
 
 class Paiement(models.Model):
     date    = models.DateTimeField(default=timezone.now)

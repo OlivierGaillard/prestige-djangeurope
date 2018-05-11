@@ -15,11 +15,13 @@ Including another URLconf
 """
 
 from django.conf.urls import url
-from .views import ArticleCreateView, ArticleDetailView, upload_pic, articles, ArticleUpdateView
+from .views import ArticleCreateView, ArticleDetailView, upload_pic, articles, ArticleUpdateView, articleDeleteView
 from .views import SoldesListView, SoldeUpdateView
 from .views import BranchEditView, BranchDeleteView, BranchDetailView, BranchListView, BranchCreateView
 from .views import CategoryDeleteView, CategoryUpdateView, CategoryDetailView, CategoryListView, CategoryCreateView
 from .views import ArrivalListView, ArrivalUpdateView, ArrivalDetailView, ArrivalCreateView, ArrivalDeleteView
+from .views import LossDetailView, LossesListView, LossUpdateView, LossDeleteView, add_one_loss
+from .views import ArrivalDeleteView
 
 app_name = 'inventory'
 
@@ -32,6 +34,16 @@ urlpatterns = [
     url(r'solde_update/(?P<pk>[0-9]+)$', SoldeUpdateView.as_view(), name='solde_update'),
     url(r'^article_detail/(?P<pk>[0-9]+)$', ArticleDetailView.as_view(), name='article_detail'),
     url(r'^upload_pic/(?P<pk>[0-9]+)$', upload_pic, name='upload_pic'),
+
+    url(r'article_losses/(?P<pk>[0-9]+)$', add_one_loss, name='article_losses'),
+    # url(r'add_one_loss/(?P<pk>[0-9]+)$', AddOneLossView.as_view(), name='add_one_loss'),
+    url(r'^article_detail/(?P<pk>[0-9]+)$', ArticleDetailView.as_view(), name='article_detail'),
+    url(r'^article_delete/(?P<pk>[0-9]+)$', articleDeleteView, name='article_delete'),
+
+    url(r'^loss_delete/(?P<pk>[0-9]+)$', LossDeleteView.as_view(), name='loss_delete'),
+    url(r'^loss_update/(?P<pk>[0-9]+)$', LossUpdateView.as_view(), name='loss_update'),
+    url(r'^loss_detail/(?P<pk>[0-9]+)$', LossDetailView.as_view(), name='loss_detail'),
+    url(r'^losses/$', LossesListView.as_view(), name='losses'),
 
     url(r'^arrival_create/$', ArrivalCreateView.as_view(), name='arrival_create'),
     url(r'^arrival_detail/(?P<pk>[0-9]+)$', ArrivalDetailView.as_view(), name='arrival_detail'),

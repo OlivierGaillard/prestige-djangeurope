@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-01 11:57+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2018-05-09 18:44+0200\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: cart/models.py:10 cart/templates/cart/vente.html:80
 #: cart/templates/cart/vente_update.html:15
@@ -78,7 +78,7 @@ msgstr ""
 #: cart/templates/cart/cart_content.html:7 cart/templates/cart/checkout.html:10
 #: cart/templates/cart/paiement_add.html:9 cart/templates/cart/vente.html:14
 msgid "step-by-step guide"
-msgstr ""
+msgstr "guide pas à pas"
 
 #: cart/templates/cart/cart_content.html:8
 msgid "Saisir le prix de vente de l'article"
@@ -209,7 +209,7 @@ msgstr ""
 
 #: cart/templates/cart/clients.html:14 cart/templates/cart/clients.html:25
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: cart/templates/cart/paiement_add.html:9
 msgid "Etape 6"
@@ -307,23 +307,23 @@ msgstr ""
 
 #: cart/templates/cart/ventes.html:14
 msgid "Total Amount"
-msgstr ""
+msgstr "Montant total"
 
 #: cart/templates/cart/ventes.html:15
 msgid "Remaining Balance"
-msgstr ""
+msgstr "Solde restant"
 
 #: cart/templates/cart/ventes.html:16
 msgid "Selling closed?"
-msgstr ""
+msgstr "Vente terminée?"
 
 #: cart/templates/cart/ventes.html:23
 msgid "Click to add one payment or see the selling's details"
-msgstr ""
+msgstr "Cliquez pour ajouter un paiement or voir les détails d'une vente"
 
 #: cart/templates/cart/ventes.html:38
 msgid "Add one payment"
-msgstr ""
+msgstr "Ajouter un paiement"
 
 #: cart/templates/cart/ventes.html:39
 msgid "reduced price"
