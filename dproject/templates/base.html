@@ -116,14 +116,14 @@
                     <li><a href="{% url "costs:categories" %}"><span class="glyphicon glyphicon-tags"></span>  {% trans "Categories" %}</a> </li>
                     <li><a href="{% url "costs:category_create" %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans "Create a category" %}</a> </li>
                     <li class="divider"></li>
-                    <li><a href="{% url "costs:enterprises" %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans "Enterprises" %}</a> </li>
+                    <li><a href="{% url "costs:enterprises" %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans "Providers" %}</a> </li>
                     <li><a href="{% url "costs:enterprise_create" %}"
                       title="{% trans 'an enterprise or provider which occurs regularly in your costs' %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans "Create an enterprise" %}</a> </li>
                   </ul>
             </li>
 
 
-            <li class="dropdown"><a href="#" data-toggle="dropdown">{% trans "Dashboard" %}<span class="caret"</span></a>
+            <li class="dropdown"><a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> {% trans "Dashboard" %}<span class="caret"</span></a>
                     <ul class="dropdown-menu">
                       <li><a title="All Branches" href="{% url 'dashboard:main' %}">Main</a> </li>
                       {% show_branches %}

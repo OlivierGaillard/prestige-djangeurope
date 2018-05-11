@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 10:38+0200\n"
-"PO-Revision-Date: 2018-05-01 11:36+0200\n"
+"POT-Creation-Date: 2018-05-11 17:51+0200\n"
+"PO-Revision-Date: 2018-05-11 17:40+0200\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
 "Language: fr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.0.7\n"
 
 #: dproject/templates/403.html:4 dproject/templates/403.html:10
 msgid "Permission denied"
@@ -28,19 +28,19 @@ msgstr ""
 
 #: dproject/templates/404.html:4 dproject/templates/404.html:10
 msgid "Page not found"
-msgstr ""
+msgstr "Page non trouvée"
 
 #: dproject/templates/404.html:11
 msgid "We're sorry, but the requested page could not be found."
-msgstr ""
+msgstr "Nous sommes désolés, mais la page demandée n'a pas pu être trouvée."
 
 #: dproject/templates/500.html:4
 msgid "Server error (500)"
-msgstr ""
+msgstr "Erreur serveur (500)"
 
 #: dproject/templates/500.html:10
 msgid "Server Error <em>(500)</em>"
-msgstr ""
+msgstr "Erreur serveurr <em>(500)</em>"
 
 #: dproject/templates/500.html:11
 msgid ""
@@ -90,19 +90,19 @@ msgstr "Créer un arrivage"
 
 #: dproject/templates/base.html:83
 msgid "Upload pictures ZIP"
-msgstr ""
+msgstr "Téléverser un ZIP des images "
 
 #: dproject/templates/base.html:83
 msgid "Upload ZIP pictures"
-msgstr ""
+msgstr "Téléverser un ZIP des images "
 
 #: dproject/templates/base.html:84
 msgid "Generate articles from pictures"
-msgstr ""
+msgstr "Générer des articles à partir des images"
 
 #: dproject/templates/base.html:84
 msgid "Generate Articles"
-msgstr ""
+msgstr "Genérer des articles"
 
 #: dproject/templates/base.html:86
 msgid "Your Basic Data"
@@ -162,35 +162,32 @@ msgstr ""
 
 #: dproject/templates/base.html:113
 msgid "Adding a lost is possible in article details view"
-msgstr ""
+msgstr "Ajouter un coût est possible dans la page des détails d'un article"
 
 #: dproject/templates/base.html:113
 msgid "Losses"
-msgstr ""
+msgstr "Pertes"
 
 #: dproject/templates/base.html:114
 msgid "Add one Cost"
-msgstr ""
+msgstr "Ajouter une perte"
 
 #: dproject/templates/base.html:117
-#, fuzzy
-#| msgid "Create category"
 msgid "Create a category"
-msgstr "Ajouter une catégorie"
+msgstr "Créer une catégorie"
 
 #: dproject/templates/base.html:119
-msgid "Enterprises"
+msgid "Providers"
 msgstr ""
 
 #: dproject/templates/base.html:121
 msgid "an enterprise or provider which occurs regularly in your costs"
 msgstr ""
+"une entreprise ou un fournisseur qui revient régulièrement dans vos coûts"
 
 #: dproject/templates/base.html:121
-#, fuzzy
-#| msgid "Create one Arrival"
 msgid "Create an enterprise"
-msgstr "Créer un arrivage"
+msgstr "Créer une entreprise"
 
 #: dproject/templates/base.html:126
 msgid "Dashboard"
@@ -213,7 +210,7 @@ msgstr "Profil"
 
 #: dproject/templates/base.html:150
 msgid "Admin"
-msgstr ""
+msgstr "Administration"
 
 #: dproject/templates/base.html:183
 msgid "créé par"
@@ -360,6 +357,9 @@ msgstr ""
 #: dproject/templates/registration/logged_out.html:12
 msgid "Log in again"
 msgstr ""
+
+#~ msgid "Enterprises"
+#~ msgstr "Entreprises"
 
 #~ msgid "Installed by"
 #~ msgstr "Installé par"
