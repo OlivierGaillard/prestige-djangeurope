@@ -203,10 +203,10 @@ class Article(models.Model):
     prix_unitaire = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     # new name
     purchasing_price = models.DecimalField(_('Purchasing price'), max_digits=10, decimal_places=2, null=True,
-                                            blank=True, default=0)
+                                            blank=True, default=0, help_text=_("Purchasing Price"))
 
     prix_total    = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Purchasing Price"))
-    selling_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.0, help_text=_("Selling Price"))
+    selling_price = models.DecimalField(_("Selling Price"), max_digits=10, decimal_places=2, default=0.0, help_text=_("Selling Price"))
     remise     = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, default=0.0)
     date_ajout = models.DateField(default=date.today, null=True)
     arrivage   = models.ForeignKey(Arrivage, null=True, blank=True, default=3, verbose_name=_('Arrival'))

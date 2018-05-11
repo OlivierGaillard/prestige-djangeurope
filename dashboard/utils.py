@@ -80,7 +80,8 @@ class TimeSliceHelper:
         if branch != None and not branch == 'MAIN' :
             objects = self.qs.filter(branch=branch)
         elif branch == 'MAIN':
-            objects = self.qs.filter(branch=None)
+            #objects = self.qs.filter(branch=None)
+            objects = self.qs.all()
         else:
             objects = self.qs.all()
         return objects

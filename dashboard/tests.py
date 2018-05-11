@@ -239,7 +239,8 @@ class TestDashboard(TestCase):
         self.assertEqual(150, Dashboard.total_losses(branch=b1))
 
         # MAIN : implies the branch is set to None.
-        self.assertEqual(300, Dashboard.total_losses(branch='MAIN'))
+        # Updated: MAIN mean ALL branches, with or without a branch
+        self.assertEqual(450, Dashboard.total_losses(branch='MAIN'))
 
     def test_delete_article_check_costs_purchases_are_ok(self):
         """If one article has a purchasing price it could be deleted from

@@ -3,7 +3,7 @@
 {% load i18n %}
 {% load thumbnail %}
 {% block content %}
-<p>
+
 <div class="container">
   <h3>{% trans "2ème étape" %}  <small>{% trans "step-by-step guide" %}</small></h3>
   <h4>{% trans "Ajouter l'article au panier" %}</h4>
@@ -35,6 +35,13 @@
           <th>{% trans "Nom de l'arrivage" %}</th>
         <td>{{article.arrivage.nom}}</td>
       </tr>
+
+      <tr>
+          <th>{% trans "Branch" %}</th>
+        <td>{{article.branch}}</td>
+      </tr>
+
+
       <tr>
           <th>{% trans "Client" %}</th>
         <td>{{article.get_type_client_display}}</td>
@@ -79,7 +86,7 @@
       <tr>
         <th>{% trans "Prix d'achat" %}</th>
         <!--<td>{{article.prix_achat|default_if_none:"<em>à renseigner</em>"}}</td>-->
-        <td>{{article.prix_total|default_if_none:"<em>à renseigner</em>"}}</td>
+        <td>{{article.purchasing_price|default_if_none:"<em>à renseigner</em>"}}</td>
       </tr>
 
       <tr>
@@ -90,8 +97,8 @@
     </tbody>
   </table>
 
-</div>
-</p>
+
+
 
 
 <table class="table-condensed">
@@ -149,7 +156,7 @@
 
 
 
-
+</div>
 
 {% endblock %}
 

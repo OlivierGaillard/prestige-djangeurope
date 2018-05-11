@@ -169,7 +169,7 @@ class BranchUpdateForm(forms.ModelForm):
 class ArticleUpdateForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('category', 'nom', 'solde', 'prix_total', 'selling_price')
+        fields = ('branch', 'category', 'nom', 'solde', 'purchasing_price', 'selling_price')
 
     def __init__(self, *args, **kwargs):
         super(ArticleUpdateForm, self).__init__(*args, **kwargs)

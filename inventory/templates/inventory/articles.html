@@ -127,7 +127,7 @@
           <td><span class="badge badge-danger">{{ a.quantite }}</span></td>
           {% endif %}
           <td><a title="{% trans 'Modifier' %}" href="/inventory/article_update/{{a.pk}}">{{a.selling_price|intcomma}}</a></td>
-          <td>{{a.prix_total}}</td>
+          <td>{{a.purchasing_price}}</td>
       </tr>
 
       {% endfor %}

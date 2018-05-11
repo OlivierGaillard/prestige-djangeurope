@@ -7,67 +7,69 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-01 11:57+0200\n"
+"POT-Creation-Date: 2018-05-11 10:38+0200\n"
 "PO-Revision-Date: 2018-05-09 18:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Last-Translator: \n"
-"Language-Team: \n"
 "X-Generator: Poedit 2.0.7\n"
 
-#: cart/models.py:10 cart/templates/cart/vente.html:80
-#: cart/templates/cart/vente_update.html:15
+#: cart/models.py:11 cart/templates/cart/vente.html:80
+#: cart/templates/cart/vente_update.html:16
 msgid "Nom"
 msgstr ""
 
-#: cart/models.py:11
+#: cart/models.py:12
 msgid "Prénom"
 msgstr ""
 
-#: cart/models.py:14
+#: cart/models.py:15
 msgid "Tél."
 msgstr ""
 
-#: cart/models.py:14
+#: cart/models.py:15
 msgid "pas d'espaces entre les chiffres svp"
 msgstr ""
 
-#: cart/models.py:34
+#: cart/models.py:44
 msgid "montant"
 msgstr ""
 
-#: cart/models.py:35 cart/templates/cart/vente.html:62
+#: cart/models.py:46 cart/templates/cart/vente.html:62
 #: cart/templates/cart/ventes.html:13
 msgid "Client"
 msgstr ""
 
-#: cart/models.py:35
-msgid "Laisser le champ vide (---) si le client n'est pas enregistré."
+#: cart/models.py:46
+msgid "Make the field empty (---) if the customer is not registered."
 msgstr ""
 
-#: cart/models.py:36
-msgid "Règlement terminé"
-msgstr ""
+#: cart/models.py:47
+#, fuzzy
+#| msgid "Selling closed?"
+msgid "Selling closed"
+msgstr "Vente terminée?"
 
-#: cart/models.py:60 cart/templates/cart/vente.html:71
+#: cart/models.py:73 cart/templates/cart/vente.html:71
 #: cart/templates/cart/vente.html:122
 msgid "Montant"
 msgstr ""
 
-#: cart/models.py:61 cart/models.py:73
+#: cart/models.py:74 cart/models.py:86
 msgid "Vente"
 msgstr ""
 
-#: cart/models.py:72 cart/templates/cart/cart_content.html:39
-#: cart/templates/cart/checkout.html:46 cart/templates/cart/vente.html:82
-#: cart/templates/cart/vente_update.html:17
+#: cart/models.py:85 cart/templates/cart/cart_content.html:39
+#: cart/templates/cart/checkout.html:48 cart/templates/cart/vente.html:82
+#: cart/templates/cart/vente_update.html:18
 msgid "Prix"
 msgstr ""
 
-#: cart/models.py:76
+#: cart/models.py:89
 msgid "Panier validé"
 msgstr ""
 
@@ -111,12 +113,12 @@ msgid "de la vente achevée"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:34
-#: cart/templates/cart/checkout.html:42
+#: cart/templates/cart/checkout.html:44
 msgid "No"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:35
-#: cart/templates/cart/checkout.html:43
+#: cart/templates/cart/checkout.html:45
 msgid "Date d'ajout"
 msgstr ""
 
@@ -125,13 +127,13 @@ msgid "Action"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:37
-#: cart/templates/cart/checkout.html:44
+#: cart/templates/cart/checkout.html:46
 msgid "Titre"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:38
-#: cart/templates/cart/checkout.html:45 cart/templates/cart/vente.html:83
-#: cart/templates/cart/vente_update.html:18
+#: cart/templates/cart/checkout.html:47 cart/templates/cart/vente.html:83
+#: cart/templates/cart/vente_update.html:19
 msgid "Quantité"
 msgstr ""
 
@@ -141,7 +143,7 @@ msgid "Modifier"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:41
-#: cart/templates/cart/checkout.html:47
+#: cart/templates/cart/checkout.html:49
 msgid "Total"
 msgstr ""
 
@@ -150,11 +152,11 @@ msgid "Supprimer du panier"
 msgstr ""
 
 #: cart/templates/cart/cart_content.html:74
-#: cart/templates/cart/checkout.html:62
+#: cart/templates/cart/checkout.html:64
 msgid "Total de votre panier:"
 msgstr ""
 
-#: cart/templates/cart/cart_content.html:83
+#: cart/templates/cart/cart_content.html:84
 msgid "Aller à la vente"
 msgstr ""
 
@@ -256,15 +258,15 @@ msgstr ""
 msgid "Date"
 msgstr ""
 
-#: cart/templates/cart/vente.html:81 cart/templates/cart/vente_update.html:16
+#: cart/templates/cart/vente.html:81 cart/templates/cart/vente_update.html:17
 msgid "Aperçu"
 msgstr ""
 
-#: cart/templates/cart/vente.html:89 cart/templates/cart/vente_update.html:25
+#: cart/templates/cart/vente.html:89 cart/templates/cart/vente_update.html:26
 msgid "Cliquer pour voir les détails"
 msgstr ""
 
-#: cart/templates/cart/vente.html:99 cart/templates/cart/vente_update.html:35
+#: cart/templates/cart/vente.html:99 cart/templates/cart/vente_update.html:36
 msgid "pas d'aperçu"
 msgstr ""
 
@@ -288,20 +290,20 @@ msgstr ""
 msgid "Modifier la vente"
 msgstr ""
 
-#: cart/templates/cart/vente_update.html:14
+#: cart/templates/cart/vente_update.html:15
 msgid "Article-ID"
 msgstr ""
 
-#: cart/templates/cart/vente_update.html:19
-#: cart/templates/cart/vente_update.html:39
+#: cart/templates/cart/vente_update.html:20
+#: cart/templates/cart/vente_update.html:40
 msgid "Supprimer"
 msgstr ""
 
-#: cart/templates/cart/vente_update.html:48
+#: cart/templates/cart/vente_update.html:50
 msgid "Supprimer la vente ID"
 msgstr ""
 
-#: cart/templates/cart/vente_update.html:53
+#: cart/templates/cart/vente_update.html:55
 msgid "Effacer la vente"
 msgstr ""
 

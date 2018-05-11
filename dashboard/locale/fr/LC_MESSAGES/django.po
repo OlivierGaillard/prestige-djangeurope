@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-08 15:46+0200\n"
+"POT-Creation-Date: 2018-05-11 10:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,45 +38,45 @@ msgstr ""
 msgid "Dashboard of Branch "
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:18
+#: dashboard/templates/dashboard/branch.html:19
 #: dashboard/templates/dashboard/main.html:22
 msgid "Purchases"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:22
+#: dashboard/templates/dashboard/branch.html:23
 msgid "Costs"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:23
+#: dashboard/templates/dashboard/branch.html:24
 msgid "Link to its costs"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:27
+#: dashboard/templates/dashboard/branch.html:28
 #: dashboard/templates/dashboard/main.html:45
 msgid "Total costs:"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:33
+#: dashboard/templates/dashboard/branch.html:34
 #: dashboard/templates/dashboard/main.html:39
 msgid "Losses:"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:39
+#: dashboard/templates/dashboard/branch.html:40
 #: dashboard/templates/dashboard/main.html:50
 msgid "Total incomes:"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:43
+#: dashboard/templates/dashboard/branch.html:44
 #: dashboard/templates/dashboard/main.html:54
 msgid "Balance:"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:47
+#: dashboard/templates/dashboard/branch.html:48
 #: dashboard/templates/dashboard/main.html:58
 msgid "Not depending of the date interval"
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:47
+#: dashboard/templates/dashboard/branch.html:48
 #: dashboard/templates/dashboard/main.html:58
 msgid "Total articles:"
 msgstr ""
