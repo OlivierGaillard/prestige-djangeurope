@@ -97,7 +97,7 @@
                     <li><a href="{% url "inventory:soldes" %}" title="Gérer les soldes">{% trans "Gérer les soldes" %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url "cart:cart_content" %}"><span class="glyphicon glyphicon-shopping-cart"></span>  {%trans 'Contenu du panier' %}</a></li>
-                    <li><a href="{% url "cart:ventes"  %}">{% trans 'Ventes' %}</a></li>
+                    <li><a href="{% url "cart:ventes"  %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Ventes' %}</a></li>
                     <li class="divider"></li>
                     <li><a href="{% url "cart:clients" %}"><span class="glyphicon glyphicon-user"></span>  {% trans 'Clients' %}</a></li>
                     <li><a href="{% url "cart:client_create" %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Ajouter un client' %}</a></li>
@@ -109,9 +109,9 @@
                   <span class="caret"></span>
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a href="{% url "costs:costs" %}">{% trans "Costs" %}</a> </li>
-                    <li><a title="{% trans 'Adding a lost is possible in article details view' %}" href="{% url "inventory:losses" %}">{% trans "Losses" %}</a> </li>
-                    <li><a href="{% url "costs:costs_create" %}">{% trans "Add one Cost" %}</a> </li>
+                    <li><a href="{% url "costs:costs" %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans "Costs" %}</a> </li>
+                    <li><a href="{% url "costs:costs_create" %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans "Add one Cost" %}</a> </li>
+                    <li><a title="{% trans 'Adding a lost is possible in article details view' %}" href="{% url "inventory:losses" %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans "Losses" %}</a> </li>
                     <li class="divider"></li>
                     <li><a href="{% url "costs:categories" %}"><span class="glyphicon glyphicon-tags"></span>  {% trans "Categories" %}</a> </li>
                     <li><a href="{% url "costs:category_create" %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans "Create a category" %}</a> </li>
@@ -125,7 +125,7 @@
 
             <li class="dropdown"><a href="#" data-toggle="dropdown"><span class="glyphicon glyphicon-stats"></span> {% trans "Dashboard" %}<span class="caret"</span></a>
                     <ul class="dropdown-menu">
-                      <li><a title="All Branches" href="{% url 'dashboard:main' %}">Main</a> </li>
+                      <li><a title="All Branches" href="{% url 'dashboard:main' %}">{% trans "General" %}</a> </li>
                       {% show_branches %}
                     </ul>
                 </li>

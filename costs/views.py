@@ -103,13 +103,14 @@ class CostsListView(ListView):
         if q:
             ctx['option'] = q
             if q.upper() == 'MAIN':
-                # costs = Costs.objects.filter(branch=None)
-                # total = sum(c.amount for c in costs)
+                # costs not belonging to a specific branch
                 total = Costs.objects.total_costs(branch='MAIN')
                 ctx['total'] = total
             elif q.upper() == 'ALL':
+                # costs not belonging to a branch and those bound to branches
                 ctx['total'] = Costs.objects.total_costs()
             else:
+                # costs bound to a branch
                 branch = Branch.objects.get(name=q)
                 ctx['total'] = Costs.objects.total_costs(branch=branch)
         else:

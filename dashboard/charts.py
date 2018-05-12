@@ -1,5 +1,6 @@
 from jchart import Chart
 from jchart.config import Axes, DataSet, rgba
+from django.utils.translation import ugettext_lazy as _
 
 class BarChart(Chart):
     chart_type = 'bar'
@@ -13,7 +14,7 @@ class BarChart(Chart):
 
 
     def get_labels(self, **kwargs):
-        return ["Purchases", "Costs", "Losses", "All: Purch. + Costs + Losses", "Incomes", "Balance"]
+        return [_("Purchases"), _("Costs"), _("Losses"), _("All: Purch. + Costs + Losses"), _("Incomes"), _("Balance")]
 
     def get_datasets(self, **kwargs):
 
@@ -25,7 +26,7 @@ class BarChart(Chart):
             rgba(153, 102, 255, 0.2),
         ]
 
-        return [DataSet(label='Bar Chart',
+        return [DataSet(label=_('Bar Chart'),
                         data=data,
                         borderWidth=1,
                         backgroundColor=colors,

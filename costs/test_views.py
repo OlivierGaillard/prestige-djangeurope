@@ -151,7 +151,6 @@ class TestCostsViews(TestCase):
         cost = Costs.objects.create(amount=2000, category=c1, name='fosse', billing_date=billing_date)
         response = c.get(reverse('costs:costs'))
         self.assertEqual(200, response.status_code)
-        self.assertInHTML('Billing Date', response.content.decode())
 
     def test_costs_total_in_main_costs_list(self):
         c = Client()

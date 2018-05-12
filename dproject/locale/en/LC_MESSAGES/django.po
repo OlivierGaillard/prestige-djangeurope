@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 18:01+0200\n"
+"POT-Creation-Date: 2018-05-12 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,15 +162,15 @@ msgid "Costs"
 msgstr ""
 
 #: dproject/templates/base.html:113
-msgid "Adding a lost is possible in article details view"
-msgstr ""
-
-#: dproject/templates/base.html:113
-msgid "Losses"
+msgid "Add one Cost"
 msgstr ""
 
 #: dproject/templates/base.html:114
-msgid "Add one Cost"
+msgid "Adding a lost is possible in article details view"
+msgstr ""
+
+#: dproject/templates/base.html:114
+msgid "Losses"
 msgstr ""
 
 #: dproject/templates/base.html:117
@@ -191,6 +191,10 @@ msgstr ""
 
 #: dproject/templates/base.html:126
 msgid "Dashboard"
+msgstr ""
+
+#: dproject/templates/base.html:128
+msgid "General"
 msgstr ""
 
 #: dproject/templates/base.html:136

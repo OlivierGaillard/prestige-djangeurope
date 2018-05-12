@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 18:01+0200\n"
-"PO-Revision-Date: 2018-05-11 18:03+0200\n"
+"POT-Creation-Date: 2018-05-12 12:46+0200\n"
+"PO-Revision-Date: 2018-05-12 12:49+0200\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
 "Language: fr\n"
@@ -161,16 +161,16 @@ msgid "Costs"
 msgstr "Coûts"
 
 #: dproject/templates/base.html:113
+msgid "Add one Cost"
+msgstr "Ajouter un coût"
+
+#: dproject/templates/base.html:114
 msgid "Adding a lost is possible in article details view"
 msgstr "Ajouter un coût est possible dans la page des détails d'un article"
 
-#: dproject/templates/base.html:113
+#: dproject/templates/base.html:114
 msgid "Losses"
 msgstr "Pertes"
-
-#: dproject/templates/base.html:114
-msgid "Add one Cost"
-msgstr "Ajouter une perte"
 
 #: dproject/templates/base.html:117
 msgid "Create a category"
@@ -192,6 +192,10 @@ msgstr "Créer une entreprise / fournisseur"
 #: dproject/templates/base.html:126
 msgid "Dashboard"
 msgstr "Tableau de bord"
+
+#: dproject/templates/base.html:128
+msgid "General"
+msgstr "Général"
 
 #: dproject/templates/base.html:136
 msgid "Log out"

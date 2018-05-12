@@ -64,6 +64,16 @@ class TimeSliceHelper:
 
 
     def get_objects(self,  year=None, branch=None, start_date=None, end_date=None):
+        """
+
+        :param year:
+        :param branch: if None it is a cost not bound to a specific branch. It is
+        requested with a value of 'MAIN'. If the value of 'branch' is None, then
+        all objects are returned (with or without a branch value).
+        :param start_date:
+        :param end_date:
+        :return:
+        """
         objects = []
         if year:
             self._set_year_qs(year)
@@ -80,7 +90,8 @@ class TimeSliceHelper:
         if branch != None and not branch == 'MAIN' :
             objects = self.qs.filter(branch=branch)
         elif branch == 'MAIN':
-            #objects = self.qs.filter(branch=None)
+            objects = self.qs.filter(branch=None)
+        elif branch == 'ALL':
             objects = self.qs.all()
         else:
             objects = self.qs.all()

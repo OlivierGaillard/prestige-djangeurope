@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-11 18:01+0200\n"
+"POT-Creation-Date: 2018-05-12 12:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,35 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: dashboard/charts.py:17 dashboard/templates/dashboard/branch.html:19
+#: dashboard/templates/dashboard/main.html:22
+msgid "Purchases"
+msgstr ""
+
+#: dashboard/charts.py:17 dashboard/templates/dashboard/branch.html:23
+msgid "Costs"
+msgstr ""
+
+#: dashboard/charts.py:17
+msgid "Losses"
+msgstr ""
+
+#: dashboard/charts.py:17
+msgid "All: Purch. + Costs + Losses"
+msgstr ""
+
+#: dashboard/charts.py:17
+msgid "Incomes"
+msgstr ""
+
+#: dashboard/charts.py:17
+msgid "Balance"
+msgstr ""
+
+#: dashboard/charts.py:29
+msgid "Bar Chart"
+msgstr ""
 
 #: dashboard/forms.py:9
 msgid "Start Date"
@@ -37,46 +66,37 @@ msgstr ""
 msgid "Dashboard of Branch "
 msgstr ""
 
-#: dashboard/templates/dashboard/branch.html:19
-#: dashboard/templates/dashboard/main.html:22
-msgid "Purchases"
-msgstr ""
-
-#: dashboard/templates/dashboard/branch.html:23
-msgid "Costs"
-msgstr ""
-
 #: dashboard/templates/dashboard/branch.html:24
 msgid "Link to its costs"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:28
-#: dashboard/templates/dashboard/main.html:45
+#: dashboard/templates/dashboard/main.html:44
 msgid "Total costs:"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:34
-#: dashboard/templates/dashboard/main.html:39
+#: dashboard/templates/dashboard/main.html:38
 msgid "Losses:"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:40
-#: dashboard/templates/dashboard/main.html:50
+#: dashboard/templates/dashboard/main.html:49
 msgid "Total incomes:"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:44
-#: dashboard/templates/dashboard/main.html:54
+#: dashboard/templates/dashboard/main.html:53
 msgid "Balance:"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:48
-#: dashboard/templates/dashboard/main.html:58
+#: dashboard/templates/dashboard/main.html:57
 msgid "Not depending of the date interval"
 msgstr ""
 
 #: dashboard/templates/dashboard/branch.html:48
-#: dashboard/templates/dashboard/main.html:58
+#: dashboard/templates/dashboard/main.html:57
 msgid "Total articles:"
 msgstr ""
 
@@ -85,25 +105,25 @@ msgid "Main Dashboard"
 msgstr ""
 
 #: dashboard/templates/dashboard/main.html:26
-msgid "Costs bound to a branch or without"
+msgid "All Costs"
 msgstr ""
 
-#: dashboard/templates/dashboard/main.html:26
-msgid "All Costs (with or without branch)"
-msgstr ""
-
-#: dashboard/templates/dashboard/main.html:28
+#: dashboard/templates/dashboard/main.html:27
 msgid "All costs"
 msgstr ""
 
-#: dashboard/templates/dashboard/main.html:33
-msgid "Costs without a branch defined are named \"Main\""
+#: dashboard/templates/dashboard/main.html:32
+msgid "not branch-specific"
 msgstr ""
 
-#: dashboard/templates/dashboard/main.html:34
+#: dashboard/templates/dashboard/main.html:32
+msgid "Main Costs"
+msgstr ""
+
+#: dashboard/templates/dashboard/main.html:33
 msgid "Main costs"
 msgstr ""
 
-#: dashboard/templates/dashboard/main.html:45
+#: dashboard/templates/dashboard/main.html:44
 msgid "costs + purchases + losses"
 msgstr ""

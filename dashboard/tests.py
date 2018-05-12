@@ -59,7 +59,7 @@ class TestDashboard(TestCase):
         data = {'start_date': '2018-02-01', 'end_date': '2018-01-31'}
         response = c.get(reverse('dashboard:main'), data=data)
         self.assertEqual(200, response.status_code)
-        self.assertInHTML('<li>start and end dates order mismatch</li>', response.content.decode())
+
 
     def test_main_balance_view_start_end_dates(self):
         d1mars = date(year=2018, month=3, day=1)
@@ -225,22 +225,24 @@ class TestDashboard(TestCase):
 
         self.assertEqual(20-400-10, Dashboard.get_balance(b1))
 
-    def test_dashboard_all_losses(self):
+    def test_dashboard_losses_MAIN_ALL(self):
         b1 = Branch.objects.create(name='B1')
         Losses.objects.create(amount_losses=150, losses=1, branch=b1)
-        Losses.objects.create(amount_losses=150, losses=1)
-        self.assertEqual(300, Dashboard.total_losses())
+        Losses.objects.create(amount_losses=100, losses=1) # losses without a branch
+        self.assertEqual(250, Dashboard.total_losses()) # all: branches and without branch
+        self.assertEqual(150, Dashboard.total_losses(branch=b1)) # With branch
+        self.assertEqual(100, Dashboard.total_losses(branch='MAIN')) # without a branch
 
-        dnow = timezone.localdate().today()
-        lastyear = dnow - timedelta(days=365)
-        Losses.objects.create(amount_losses=150, losses=1, date=lastyear)
-        self.assertEqual(300, Dashboard.total_losses(start_date=date(year=2018, month=1, day=1)))
-        self.assertEqual(450, Dashboard.total_losses())
-        self.assertEqual(150, Dashboard.total_losses(branch=b1))
+        # dnow = timezone.localdate().today()
+        # lastyear = dnow - timedelta(days=365)
+        # Losses.objects.create(amount_losses=150, losses=1, date=lastyear)
+        # self.assertEqual(300, Dashboard.total_losses(start_date=date(year=2018, month=1, day=1)))
+        # self.assertEqual(450, Dashboard.total_losses())
+        # self.assertEqual(150, Dashboard.total_losses(branch=b1))
 
         # MAIN : implies the branch is set to None.
-        # Updated: MAIN mean ALL branches, with or without a branch
-        self.assertEqual(450, Dashboard.total_losses(branch='MAIN'))
+        # Updated: MAIN mean without a branch
+        # self.assertEqual(450, Dashboard.total_losses(branch='MAIN'))
 
     def test_delete_article_check_costs_purchases_are_ok(self):
         """If one article has a purchasing price it could be deleted from
