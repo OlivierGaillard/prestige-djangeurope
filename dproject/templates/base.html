@@ -82,7 +82,10 @@
                         <li><a href="{% url "inventory:arrival_create" %}" title="{% trans 'Create  Arrival' %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Create one Arrival' %}</a></li>
                         <li><a href="#" title="{% trans 'Upload pictures ZIP' %}">{% trans 'Upload ZIP pictures' %}</a></li>
                         <li><a href="#" title="{% trans 'Generate articles from pictures' %}">{% trans 'Generate Articles' %}</a></li>
-                        <li class="divider"></li>
+
+ <!--                       <li><a href="{% url 'inventory:article_create' %}"  title="{% trans "Add an article from workshop" %}"><span class="glyphicon glyphicon-pencil"></span>
+                          {% trans 'Add workshop article' %} <span class="glyphicon glyphicon-scissors"></span></a></li>
+ -->                       <li class="divider"></li>
                         <li class="dropdown-header">{% trans 'Your Basic Data'%}</li>
                         <li><a href="{% url "inventory:branches" %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Branches' %}</a> </li>
                         <li><a href="{% url "inventory:arrivals" %}" title="{% trans 'Arrivals List' %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Arrivals' %}</a></li>

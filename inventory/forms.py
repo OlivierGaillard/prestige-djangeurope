@@ -192,8 +192,8 @@ class ArticleCreateForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('category', 'type_client', 'genre_article', 'nom', 'marque', 'quantite', 'prix_unitaire', 'prix_total',
-                  'arrivage', 'entreprise')
+        fields = ('branch', 'category', 'type_client', 'genre_article', 'nom', 'marque', 'quantite', 'purchasing_price',
+                  'selling_price', 'arrivage', 'entreprise')
 
         widgets = {
             'type_client': forms.RadioSelect,
@@ -212,10 +212,10 @@ class ArticleCreateForm(forms.ModelForm):
             TabHolder(
                 Tab('Fiche article',
                     'category', 'nom', 'arrivage', 'entreprise',
-                    'quantite', 'prix_unitaire', 'prix_total',),
+                    'quantite', 'purchasing_price', 'selling_price',),
 
                 Tab('Classification',
-                    'type_client', 'marque', 'new_marque',
+                    'branch', 'type_client', 'marque', 'new_marque',
                     ),
             ),
             #Submit('submit', u'Submit', css_class='btn btn-success'),
