@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-12 12:46+0200\n"
-"PO-Revision-Date: 2018-05-09 18:44+0200\n"
+"POT-Creation-Date: 2018-05-14 11:22+0200\n"
+"PO-Revision-Date: 2018-05-14 11:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -17,6 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.7\n"
+
+#: cart/forms.py:119
+#, fuzzy
+#| msgid "Total Amount"
+msgid "Amount"
+msgstr "Montant total"
 
 #: cart/models.py:11 cart/templates/cart/vente.html:86
 #: cart/templates/cart/vente_update.html:16
@@ -46,7 +52,7 @@ msgstr ""
 
 #: cart/models.py:46
 msgid "Make the field empty (---) if the customer is not registered."
-msgstr ""
+msgstr "Laissez le champ vide (---) si le client n'est pas enregistré."
 
 #: cart/models.py:47
 #, fuzzy
@@ -55,7 +61,7 @@ msgid "Selling closed"
 msgstr "Vente terminée?"
 
 #: cart/models.py:73 cart/templates/cart/vente.html:77
-#: cart/templates/cart/vente.html:129
+#: cart/templates/cart/vente.html:128
 msgid "Montant"
 msgstr ""
 
@@ -199,11 +205,11 @@ msgstr ""
 
 #: cart/templates/cart/clients.html:11
 msgid "Last Name"
-msgstr ""
+msgstr "Nom"
 
 #: cart/templates/cart/clients.html:12
 msgid "First Name"
-msgstr ""
+msgstr "Prénom"
 
 #: cart/templates/cart/clients.html:13
 msgid "Phone"
@@ -258,7 +264,7 @@ msgstr ""
 msgid "Branch"
 msgstr ""
 
-#: cart/templates/cart/vente.html:74 cart/templates/cart/vente.html:128
+#: cart/templates/cart/vente.html:74 cart/templates/cart/vente.html:127
 msgid "Date"
 msgstr ""
 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-12 12:46+0200\n"
+"POT-Creation-Date: 2018-05-14 11:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -104,119 +104,139 @@ msgid "Generate Articles"
 msgstr ""
 
 #: dproject/templates/base.html:86
-msgid "Your Basic Data"
+msgid "Add an article from workshop"
 msgstr ""
 
 #: dproject/templates/base.html:87
-msgid "Branches"
-msgstr ""
-
-#: dproject/templates/base.html:88
-msgid "Arrivals List"
-msgstr ""
-
-#: dproject/templates/base.html:88
-msgid "Arrivals"
+msgid "Add workshop article"
 msgstr ""
 
 #: dproject/templates/base.html:89
+msgid "Your Basic Data"
+msgstr ""
+
+#: dproject/templates/base.html:90
+msgid "Branches"
+msgstr ""
+
+#: dproject/templates/base.html:91
+msgid "Arrivals List"
+msgstr ""
+
+#: dproject/templates/base.html:91
+msgid "Arrivals"
+msgstr ""
+
+#: dproject/templates/base.html:92
 #, fuzzy
 #| msgid "Liste des articles"
 msgid "List the categories"
 msgstr "Articles' list"
 
-#: dproject/templates/base.html:89 dproject/templates/base.html:116
+#: dproject/templates/base.html:92 dproject/templates/base.html:128
 msgid "Categories"
 msgstr ""
 
-#: dproject/templates/base.html:94
-msgid "Caisse"
-msgstr "Checkout"
-
-#: dproject/templates/base.html:96
-msgid "Liste des articles"
-msgstr "Articles' list"
-
 #: dproject/templates/base.html:97
-msgid "Gérer les soldes"
+msgid "Workshop"
 msgstr ""
 
 #: dproject/templates/base.html:99
+msgid "Sellings"
+msgstr ""
+
+#: dproject/templates/base.html:100
+msgid "Enter one selling"
+msgstr ""
+
+#: dproject/templates/base.html:106
+msgid "Caisse"
+msgstr "Checkout"
+
+#: dproject/templates/base.html:108
+msgid "Liste des articles"
+msgstr "Articles' list"
+
+#: dproject/templates/base.html:109
+msgid "Gérer les soldes"
+msgstr ""
+
+#: dproject/templates/base.html:111
 msgid "Contenu du panier"
 msgstr "Cart content"
 
-#: dproject/templates/base.html:100
+#: dproject/templates/base.html:112
 msgid "Ventes"
 msgstr "Sellings"
 
-#: dproject/templates/base.html:102
+#: dproject/templates/base.html:114
 msgid "Clients"
 msgstr "Customers"
 
-#: dproject/templates/base.html:103
+#: dproject/templates/base.html:115
 msgid "Ajouter un client"
 msgstr "Add a customer"
 
-#: dproject/templates/base.html:108 dproject/templates/base.html:112
+#: dproject/templates/base.html:120 dproject/templates/base.html:124
 msgid "Costs"
 msgstr ""
 
-#: dproject/templates/base.html:113
+#: dproject/templates/base.html:125
 msgid "Add one Cost"
 msgstr ""
 
-#: dproject/templates/base.html:114
+#: dproject/templates/base.html:126
 msgid "Adding a lost is possible in article details view"
 msgstr ""
 
-#: dproject/templates/base.html:114
+#: dproject/templates/base.html:126
 msgid "Losses"
 msgstr ""
 
-#: dproject/templates/base.html:117
+#: dproject/templates/base.html:129
 msgid "Create a category"
 msgstr ""
 
-#: dproject/templates/base.html:119
+#: dproject/templates/base.html:131
 msgid "Providers"
 msgstr ""
 
-#: dproject/templates/base.html:121
+#: dproject/templates/base.html:133
 msgid "an enterprise or provider which occurs regularly in your costs"
 msgstr ""
 
-#: dproject/templates/base.html:121
+#: dproject/templates/base.html:133
 msgid "Create an enterprise"
 msgstr ""
 
-#: dproject/templates/base.html:126
+#: dproject/templates/base.html:138
 msgid "Dashboard"
 msgstr ""
 
-#: dproject/templates/base.html:128
+#: dproject/templates/base.html:140
 msgid "General"
 msgstr ""
 
-#: dproject/templates/base.html:136
+#: dproject/templates/base.html:148
 msgid "Log out"
 msgstr ""
 
-#: dproject/templates/base.html:139
+#: dproject/templates/base.html:151
 #: dproject/templates/registration/login.html:5
 #: dproject/templates/registration/login.html:12
 #: dproject/templates/registration/login.html:18
 msgid "Log in"
 msgstr ""
 
-#: dproject/templates/base.html:149
+#: dproject/templates/base.html:161
 msgid "Profile"
 msgstr ""
 
-#: dproject/templates/base.html:150
+#: dproject/templates/base.html:162
 msgid "Admin"
 msgstr ""
 
-#: dproject/templates/base.html:183
+#: dproject/templates/base.html:195
 msgid "créé par"
 msgstr "made by"
 

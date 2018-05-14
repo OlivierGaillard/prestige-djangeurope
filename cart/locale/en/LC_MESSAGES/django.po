@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-12 12:46+0200\n"
+"POT-Creation-Date: 2018-05-14 11:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,10 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: cart/forms.py:119
+msgid "Amount"
+msgstr ""
 
 #: cart/models.py:11 cart/templates/cart/vente.html:86
 #: cart/templates/cart/vente_update.html:16
@@ -52,7 +56,7 @@ msgid "Selling closed"
 msgstr ""
 
 #: cart/models.py:73 cart/templates/cart/vente.html:77
-#: cart/templates/cart/vente.html:129
+#: cart/templates/cart/vente.html:128
 msgid "Montant"
 msgstr "Amount"
 
@@ -266,7 +270,7 @@ msgstr "Selling Nb"
 msgid "Branch"
 msgstr ""
 
-#: cart/templates/cart/vente.html:74 cart/templates/cart/vente.html:128
+#: cart/templates/cart/vente.html:74 cart/templates/cart/vente.html:127
 msgid "Date"
 msgstr ""
 
