@@ -47,10 +47,11 @@ class TestInventory(TestCase):
                 'arrivage': self.arrivage.pk,
                 'prix_unitaire' : '2500',
                 'prix_total' : '2500',
+                'selling_price' : 5000,
                 'remise' : 5.0,
                 }
         form = ArticleCreateForm(data)
-        self.assertTrue(form.is_valid(), form.errors)
+        self.assertTrue(form.is_valid(), form.errors.as_data())
 
     def test_get_article1(self):
         article = Article.objects.get(pk=self.article1.pk)

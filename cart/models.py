@@ -60,7 +60,7 @@ class Vente(models.Model):
     def total_paiements(self):
         total = 0
         for p in self.paiement_set.all():
-            total += p.montant
+            total += p.payment_amount
         return total
 
     def solde_paiements(self):
@@ -70,11 +70,11 @@ class Vente(models.Model):
 
 class Paiement(models.Model):
     date    = models.DateTimeField(default=timezone.now)
-    montant = models.DecimalField(_('Montant'), max_digits=20, decimal_places=0, default=0)
+    payment_amount = models.DecimalField(_('Montant'), max_digits=20, decimal_places=0, default=0)
     vente   = models.ForeignKey(Vente, verbose_name=_('Vente'))
 
     def __str__(self):
-        return "Montant: %s / Vente-ID: %s" % (self.montant, self.vente.pk)
+        return "Montant: %s / Vente-ID: %s" % (self.payment_amount, self.vente.pk)
 
 
 class CartItem(models.Model):

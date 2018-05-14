@@ -17,6 +17,6 @@ class ClientAdmin(admin.ModelAdmin):
 admin.site.register(Client, ClientAdmin)
 
 class PaiementAdmin(admin.ModelAdmin):
-    list_display = ['date', 'montant', 'vente']
+    list_display = ['date', 'payment_amount', 'vente']
 
 admin.site.register(Paiement, PaiementAdmin)

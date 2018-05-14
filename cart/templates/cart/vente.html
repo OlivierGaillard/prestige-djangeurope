@@ -124,7 +124,6 @@
         <thead>
         <tr>
             <th>{% trans 'Nr' %}</th>
-
             <th>{% trans 'Date' %}</th>
             <th>{% trans 'Montant' %}</th>
         </tr>
@@ -133,8 +132,9 @@
         {% for p in vente.paiement_set.all %}
         <tr>
           <td>{{forloop.counter}}</td>
-          <td>{{p.branch|default_if_none:"n.d."}}</td>
-          <td>{{p.date|date:"D d/m/y"}}</td><td>{{p.montant|intcomma}}</td></tr>
+          <td>{{p.date|date:"D d/m/y"}}</td>
+          <td>{{p.payment_amount|intcomma}}</td>
+        </tr>
         {% endfor %}
         <tr>
             <th colspan="2">Total</th>

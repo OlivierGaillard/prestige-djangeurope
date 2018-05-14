@@ -1,4 +1,5 @@
-from django.shortcuts import render, reverse
+from django.shortcuts import render, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
@@ -11,6 +12,10 @@ from inventory.models import Article
 from .cartutils import is_cart_id_session_set, _set_or_get_session_id, get_cart_items, get_cart_id_session
 from .cartutils import  get_cart_item_of_book, article_already_in_cart, get_cart_counter, _remove_cart_item, cart_not_complete
 from .cartutils import remove_cart_id_from_session
+import logging
+
+logger = logging.getLogger('django')
+
 
 
 def add_cart_counter_to_context(request, ctx):
@@ -173,6 +178,18 @@ class VenteUpdateView(UpdateView):
     context_object_name = 'vente'
     form_class = VenteUpdateForm
 
+class VenteCreateView(CreateView):
+    """
+    Primary usage is for branch workshop. It is not used
+    to enter a selling by using the cart process.
+    """
+    model = Vente
+    template_name = 'cart/vente_create.html'
+    context_object_name = 'vente'
+    form_class = VenteCreateForm
+    success_url = 'cart/ventes_workshop'
+
+
 
 class VenteListView(ListView):
     model = Vente
@@ -188,11 +205,25 @@ class VenteListView(ListView):
         ctx['total'] = total
         return ctx
 
+class VenteWorkshopListView(ListView):
+    model = Vente
+    template_name = 'cart/ventes.html'
+    context_object_name = 'ventes'
 
-# class VenteDeleteView(DeleteView):
-#     model = Vente
-#     template_name = 'cart/vente_delete.html'
-#     form_class = VenteDeleteForm
+    def get_context_data(self, **kwargs):
+        ctx = super(VenteWorkshopListView, self).get_context_data(**kwargs)
+        li = Vente.objects.filter(branch__name='Atelier')
+        total = 0
+        for v in li:
+            total += v.montant
+        ctx['total'] = total
+        return ctx
+
+    def get_queryset(self):
+        qs = super(VenteWorkshopListView, self).get_queryset()
+        qs = qs.filter(branch__name='Atelier')
+        return qs
+
 
 def vente_delete(request, pk):
     if request.method == "GET":
@@ -236,56 +267,111 @@ class PaiementCreateView(CreateView):
     template_name = 'cart/paiement_create.html'
     form_class = PaiementCreateForm
 
+login_required()
 def add_paiement(request, vente_pk):
     """Add a paiement to a vente.
     return render(request, 'polls/detail.html', {'question': question})
 
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+
     """
+    logger.debug('In add_paiement')
     template_name = 'cart/paiement_add.html'
+    vente = get_object_or_404(Vente, pk=vente_pk)
+    logger.debug('Vente instance retrieved.')
+    logger.debug('Amount of this "Vente": ', vente.montant)
+
     if request.method == 'POST':
+        logger.debug('in POST')
         form = PaiementCreateForm(request.POST)
-        montant = float(request.POST.get('montant', ''))
-        vente = Vente.objects.get(pk=vente_pk)
-        form.helper.layout.append(PrependedText('montant', 'Max: ' + str(vente.solde_paiements())))
-        form.helper.layout.append(
-            FormActions(
-                Submit('save', 'Submit'),
-            )
-        )
-
-
+        logger.debug('before calling form.is_valid()')
         if form.is_valid():
-            form.save()
+            logger.debug('IS valid.')
+            logger.debug('Setting the "Vente" instance to the payment...')
+            montant = form.cleaned_data['payment_amount']
+            p = Paiement.objects.create(payment_amount=montant, date=form.cleaned_data['date'], vente=vente)
+            logger.debug('Payment-ID [%s] created.' % p.pk)
+            logger.debug('Payment amount: [%s]' % p.payment_amount)
+            logger.debug('Saved. Will update selling.')
             if vente.solde_paiements() == 0:
                 vente.reglement_termine = True
             else:
                 vente.reglement_termine = False
             vente.save()
+            logger.debug('Vente: %s' % vente)
             url_redirect = reverse('cart:vente', args=[vente.pk])
             return HttpResponseRedirect(url_redirect)
         else:
+            logger.debug('IS NOT valid.')
+            logger.debug(form.errors.as_data())
             return render(request=request, template_name=template_name, context={'form': form,
                                                                              'solde': vente.solde_paiements()})
     else:
-        # initial data = vente.pk
-        vente = Vente.objects.get(pk=vente_pk)
+        logger.debug('in GET.')
+        logger.debug('Vente ID: %s' % vente.pk)
         vente_solde = vente.solde_paiements()
-
+        logger.debug('Solde: [%s}' % vente_solde)
         date_vente = datetime.datetime(year=vente.date.year, month=vente.date.month, day=vente.date.day,
                                        hour=vente.date.hour, minute=vente.date.minute)
-        form = PaiementCreateForm(initial={'vente': vente, 'date' : date_vente, 'montant' : vente_solde})
+        form = PaiementCreateForm(initial={'date' : date_vente, 'payment_amount' : vente_solde, 'vente' : vente})
         # add prepended text here
-        form.helper.layout.append(PrependedText('montant', 'Max: ' + str(vente_solde)))
-        form.helper.layout.append(
-            FormActions(
-                Submit('save', 'Submit'),
-            )
-        )
-
+        #form.helper.layout.append(PrependedText('payment_amount', 'Max: ' + str(vente_solde)))
         return render(request=request, template_name=template_name, context={'form': form,
                                                                              'solde': vente_solde})
 
+
+# def add_paiement(request, vente_pk):
+#     """Add a paiement to a vente.
+#     return render(request, 'polls/detail.html', {'question': question})
+#
+#     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+#     """
+#     logger.info('In add_paiement')
+#     template_name = 'cart/paiement_add.html'
+#     if request.method == 'POST':
+#         logger.info('In add_paiement POST')
+#         form = PaiementCreateForm(request.POST)
+#         montant = float(request.POST.get('montant', ''))
+#         vente = Vente.objects.get(pk=vente_pk)
+#         form.helper.layout.append(PrependedText('montant', 'Max: ' + str(vente.solde_paiements())))
+#         form.helper.layout.append(
+#             FormActions(
+#                 Submit('save', 'Submit'),
+#             )
+#         )
+#
+#
+#         if form.is_valid():
+#             form.save()
+#             if vente.solde_paiements() == 0:
+#                 vente.reglement_termine = True
+#             else:
+#                 vente.reglement_termine = False
+#             vente.save()
+#             url_redirect = reverse('cart:vente', args=[vente.pk])
+#             return HttpResponseRedirect(url_redirect)
+#         else:
+#             return render(request=request, template_name=template_name, context={'form': form,
+#                                                                              'solde': vente.solde_paiements()})
+#     else:
+#         # initial data = vente.pk
+#         vente = Vente.objects.get(pk=vente_pk)
+#         vente_solde = vente.solde_paiements()
+#
+#         date_vente = datetime.datetime(year=vente.date.year, month=vente.date.month, day=vente.date.day,
+#                                        hour=vente.date.hour, minute=vente.date.minute)
+#         form = PaiementCreateForm(initial={'vente': vente, 'date' : date_vente, 'montant' : vente_solde})
+#         # add prepended text here
+#         form.helper.layout.append(PrependedText('montant', 'Max: ' + str(vente_solde)))
+#         form.helper.layout.append(
+#             FormActions(
+#                 Submit('save', 'Submit'),
+#             )
+#         )
+#
+#         return render(request=request, template_name=template_name, context={'form': form,
+#                                                                              'solde': vente_solde})
+#
 
 
 class PaiementDetailView(DetailView):

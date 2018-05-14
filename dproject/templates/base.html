@@ -94,6 +94,15 @@
                 </li>
 
             <li class="dropdown">
+              <a class="dropdown-toggle" href="#" data-toggle="dropdown">{% trans "Workshop" %}<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url "cart:ventes_workshop"  %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Sellings' %}</a></li>
+                    <li><a href="{% url "cart:vente_create"  %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Enter one selling' %}</a></li>
+                </ul>
+            </li>
+
+
+            <li class="dropdown">
               <a class="dropdown-toggle" href="#" data-toggle="dropdown">{% trans "Caisse" %}<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                     <li><a href="{% url "inventory:articles" %}" title="{% trans 'Liste des articles' %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Liste des articles' %}</a></li>
