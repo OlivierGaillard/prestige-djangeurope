@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-14 11:22+0200\n"
+"POT-Creation-Date: 2018-05-21 17:12+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -44,6 +44,7 @@ msgstr "Amount"
 
 #: cart/models.py:46 cart/templates/cart/vente.html:68
 #: cart/templates/cart/ventes.html:13
+#: cart/templates/cart/ventes_workshop.html:13
 msgid "Client"
 msgstr "Customer"
 
@@ -330,26 +331,32 @@ msgid "Effacer la vente"
 msgstr "Edit the selling"
 
 #: cart/templates/cart/ventes.html:14
+#: cart/templates/cart/ventes_workshop.html:14
 msgid "Total Amount"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:15
+#: cart/templates/cart/ventes_workshop.html:15
 msgid "Remaining Balance"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:16
+#: cart/templates/cart/ventes_workshop.html:16
 msgid "Selling closed?"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:23
+#: cart/templates/cart/ventes_workshop.html:23
 msgid "Click to add one payment or see the selling's details"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:38
+#: cart/templates/cart/ventes_workshop.html:38
 msgid "Add one payment"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:39
+#: cart/templates/cart/ventes_workshop.html:39
 msgid "reduced price"
 msgstr ""
 

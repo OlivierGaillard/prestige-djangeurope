@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^inventory/', include('inventory.urls', namespace='inventory')),
     url(r'^costs/', include('costs.urls', namespace="costs")),
     url(r'^dashboard/', include('dashboard.urls', namespace="dashboard")),
+    url(r'^workshop/', include('workshop.urls', namespace="workshop")),
     url(r'^', include('favicon.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

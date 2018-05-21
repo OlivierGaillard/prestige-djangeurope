@@ -98,6 +98,10 @@
                 <ul class="dropdown-menu">
                     <li><a href="{% url "cart:ventes_workshop"  %}"><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Sellings' %}</a></li>
                     <li><a href="{% url "cart:vente_create"  %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Enter one selling' %}</a></li>
+                    <li><a href="{% url "workshop:product_create"  %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Enter one product' %}</a></li>
+                    <li><a href="{% url "workshop:product_category_create"  %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Enter one product category' %}</a></li>
+                    <li><a href="{% url "workshop:product_categories" %}" ><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Product categories' %}</a></li>
+                    <li><a href="{% url "workshop:products" %}" ><span class="glyphicon glyphicon-list-alt"></span>  {% trans 'Products' %}</a></li>
                 </ul>
             </li>
 

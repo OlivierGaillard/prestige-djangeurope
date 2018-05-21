@@ -1,0 +1,102 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-21 17:12+0200\n"
+"PO-Revision-Date: 2018-05-21 17:15+0200\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.7\n"
+
+#: workshop/models.py:7 workshop/models.py:25
+#: workshop/templates/workshop/product_categories.html:9
+#: workshop/templates/workshop/products.html:14
+msgid "Name"
+msgstr "Nom"
+
+#: workshop/models.py:7 workshop/models.py:25 workshop/models.py:29
+msgid "n.d."
+msgstr "n.d."
+
+#: workshop/models.py:15
+msgid "pending"
+msgstr "en attente"
+
+#: workshop/models.py:16
+msgid "started"
+msgstr "démarré"
+
+#: workshop/models.py:17
+msgid "working"
+msgstr "en cours"
+
+#: workshop/models.py:18
+msgid "finished"
+msgstr "terminé"
+
+#: workshop/models.py:20 workshop/templates/workshop/products.html:9
+msgid "Deadline"
+msgstr "Date butoire"
+
+#: workshop/models.py:21
+msgid "Date order"
+msgstr "Date de la commande"
+
+#: workshop/models.py:23
+msgid "Work state"
+msgstr "Status"
+
+#: workshop/models.py:24 workshop/templates/workshop/products.html:13
+msgid "Start date"
+msgstr "Date de début"
+
+#: workshop/models.py:26
+msgid "Category"
+msgstr "Catégorie"
+
+#: workshop/models.py:27
+msgid "Selling Price"
+msgstr "Prix de vente"
+
+#: workshop/models.py:28
+msgid "Selling"
+msgstr "Vente"
+
+#: workshop/models.py:29
+msgid "Notes"
+msgstr "Notes"
+
+#: workshop/templates/workshop/product_categories.html:10
+#: workshop/templates/workshop/product_categories.html:19
+#: workshop/templates/workshop/products.html:15
+#: workshop/templates/workshop/products.html:28
+msgid "Edit"
+msgstr "Modifier"
+
+#: workshop/templates/workshop/product_categories.html:11
+#: workshop/templates/workshop/product_categories.html:20
+#: workshop/templates/workshop/products.html:29
+msgid "Delete"
+msgstr "Supprimer"
+
+#: workshop/templates/workshop/products.html:10
+msgid "State"
+msgstr "Status"
+
+#: workshop/templates/workshop/products.html:11
+msgid "Order date"
+msgstr "Date de la commande"
+
+#: workshop/templates/workshop/products.html:12
+msgid "Client"
+msgstr "Client"

@@ -1,0 +1,55 @@
+{% extends "inventex.html" %}
+{% load static %}
+{% load i18n %}
+{% load humanize %}
+{% block content %}
+  <div class="container table-responsive">
+    <table class="table table-light">
+      <thead class="thead-light">
+      <tr>
+          <th>ID</th>
+          <th>Date</th>
+          <th>Article</th>
+          <th>{% trans "Client" %}</th>
+          <th>{% trans "Total Amount" %}</th>
+          <th>{% trans "Remaining Balance" %}</th>
+          <th>{% trans "Selling closed?" %}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for a in ventes %}
+      <tr>
+          <td> <a title="{% trans "Click to add one payment or see the selling's details" %}" href="/cart/vente/{{a.pk}}">{{ a.pk }}</a> </td>
+          <td>{{ a.date|date:"D d/m/y" }}</td>
+          <td>à faire</td>
+          <td>{{ a.client.prenom}} {{ a.client.nom }}</td>
+          <td>{{ a.montant|intcomma }}</td>
+          {% if a.solde_paiements > 0 %}
+          <td>
+            <form method="GET" action="{% url "cart:paiement_add" a.pk  %}" >
+            {% csrf_token %}
+            <input type="submit"
+                   {% if a.solde_paiements == a.montant %}
+                   class="btn btn-warning"
+                   {% else %}
+                   class="btn btn-success"
+                   {% endif %}
+                   value="{% trans 'Add one payment' %}" />
+            <small class="form-text text-muted">{% trans 'reduced price'%}: {{a.solde_paiements|intcomma}}</small>
+            </form>
+          </td>
+          {% else %}
+          <td>{{ a.solde_paiements|intcomma}}</td>
+          {% endif %}
+          <td>{{ a.reglement_termine|yesno:"Oui,Non" }}</td>
+      </tr>
+      {% endfor %}
+      <tr>
+        <th colspan="4">Total</th>
+        <td colspan="4"><b>{{total|intcomma}}</b></td>
+      </tr>
+    </table>
+  </div>
+
+{% endblock %}

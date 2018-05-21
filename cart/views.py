@@ -207,7 +207,7 @@ class VenteListView(ListView):
 
 class VenteWorkshopListView(ListView):
     model = Vente
-    template_name = 'cart/ventes.html'
+    template_name = 'cart/ventes_workshop.html'
     context_object_name = 'ventes'
 
     def get_context_data(self, **kwargs):
