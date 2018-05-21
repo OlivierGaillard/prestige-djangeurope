@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-21 17:12+0200\n"
-"PO-Revision-Date: 2018-05-21 17:25+0200\n"
+"PO-Revision-Date: 2018-05-21 17:43+0200\n"
 "Last-Translator: Pascal Bader <info@wservices.ch>\n"
 "Language-Team: LANGUAGE <info@wservices.ch>\n"
 "Language: fr\n"
@@ -150,7 +150,7 @@ msgstr "Saisir une vente"
 
 #: dproject/templates/base.html:101
 msgid "Enter one product"
-msgstr ""
+msgstr "Ajouter un produit"
 
 #: dproject/templates/base.html:102
 msgid "Enter one product category"
