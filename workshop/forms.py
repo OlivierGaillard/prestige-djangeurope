@@ -1,4 +1,6 @@
 from crispy_forms.helper import FormHelper
+from django.urls import reverse_lazy
+from django.utils.translation import ugettext_lazy as _
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions
 from crispy_forms.layout import Submit, Layout, Fieldset, Field
 from django import forms
@@ -75,8 +77,6 @@ class ProductCategoryCreateForm(forms.ModelForm):
 
 
 class OrderCreateForm(forms.ModelForm):
-    # generate_selling = forms.ChoiceField(widget=forms.RadioSelect(attrs={'checked' : 'checked'}),
-    #                                      choices=(('YES', 'YES'), ('NO', 'NO')))
     class Meta:
         model = Order
         fields = ('client', 'product', 'order_date', 'deadline', 'start_date', 'order_state')
@@ -107,7 +107,8 @@ class OrderCreateForm(forms.ModelForm):
 
 class OrderUpdateForm(forms.ModelForm):
     generate_selling = forms.ChoiceField(widget=forms.RadioSelect(attrs={'checked': 'checked'}),
-                                         choices=(('YES', 'YES'), ('NO', 'NO')))
+                                         choices=(('YES', _('YES')), ('NO', _('NO'))), label=_('generate_selling')
+                                         )
     class Meta:
         model = Order
         fields = ('client', 'product', 'order_date', 'deadline', 'start_date', 'order_state')

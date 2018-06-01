@@ -32,12 +32,12 @@ class Order(models.Model):
     TESTED    = 'tested'
     DELIVERED = 'delivered'
     STATES_CHOICES = (
-        (PENDING,   'pending'),
-        (PLANNED,   'planned'),
-        (WORKING,   'working'),
-        (FINISHED,  'finished'),
-        (TESTED,    'tested'),
-        (DELIVERED, 'delivered'),
+        (PENDING,   _('pending')),
+        (PLANNED,   _('planned')),
+        (WORKING,   _('working')),
+        (FINISHED,  _('finished')),
+        (TESTED,    _('tested')),
+        (DELIVERED, _('delivered')),
     )
 
     client      = models.ForeignKey(Client, null=True)
@@ -45,7 +45,7 @@ class Order(models.Model):
     order_date  = models.DateField(_('Date order'), null=True, blank=True, default=date.today)
     deadline    = models.DateField(_('Deadline'),   null=True, blank=True, default=date.today)
     start_date  = models.DateField(_('Start date'), null=True, blank=True, default=date.today)
-    order_state = models.CharField(max_length=9, choices=STATES_CHOICES, default=PENDING)
+    order_state = models.CharField(_('Order state'), max_length=9, choices=STATES_CHOICES, default=PENDING)
     selling     = models.ForeignKey(Vente, on_delete=models.CASCADE, verbose_name=_('Selling'), null=True, blank=True)
 
 

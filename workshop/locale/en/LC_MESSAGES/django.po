@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 17:34+0200\n"
+"POT-Creation-Date: 2018-06-01 18:16+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,6 +16,18 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+
+#: workshop/forms.py:110
+msgid "YES"
+msgstr ""
+
+#: workshop/forms.py:110
+msgid "NO"
+msgstr ""
+
+#: workshop/forms.py:110
+msgid "generate_selling"
+msgstr ""
 
 #: workshop/models.py:7 workshop/models.py:14
 #: workshop/templates/workshop/product_categories.html:9
@@ -41,6 +53,30 @@ msgstr ""
 msgid "Notes"
 msgstr ""
 
+#: workshop/models.py:35
+msgid "pending"
+msgstr ""
+
+#: workshop/models.py:36
+msgid "planned"
+msgstr ""
+
+#: workshop/models.py:37
+msgid "working"
+msgstr ""
+
+#: workshop/models.py:38
+msgid "finished"
+msgstr ""
+
+#: workshop/models.py:39
+msgid "tested"
+msgstr ""
+
+#: workshop/models.py:40
+msgid "delivered"
+msgstr ""
+
 #: workshop/models.py:45
 msgid "Date order"
 msgstr ""
@@ -51,6 +87,10 @@ msgstr ""
 
 #: workshop/models.py:47 workshop/templates/workshop/orders.html:15
 msgid "Start date"
+msgstr ""
+
+#: workshop/models.py:48 workshop/templates/workshop/orders.html:13
+msgid "Order state"
 msgstr ""
 
 #: workshop/models.py:49
@@ -67,10 +107,6 @@ msgstr ""
 
 #: workshop/templates/workshop/orders.html:12
 msgid "Product"
-msgstr ""
-
-#: workshop/templates/workshop/orders.html:13
-msgid "Order state"
 msgstr ""
 
 #: workshop/templates/workshop/orders.html:16

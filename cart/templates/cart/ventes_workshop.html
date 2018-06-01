@@ -22,7 +22,7 @@
       <tr>
           <td> <a title="{% trans "Click to add one payment or see the selling's details" %}" href="/cart/vente/{{a.pk}}">{{ a.pk }}</a> </td>
           <td>{{ a.date|date:"D d/m/y" }}</td>
-        {% if a.order_set|length > 0 %}
+        {% if a.order_set.first.product.pk %}
         <td><a href="{% url "workshop:product_detail" a.order_set.first.product.pk %}">{{ a.order_set.first.product.name }}</a></td>
         {% else %}
         <td>{% trans 'no product found' %}</td>
