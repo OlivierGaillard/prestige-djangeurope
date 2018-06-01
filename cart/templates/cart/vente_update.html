@@ -60,29 +60,22 @@
 
 
 </div>
-
-
-
+{% endblock %}
 
 
 {% block javascript %}
 <script type="text/javascript">
 
-$( function() {
+$(function() {
      $.datepicker.setDefaults(
-       $.datepicker.regional["fr-CH"]);
-     $( '[id="datetimepicker_vente"]' ).datepicker({
-       dateFormat: "dd.mm.yy"});
-}
+       $.datepicker.regional["fr-CH"]
+       );
+
+     $('[id="datetimepicker_vente"]').datepicker(
+       {dateFormat: "dd.mm.yy"}
+       );
+   }
 );
 
-
-
-$(function () {
-     $('[id="sss-datetimepicker_vente"]').datetimepicker();
-});
-
-
-  </script>
-{% endblock %}
+ </script>
 {% endblock %}

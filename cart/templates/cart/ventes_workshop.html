@@ -22,7 +22,7 @@
       <tr>
           <td> <a title="{% trans "Click to add one payment or see the selling's details" %}" href="/cart/vente/{{a.pk}}">{{ a.pk }}</a> </td>
           <td>{{ a.date|date:"D d/m/y" }}</td>
-          <td>à faire</td>
+        <td><a href="{% url "workshop:product_detail" a.order_set.first.product.pk %}">{{ a.order_set.first.product.name }}</a></td>
           <td>{{ a.client.prenom}} {{ a.client.nom }}</td>
           <td>{{ a.montant|intcomma }}</td>
           {% if a.solde_paiements > 0 %}

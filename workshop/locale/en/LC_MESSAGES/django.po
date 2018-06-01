@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-21 17:12+0200\n"
+"POT-Creation-Date: 2018-06-01 16:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,85 +17,103 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: workshop/models.py:7 workshop/models.py:25
+#: workshop/models.py:7 workshop/models.py:14
 #: workshop/templates/workshop/product_categories.html:9
-#: workshop/templates/workshop/products.html:14
+#: workshop/templates/workshop/product_detail.html:22
+#: workshop/templates/workshop/products.html:10
 msgid "Name"
 msgstr ""
 
-#: workshop/models.py:7 workshop/models.py:25 workshop/models.py:29
+#: workshop/models.py:7 workshop/models.py:14 workshop/models.py:17
 msgid "n.d."
 msgstr ""
 
-#: workshop/models.py:15
-msgid "pending"
-msgstr ""
-
-#: workshop/models.py:16
-msgid "started"
-msgstr ""
-
-#: workshop/models.py:17
-msgid "working"
-msgstr ""
-
-#: workshop/models.py:18
-msgid "finished"
-msgstr ""
-
-#: workshop/models.py:20 workshop/templates/workshop/products.html:9
-msgid "Deadline"
-msgstr ""
-
-#: workshop/models.py:21
-msgid "Date order"
-msgstr ""
-
-#: workshop/models.py:23
-msgid "Work state"
-msgstr ""
-
-#: workshop/models.py:24 workshop/templates/workshop/products.html:13
-msgid "Start date"
-msgstr ""
-
-#: workshop/models.py:26
+#: workshop/models.py:15 workshop/templates/workshop/product_detail.html:27
+#: workshop/templates/workshop/products.html:11
 msgid "Category"
 msgstr ""
 
-#: workshop/models.py:27
+#: workshop/models.py:16
 msgid "Selling Price"
 msgstr ""
 
-#: workshop/models.py:28
-msgid "Selling"
-msgstr ""
-
-#: workshop/models.py:29
+#: workshop/models.py:17
 msgid "Notes"
 msgstr ""
 
+#: workshop/models.py:45
+msgid "Date order"
+msgstr ""
+
+#: workshop/models.py:46 workshop/templates/workshop/orders.html:14
+msgid "Deadline"
+msgstr ""
+
+#: workshop/models.py:47 workshop/templates/workshop/orders.html:15
+msgid "Start date"
+msgstr ""
+
+#: workshop/models.py:49
+msgid "Selling"
+msgstr ""
+
+#: workshop/templates/workshop/orders.html:10
+msgid "Order date"
+msgstr ""
+
+#: workshop/templates/workshop/orders.html:11
+msgid "Client"
+msgstr ""
+
+#: workshop/templates/workshop/orders.html:12
+msgid "Product"
+msgstr ""
+
+#: workshop/templates/workshop/orders.html:13
+msgid "Order state"
+msgstr ""
+
+#: workshop/templates/workshop/orders.html:16
+#: workshop/templates/workshop/orders.html:29
 #: workshop/templates/workshop/product_categories.html:10
 #: workshop/templates/workshop/product_categories.html:19
-#: workshop/templates/workshop/products.html:15
-#: workshop/templates/workshop/products.html:28
+#: workshop/templates/workshop/product_detail.html:42
+#: workshop/templates/workshop/products.html:14
+#: workshop/templates/workshop/products.html:25
 msgid "Edit"
 msgstr ""
 
 #: workshop/templates/workshop/product_categories.html:11
 #: workshop/templates/workshop/product_categories.html:20
-#: workshop/templates/workshop/products.html:29
 msgid "Delete"
 msgstr ""
 
-#: workshop/templates/workshop/products.html:10
-msgid "State"
+#: workshop/templates/workshop/product_detail.html:11
+msgid "Product details"
 msgstr ""
 
-#: workshop/templates/workshop/products.html:11
-msgid "Order date"
+#: workshop/templates/workshop/product_detail.html:17
+msgid "ID"
 msgstr ""
 
+#: workshop/templates/workshop/product_detail.html:32
 #: workshop/templates/workshop/products.html:12
-msgid "Client"
+msgid "Selling price"
+msgstr ""
+
+#: workshop/templates/workshop/product_detail.html:37
+msgid "Note"
+msgstr ""
+
+#: workshop/templates/workshop/product_detail.html:47
+msgid "Photo"
+msgstr ""
+
+#: workshop/templates/workshop/product_detail.html:50
+msgid "picture of "
+msgstr ""
+
+#: workshop/templates/workshop/products.html:13
+#: workshop/templates/workshop/products.html:24
+msgid "Details"
 msgstr ""

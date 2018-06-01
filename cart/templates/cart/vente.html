@@ -8,8 +8,6 @@
 
 <div class="container">
 
-
-
   {% if vente.reglement_termine == False %}
   <h3>{% trans "Etape 5" %}  <small>{% trans "step-by-step guide" %}</small></h3>
   <h4>{% trans "Ajoutez un paiement (avance ou paiement complet) à la vente" %} {{ vente.pk }}</h4>
@@ -34,18 +32,14 @@
     {% endif %}
     </div>
 
-  {% if vente.paiement_set.all|length == 0 %}
-
-  <form method="GET" action="{% url "cart:paiement_add" vente.pk  %}">
-  {% csrf_token %}
-  <input type="submit" class="btn btn-warning" value="{% trans "Ajouter un paiement" %}"/>
-
-  {% elif vente.paiement_set.all|length > 0 and vente.reglement_termine == False %}
+  {% if vente.paiement_set.all|length >= 0 and vente.reglement_termine == False %}
   <form method="GET" action="{% url "cart:paiement_add" vente.pk  %}">
   {% csrf_token %}
   <input type="submit" class="btn btn-warning" value="{% trans 'Ajouter un paiement' %}"/>
   </form>
   {% endif %}
+
+
 
 <h3>{% trans "Résumé de la vente" %}</h3>
 
@@ -151,12 +145,10 @@
 
 <h3>{% trans "Modifier la vente" %}</h3>
 
-  <p>
   <form method="GET" action="{% url "cart:vente_update" vente.pk  %}">
        {% csrf_token %}
        <input type="submit" class="btn btn-danger" value="{% trans 'Modifier la vente' %}"/>
     </form>
-  </p>
 
 </div>
 

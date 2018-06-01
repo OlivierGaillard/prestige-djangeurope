@@ -6,3 +6,20 @@
 {% crispy form %}
 </div>
 {% endblock %}
+
+{% block javascript %}
+<script type="text/javascript">
+
+$(function() {
+     $.datepicker.setDefaults(
+       $.datepicker.regional["fr-CH"]
+       );
+
+     $('[id="datetimepicker_vente"]').datepicker(
+       {dateFormat: "dd.mm.yy"}
+       );
+   }
+);
+
+ </script>
+{% endblock %}

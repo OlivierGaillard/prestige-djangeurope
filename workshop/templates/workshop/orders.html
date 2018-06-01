@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="container">
+  <div class="table-responsive">
+    <table class="table table-light">
+      <thead class="thead-light">
+      <tr>
+          <th>{% trans 'Order date' %}</th>
+          <th>{% trans 'Client' %}</th>
+          <th>{% trans 'Product' %}</th>
+          <th>{% trans 'Order state' %}</th>
+          <th>{% trans 'Deadline' %}</th>
+          <th>{% trans 'Start date' %}</th>
+          <th>{% trans 'Edit' %}</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      {% for a in orders %}
+      <tr>
+        <td>{{ a.order_date }}</td>
+        <td>{{ a.client }}</td>
+        <td>{{ a.product }}</td>
+        <td>{{ a.get_order_state_display }}</td>
+        <td>{{ a.deadline }}</td>
+        <td>{{ a.start_date }}</td>
+        <td><a href="{% url "workshop:order_update" a.pk %}">{% trans 'Edit'%}</a> </td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

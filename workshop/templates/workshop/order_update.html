@@ -14,12 +14,16 @@ $( function() {
      $.datepicker.setDefaults(
        $.datepicker.regional["fr-CH"]);
 
-     $( '[id="datetimepicker_billing_date"]' ).datepicker({
+     $( '[id="datetimepicker_deadline"]' ).datepicker(
+     { dateFormat: "dd/mm/yy" }
+       );
+
+     $( '[id="datetimepicker_order"]' ).datepicker({
        dateFormat: "dd/mm/yy"});
 
-     $( '[id="datetimepicker_creation"]' ).datepicker({
+     $( '[id="datetimepicker_start_date"]' ).datepicker({
        dateFormat: "dd/mm/yy"});
-}
+   }
 );
-  </script>
+</script>
 {% endblock %}

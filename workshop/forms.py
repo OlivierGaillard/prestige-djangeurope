@@ -2,22 +2,13 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions
 from crispy_forms.layout import Submit, Layout, Fieldset, Field
 from django import forms
-from .models import Product, ProductCategory
+from .models import Product, ProductCategory, Order
 
 
 class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('deadline', 'order_date', 'client', 'work_state', 'name', 'product_category', 'selling_price', 'note', 'photo')
-        widgets = {
-            'deadline': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
-            ),
-            'order_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
-            ),
-
-        }
+        fields = ('name', 'product_category', 'selling_price', 'note', 'photo')
 
     def __init__(self, *args, **kwargs):
         super(ProductCreateForm, self).__init__(*args, **kwargs)
@@ -35,16 +26,16 @@ class ProductCreateForm(forms.ModelForm):
 class ProductUpdateForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ('deadline', 'order_date', 'client', 'work_state', 'start_date', 'name', 'product_category', 'selling_price', 'note', 'photo')
+        fields = ('name', 'product_category', 'selling_price', 'note', 'photo')
         widgets = {
             'deadline': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
+                attrs={'id': 'datetimepicker_deadline'}
             ),
             'order_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
+                attrs={'id': 'datetimepicker_order'}
             ),
             'start_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
+                attrs={'id': 'datetimepicker_start_date'}
             ),
 
         }
@@ -60,10 +51,8 @@ class ProductUpdateForm(forms.ModelForm):
             FormActions(
                 Submit('save', 'Submit'),
             )
+
         )
-
-
-
 
 
 class ProductCategoryCreateForm(forms.ModelForm):
@@ -84,3 +73,65 @@ class ProductCategoryCreateForm(forms.ModelForm):
             )
         )
 
+
+class OrderCreateForm(forms.ModelForm):
+    # generate_selling = forms.ChoiceField(widget=forms.RadioSelect(attrs={'checked' : 'checked'}),
+    #                                      choices=(('YES', 'YES'), ('NO', 'NO')))
+    class Meta:
+        model = Order
+        fields = ('client', 'product', 'order_date', 'deadline', 'start_date', 'order_state')
+        widgets = {
+            'deadline': forms.DateInput(
+                attrs={'id': 'datetimepicker_deadline'}
+            ),
+            'order_date': forms.DateInput(
+                attrs={'id': 'datetimepicker_order'}
+            ),
+            'start_date': forms.DateInput(
+                attrs={'id': 'datetimepicker_start_date'}
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(OrderCreateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )
+
+class OrderUpdateForm(forms.ModelForm):
+    generate_selling = forms.ChoiceField(widget=forms.RadioSelect(attrs={'checked': 'checked'}),
+                                         choices=(('YES', 'YES'), ('NO', 'NO')))
+    class Meta:
+        model = Order
+        fields = ('client', 'product', 'order_date', 'deadline', 'start_date', 'order_state')
+        widgets = {
+            'deadline': forms.DateInput(
+                attrs={'id': 'datetimepicker_deadline'}
+            ),
+            'order_date': forms.DateInput(
+                attrs={'id': 'datetimepicker_order'}
+            ),
+            'start_date': forms.DateInput(
+                attrs={'id': 'datetimepicker_start_date'}
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(OrderUpdateForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-lg-2'
+        self.helper.field_class = 'col-lg-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', 'Submit'),
+            )
+        )

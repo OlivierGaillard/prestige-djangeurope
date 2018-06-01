@@ -113,17 +113,10 @@ class CartView(ListView):
 
     def get_context_data(self, **kwargs):
         ctx = super(CartView, self).get_context_data(**kwargs)
-        # ctx = add_categories_to_context(ctx)
-        # ctx = add_cart_counter_to_context(self.request, ctx)
-        # ctx = add_total_books(ctx)
         if  is_cart_id_session_set(self.request): # and not cart_not_complete(self.request):
             cart_id = get_cart_id_session(self.request)
             ctx['cart_total'] = CartItem.get_total_of_cart(cart_id)
-            #ctx['vente_pk']   = CartItem.get_vente_id(cart_id)
             ctx['cart'] = get_cart_items(self.request)
-            carts = get_cart_items(self.request)
-            print(carts)
-            print('cart')
             return ctx
         else:
             return ctx
@@ -182,6 +175,10 @@ class VenteCreateView(CreateView):
     """
     Primary usage is for branch workshop. It is not used
     to enter a selling by using the cart process.
+
+    A user of the workshop will select a product of the workshop
+    and it to the cart, why not?
+
     """
     model = Vente
     template_name = 'cart/vente_create.html'

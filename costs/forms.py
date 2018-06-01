@@ -11,7 +11,7 @@ class CostsCreateForm(forms.ModelForm):
         fields = ('branch', 'name', 'amount', 'category', 'note', 'enterprise', 'billing_date', 'billing_number' )
         widgets = {
             'billing_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
+                attrs={'id': 'datetimepicker_billing_date'}
             ),
         }
 
@@ -34,10 +34,10 @@ class CostsUpdateForm(forms.ModelForm):
         fields = ('creation_date', 'branch', 'name', 'amount', 'category', 'note', 'enterprise', 'billing_date', 'billing_number' )
         widgets = {
             'billing_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es_update'}
+                attrs={'id': 'datetimepicker_billing_date'}
             ),
             'creation_date': forms.DateInput(
-                attrs={'id': 'datetimepicker_es'}
+                attrs={'id': 'datetimepicker_creation'}
             ),
         }
 

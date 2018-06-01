@@ -68,6 +68,7 @@ class Vente(models.Model):
 
 
 
+
 class Paiement(models.Model):
     date    = models.DateTimeField(default=timezone.now)
     payment_amount = models.DecimalField(_('Montant'), max_digits=20, decimal_places=0, default=0)

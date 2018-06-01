@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% load static %}
+{% load i18n %}
+{% load thumbnail %}
+{% block content %}
+
+<div class="container">
+
+
+
+  <h2>{% trans "Product details" %}</h2>
+
+  <table class="table">
+    <tbody>
+
+      <tr>
+          <th>{% trans "ID" %}</th>
+        <td>{{product.pk}}</td>
+      </tr>
+
+      <tr>
+          <th>{% trans "Name" %}</th>
+        <td>{{product.name}}</td>
+      </tr>
+
+      <tr>
+          <th>{% trans "Category" %}</th>
+        <td>{{product.product_category}}</td>
+      </tr>
+
+      <tr>
+          <th>{% trans "Selling price" %}</th>
+        <td>{{product.selling_price}}</td>
+      </tr>
+
+      <tr>
+          <th>{% trans "Note" %}</th>
+        <td>{{product.note}}</td>
+      </tr>
+
+      <tr>
+        <th>{% trans "Edit" %}</th>
+        <td><a href="{% url "workshop:product_update" product.pk %}">Edit</a> </td>
+      </tr>
+
+      <tr>
+          <th>{% trans "Photo" %}</th>
+        <td>
+          {% thumbnail product.photo  "450x450" crop="center" as thumbnail %}
+          <a href="{{ product.photo.url }}" alt="{% trans 'picture of ' %}{{product.name}}-ID: {{product.pk}}">
+            <img src="{{ thumbnail.url }}" alt="The thumbnail" style="width: {{ thumbnail.width }}">
+          </a>
+        </td>
+        {% endthumbnail %}
+      </tr>
+
+
+
+
+
+    </tbody>
+  </table>
+
+</div>
+
+
+{% endblock %}
+
+{% block footernav %}
+
+{% endblock %}
