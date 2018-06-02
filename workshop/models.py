@@ -48,6 +48,8 @@ class Order(models.Model):
     order_state = models.CharField(_('Order state'), max_length=9, choices=STATES_CHOICES, default=PENDING)
     selling     = models.ForeignKey(Vente, on_delete=models.CASCADE, verbose_name=_('Selling'), null=True, blank=True)
 
+    class Meta:
+        ordering = ['deadline']
 
 
 

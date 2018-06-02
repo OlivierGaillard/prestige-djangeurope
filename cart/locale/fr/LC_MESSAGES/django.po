@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 18:16+0200\n"
-"PO-Revision-Date: 2018-05-14 11:26+0200\n"
+"POT-Creation-Date: 2018-06-02 08:56+0200\n"
+"PO-Revision-Date: 2018-06-02 08:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -19,10 +19,8 @@ msgstr ""
 "X-Generator: Poedit 2.0.7\n"
 
 #: cart/forms.py:119
-#, fuzzy
-#| msgid "Total Amount"
 msgid "Amount"
-msgstr "Montant total"
+msgstr "Montant"
 
 #: cart/models.py:11 cart/templates/cart/vente.html:80
 #: cart/templates/cart/vente_update.html:16
@@ -56,10 +54,8 @@ msgid "Make the field empty (---) if the customer is not registered."
 msgstr "Laissez le champ vide (---) si le client n'est pas enregistré."
 
 #: cart/models.py:47
-#, fuzzy
-#| msgid "Selling closed?"
 msgid "Selling closed"
-msgstr "Vente terminée?"
+msgstr "Vente terminée"
 
 #: cart/models.py:74 cart/templates/cart/vente.html:71
 #: cart/templates/cart/vente.html:122
@@ -214,7 +210,7 @@ msgstr "Prénom"
 
 #: cart/templates/cart/clients.html:13
 msgid "Phone"
-msgstr ""
+msgstr "Téléphone"
 
 #: cart/templates/cart/clients.html:14 cart/templates/cart/clients.html:25
 msgid "Edit"
@@ -263,7 +259,7 @@ msgstr ""
 
 #: cart/templates/cart/vente.html:54
 msgid "Branch"
-msgstr ""
+msgstr "Branche"
 
 #: cart/templates/cart/vente.html:68 cart/templates/cart/vente.html:121
 msgid "Date"
@@ -319,35 +315,42 @@ msgid "Effacer la vente"
 msgstr ""
 
 #: cart/templates/cart/ventes.html:14
-#: cart/templates/cart/ventes_workshop.html:14
+#: cart/templates/cart/ventes_workshop.html:15
 msgid "Total Amount"
 msgstr "Montant total"
 
 #: cart/templates/cart/ventes.html:15
-#: cart/templates/cart/ventes_workshop.html:15
+#: cart/templates/cart/ventes_workshop.html:16
 msgid "Remaining Balance"
 msgstr "Solde restant"
 
 #: cart/templates/cart/ventes.html:16
-#: cart/templates/cart/ventes_workshop.html:16
+#: cart/templates/cart/ventes_workshop.html:17
 msgid "Selling closed?"
 msgstr "Vente terminée?"
 
 #: cart/templates/cart/ventes.html:23
-#: cart/templates/cart/ventes_workshop.html:23
+#: cart/templates/cart/ventes_workshop.html:24
 msgid "Click to add one payment or see the selling's details"
 msgstr "Cliquez pour ajouter un paiement or voir les détails d'une vente"
 
 #: cart/templates/cart/ventes.html:38
-#: cart/templates/cart/ventes_workshop.html:42
+#: cart/templates/cart/ventes_workshop.html:46
 msgid "Add one payment"
 msgstr "Ajouter un paiement"
 
 #: cart/templates/cart/ventes.html:39
-#: cart/templates/cart/ventes_workshop.html:43
 msgid "reduced price"
 msgstr ""
 
-#: cart/templates/cart/ventes_workshop.html:28
+#: cart/templates/cart/ventes_workshop.html:14
+msgid "Order-ID"
+msgstr "Commande-ID"
+
+#: cart/templates/cart/ventes_workshop.html:29
 msgid "no product found"
-msgstr ""
+msgstr "pas trouvé de produit"
+
+#: cart/templates/cart/ventes_workshop.html:34
+msgid "No order!"
+msgstr "Aucune commande!"

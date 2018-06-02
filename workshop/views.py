@@ -62,13 +62,14 @@ class OrderUpdateView(UpdateView):
 
     def form_valid(self, form):
         generate_selling = form.cleaned_data['generate_selling']
-        if (generate_selling == 'YES'):
+        if (generate_selling == 'YES' and self.object.selling == None):
             selling_price = self.object.product.selling_price
             branch_atelier = None
             if Branch.objects.filter(name='Atelier').count() == 0:
                 branch_atelier = Branch.objects.create(name='Atelier')
             else:
                 branch_atelier = Branch.objects.get(name='Atelier')
-            vente = Vente.objects.create(branch=branch_atelier, montant=selling_price)
+
+            vente = Vente.objects.create(branch=branch_atelier, montant=selling_price, client=self.object.client)
             self.object.selling = vente
         return super(OrderUpdateView, self).form_valid(form)

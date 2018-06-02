@@ -11,6 +11,7 @@
           <th>Date</th>
           <th>Article</th>
           <th>{% trans "Client" %}</th>
+          <th>{% trans "Order-ID" %}</th>
           <th>{% trans "Total Amount" %}</th>
           <th>{% trans "Remaining Balance" %}</th>
           <th>{% trans "Selling closed?" %}</th>
@@ -27,7 +28,10 @@
         {% else %}
         <td>{% trans 'no product found' %}</td>
         {% endif %}
+
           <td>{{ a.client.prenom}} {{ a.client.nom }}</td>
+        {% if a.order_set.first %}<td><a href="{% url "workshop:order_update"  a.order_set.first.pk %}">{{a.order_set.first.pk }}</a></td>
+        {% else %}<td>{% trans 'No order!' %}</td>{% endif %}
           <td>{{ a.montant|intcomma }}</td>
           {% if a.solde_paiements > 0 %}
           <td>
@@ -40,7 +44,6 @@
                    class="btn btn-success"
                    {% endif %}
                    value="{% trans 'Add one payment' %}" />
-            <small class="form-text text-muted">{% trans 'reduced price'%}: {{a.solde_paiements|intcomma}}</small>
             </form>
           </td>
           {% else %}
