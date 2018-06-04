@@ -24,7 +24,7 @@
           {% for a in vente.cartitem_set.all %}
           <tr>
               <td><a title="{% trans 'Cliquer pour voir les détails' %}" href="/inventory/article_detail/{{a.article.pk}}">{{ a.article.pk }}</td>
-              <td>{{a.article.nom}}</td>
+              <td>{{a.article.name}}</td>
               {% if a.article.photo_set.all %}
               {% thumbnail a.article.photo_set.first.photo.path  "50x50" crop="center" as thumbnail %}
               <td><a href="{{ a.article.photo_set.first.photo.url }}" alt="image">

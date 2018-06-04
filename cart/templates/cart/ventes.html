@@ -22,7 +22,7 @@
       <tr>
           <td> <a title="{% trans "Click to add one payment or see the selling's details" %}" href="/cart/vente/{{a.pk}}">{{ a.pk }}</a> </td>
           <td>{{ a.date|date:"D d/m/y" }}</td>
-          <td>{{ a.cartitem_set.first.article.nom }}</td>
+          <td>{{ a.cartitem_set.first.article.name }}</td>
           <td>{{ a.client.prenom}} {{ a.client.nom }}</td>
           <td>{{ a.montant|intcomma }}</td>
           {% if a.solde_paiements > 0 %}
