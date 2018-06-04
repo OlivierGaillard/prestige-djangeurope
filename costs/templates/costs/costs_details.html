@@ -25,6 +25,12 @@
         <a href="{{costs.article_link}}">{% trans "Link to article" %}</a></td>
         {% endif %}
       </tr>
+      {% if costs.article_id %}
+      <tr>
+        <th>{% trans "Article-ID (if deleted)" %}</th>
+        <td>{{ costs.article_id}}</td>
+      </tr>
+      {% endif %}
       <tr>
         <th>{% trans "Enterprise" %}</th><td>{% if costs.enterprise %}{{costs.enterprise.name}}{% else %}n.d.{% endif %}</td>
         <th>{% trans "Billing Date" %}</th><td>{{costs.billing_date|default_if_none:"n.d."}}</td>

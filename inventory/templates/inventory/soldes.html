@@ -69,10 +69,10 @@
           <td>pas photo</td>
           {% endif %}
           <td>{{ a.marque }}</td>
-          {% if a.quantite > 0 %}
-           <td><span class="badge">{{ a.quantite }}</span></td>
+          {% if a.quantity > 0 %}
+           <td><span class="badge">{{ a.quantity }}</span></td>
           {% else %}
-          <td><span class="badge badge-danger">{{ a.quantite }}</span></td>
+          <td><span class="badge badge-danger">{{ a.quantity }}</span></td>
           {% endif %}
           <td><a title="{% trans 'Modifier' %}" href="/inventory/solde_update/{{a.pk}}">{{a.selling_price|intcomma}}</a></td>
       </tr>

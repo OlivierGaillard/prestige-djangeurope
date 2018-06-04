@@ -32,8 +32,13 @@
               {% render_field filter.form.id class="form-control" %}
             </div>
             <div class="form-group col-sm-4 col-md-3">
+              <strong>{% trans "Arrivage" %}:</strong>
+              {% render_field filter.form.arrivage__nom__icontains class="form-control" %}
+            </div>
+
+            <div class="form-group col-sm-4 col-md-3">
               <strong>{% trans "Partie du nom" %}:</strong>
-              {% render_field filter.form.nom__icontains  class="form-control" %}
+              {% render_field filter.form.name__icontains  class="form-control" %}
             </div>
             <div class="form-group col-sm-4 col-md-3">
               <strong>{% trans 'Partie de la marque' %}:</strong>
@@ -54,7 +59,7 @@
             </div>
             <div class="form-group col-sm-4 col-md-3">
               <strong>{% trans "Quantité supérieure à" %}:</strong>
-              {% render_field filter.form.quantite__gt  class="form-control" placeholder="0" %}
+              {% render_field filter.form.quantity__gt  class="form-control" placeholder="0" %}
             </div>
 
             <div class="form-group col-sm-4 col-md-3">
@@ -64,7 +69,7 @@
 
             <div class="form-group col-sm-4 col-md-3">
               <strong>{% trans "Prix d'achat" %}:</strong>
-              {% render_field filter.form.prix_total  class="form-control" %}
+              {% render_field filter.form.selling_price  class="form-control" %}
             </div>
           </div>
         </div>
@@ -118,13 +123,13 @@
           <td>{{ a.get_genre_article_display }}</td>
           <td>{{ a.category }}</td>
 
-           <td> <a title="{% trans 'Cliquer pour voir les détails' %}" href="/inventory/article_detail/{{a.pk}}">{{ a.nom }}</a>
+           <td> <a title="{% trans 'Cliquer pour voir les détails' %}" href="/inventory/article_detail/{{a.pk}}">{{ a.name }}</a>
            </td>
           <td>{{ a.marque }}</td>
-          {% if a.quantite > 0 %}
-           <td><span class="badge">{{ a.quantite }}</span></td>
+          {% if a.quantity > 0 %}
+           <td><span class="badge">{{ a.quantity }}</span></td>
           {% else %}
-          <td><span class="badge badge-danger">{{ a.quantite }}</span></td>
+          <td><span class="badge badge-danger">{{ a.quantity }}</span></td>
           {% endif %}
           <td><a title="{% trans 'Modifier' %}" href="/inventory/article_update/{{a.pk}}">{{a.selling_price|intcomma}}</a></td>
           <td>{{a.purchasing_price}}</td>

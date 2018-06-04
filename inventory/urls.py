@@ -15,13 +15,14 @@ Including another URLconf
 """
 
 from django.conf.urls import url
-from .views import ArticleCreateView, ArticleDetailView, upload_pic, articles, ArticleUpdateView, articleDeleteView
+from .views import ArticleCreateView, ArticleDetailView, upload_pic, articles, ArticleUpdateView #, articleDeleteView
 from .views import SoldesListView, SoldeUpdateView
 from .views import BranchEditView, BranchDeleteView, BranchDetailView, BranchListView, BranchCreateView
 from .views import CategoryDeleteView, CategoryUpdateView, CategoryDetailView, CategoryListView, CategoryCreateView
 from .views import ArrivalListView, ArrivalUpdateView, ArrivalDetailView, ArrivalCreateView, ArrivalDeleteView
 from .views import LossDetailView, LossesListView, LossUpdateView, LossDeleteView, add_one_loss
-from .views import ArrivalDeleteView
+from .views import ArrivalDeleteView, ArticleDeleteView
+from .views import upload_pictures_zip, handle_pictures
 
 app_name = 'inventory'
 
@@ -31,6 +32,7 @@ urlpatterns = [
     url('soldes/', SoldesListView.as_view(), name='soldes'),
     url('article_create', ArticleCreateView.as_view(), name='article_create'),
     url(r'article_update/(?P<pk>[0-9]+)$', ArticleUpdateView.as_view(), name='article_update'),
+    url(r'article_delete/(?P<pk>[0-9]+)$', ArticleDeleteView.as_view(), name='article_delete'),
     url(r'solde_update/(?P<pk>[0-9]+)$', SoldeUpdateView.as_view(), name='solde_update'),
     url(r'^article_detail/(?P<pk>[0-9]+)$', ArticleDetailView.as_view(), name='article_detail'),
     url(r'^upload_pic/(?P<pk>[0-9]+)$', upload_pic, name='upload_pic'),
@@ -38,7 +40,7 @@ urlpatterns = [
     url(r'article_losses/(?P<pk>[0-9]+)$', add_one_loss, name='article_losses'),
     # url(r'add_one_loss/(?P<pk>[0-9]+)$', AddOneLossView.as_view(), name='add_one_loss'),
     url(r'^article_detail/(?P<pk>[0-9]+)$', ArticleDetailView.as_view(), name='article_detail'),
-    url(r'^article_delete/(?P<pk>[0-9]+)$', articleDeleteView, name='article_delete'),
+    #url(r'^article_delete/(?P<pk>[0-9]+)$', articleDeleteView, name='article_delete'),
 
     url(r'^loss_delete/(?P<pk>[0-9]+)$', LossDeleteView.as_view(), name='loss_delete'),
     url(r'^loss_update/(?P<pk>[0-9]+)$', LossUpdateView.as_view(), name='loss_update'),
@@ -62,6 +64,9 @@ urlpatterns = [
     url('branch_detail/(?P<pk>[0-9]+)$', BranchDetailView.as_view(), name='branch_detail'),
     url('branch_delete/(?P<pk>[0-9]+)$', BranchDeleteView.as_view(), name='branch_delete'),
     url('branch_update/(?P<pk>[0-9]+)$', BranchEditView.as_view(), name='branch_update'),
+
+    url(r'^upload_zipics/$', upload_pictures_zip, name='upload_zipics'),
+    url(r'^handle_pics/$', handle_pictures, name='handle_pics'),
 
 ]
 

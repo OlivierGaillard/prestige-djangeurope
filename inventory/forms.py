@@ -1,16 +1,75 @@
 from crispy_forms.helper import FormHelper
 from crispy_forms.bootstrap import TabHolder, Tab, FormActions
-from crispy_forms.layout import Submit, Layout, Fieldset, Field
+from crispy_forms.layout import Submit, Layout, Fieldset, Field, HTML
 from django import forms
 from django.shortcuts import reverse
+from django.conf import settings
 from .models import Article, Branch, Category, Arrivage, Losses
 from django.utils.translation import ugettext_lazy as _
+import os
+import logging
+logger = logging.getLogger('django')
+
+
+class UploadPicturesZipForm(forms.Form):
+    pictures_zip = forms.FileField()
+
+    def __init__(self, *args, **kwargs):
+        super(UploadPicturesZipForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+
+        pictures_dir = os.path.join(settings.MEDIA_ROOT, 'tmp')
+        li = os.listdir(pictures_dir)
+        if len(li) > 0:
+            msg = _('They are already uploaded pictures. Please generate the articles before uploading new ones.')
+            self.helper.layout = Layout(
+                HTML("<div class='alert alert-warning'>%s</div>" % msg)
+            )
+        else:
+            self.helper.layout.append(
+                FormActions(
+                    Submit('save', _('Upload')),
+                )
+            )
+
+
+    def clean(self):
+        cleaned_data = super(UploadPicturesZipForm, self).clean()
+        zip_file = cleaned_data['pictures_zip']
+        if not zip_file.name.split('.')[1] == 'zip':
+            self.add_error('pictures_zip', _("File ends not with extension '.zip'."))
+        return cleaned_data
+
+
+
+class HandlePicturesForm(forms.Form):
+
+    branch   = forms.ModelChoiceField(label=_('Branch'), required=False, queryset=Branch.objects.all())
+    arrival  = forms.ModelChoiceField(label=_('Arrival'), queryset=Arrivage.objects.all())
+    category = forms.ModelChoiceField(label=_('Category'), required=False, queryset=Category.objects.all())
+
+    def __init__(self, *args, **kwargs):
+        super(HandlePicturesForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_method = "POST"
+        self.helper.form_class = 'form-horizontal'
+        self.helper.label_class = 'col-sm-2'
+        self.helper.field_class = 'col-sm-4'
+        self.helper.layout.append(
+            FormActions(
+                Submit('save', _('Generate')),
+            )
+        )
 
 
 class ArrivalUpdateForm(forms.ModelForm):
     class Meta:
         model = Arrivage
-        fields = ('nom', 'date_arrivee')
+        fields = ('nom', 'date_arrivee', 'proprietaire')
         widgets = {
             'date_arrivee': forms.DateInput(format='%d-%m-%Y',
                 attrs={'id': 'datetimepicker_arrival'}
@@ -54,21 +113,21 @@ class ArrivalCreateForm(forms.ModelForm):
             )
         )
 
-class ArticleDeleteForm(forms.Form):
-    delete_purchasing_costs = forms.BooleanField(required=False, label=_("Delete Purchasing Costs too?"))
-
-    def __init__(self, *args, **kwargs):
-        super(ArticleDeleteForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper(self)
-        self.helper.form_method = "POST"
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-sm-2'
-        self.helper.field_class = 'col-sm-4'
-        self.helper.layout.append(
-            FormActions(
-                Submit('save', 'Submit'),
-            )
-        )
+# class ArticleDeleteForm(forms.Form):
+#     delete_purchasing_costs = forms.BooleanField(required=False, label=_("Delete Purchasing Costs too?"))
+#
+#     def __init__(self, *args, **kwargs):
+#         super(ArticleDeleteForm, self).__init__(*args, **kwargs)
+#         self.helper = FormHelper(self)
+#         self.helper.form_method = "POST"
+#         self.helper.form_class = 'form-horizontal'
+#         self.helper.label_class = 'col-sm-2'
+#         self.helper.field_class = 'col-sm-4'
+#         self.helper.layout.append(
+#             FormActions(
+#                 Submit('save', 'Submit'),
+#             )
+#         )
 
 
 
@@ -169,7 +228,13 @@ class BranchUpdateForm(forms.ModelForm):
 class ArticleUpdateForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ('branch', 'category', 'nom', 'solde', 'purchasing_price', 'selling_price')
+        fields = ('branch', 'category', 'type_client', 'genre_article', 'name', 'marque', 'quantity', 'purchasing_price',
+                  'selling_price', 'arrivage', 'entreprise')
+        #fields = ('branch', 'category', 'nom', 'solde', 'purchasing_price', 'selling_price')
+
+        widgets = {
+            'type_client': forms.RadioSelect,
+        }
 
     def __init__(self, *args, **kwargs):
         super(ArticleUpdateForm, self).__init__(*args, **kwargs)
@@ -192,7 +257,7 @@ class ArticleCreateForm(forms.ModelForm):
 
     class Meta:
         model = Article
-        fields = ('branch', 'category', 'type_client', 'genre_article', 'nom', 'marque', 'quantite', 'purchasing_price',
+        fields = ('branch', 'category', 'type_client', 'genre_article', 'name', 'marque', 'quantity', 'purchasing_price',
                   'selling_price', 'arrivage', 'entreprise')
 
         widgets = {
@@ -212,7 +277,7 @@ class ArticleCreateForm(forms.ModelForm):
             TabHolder(
                 Tab('Fiche article',
                     'category', 'nom', 'arrivage', 'entreprise',
-                    'quantite', 'purchasing_price', 'selling_price',),
+                    'quantity', 'purchasing_price', 'selling_price',),
 
                 Tab('Classification',
                     'branch', 'type_client', 'marque', 'new_marque',

@@ -75,6 +75,8 @@ class Costs(models.Model):
     billing_date = models.DateField(_('Billing Date'), default=date.today, blank=True, null=True, help_text=_('when the bill was created'))
     billing_number = models.CharField(_('Billing Nr'), blank=True, null=True, max_length=200,
                                       help_text=_('the bill reference number'))
+    # the field 'article' is used when an article is deleted, to save the purchasing price
+    article_id = models.IntegerField(_('Article-ID'), null=True, blank=True)
     objects = CostsManager()
 
     def __str__(self):

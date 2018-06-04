@@ -1,31 +1,183 @@
+from django.http import HttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
 from django.urls import reverse_lazy
+from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required, permission_required
-#from django.contrib.admin.views.decorators import staff_member_required
+from django.db.utils import IntegrityError
+from django.contrib import messages
+from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter
-from django_filters.views import FilterView
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.models import User
-from .models import Branch, Article, Employee, Photo, Category, Arrivage, Losses
+from .models import Branch, Article, Employee, Photo, Category, Arrivage, Losses, Marque
 from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm, BranchCreateForm, BranchUpdateForm
 from .forms import CategoryFormDelete, CategoryFormUpdate, CategoryFormCreate
 from .forms import ArrivalUpdateForm, ArrivalCreateForm
 from cart.cartutils import article_already_in_cart, get_cart_items
 import logging
 from django.core.exceptions import ValidationError
-from .forms import ArticleLossesForm
-from .forms import ArticleLossesUpdateForm, ArticleDeleteForm
+from .forms import ArticleLossesForm, UploadPicturesZipForm, HandlePicturesForm
+from .forms import ArticleLossesUpdateForm #, ArticleDeleteForm
 from costs.models import Category as CostsCategory, Costs
+import subprocess
+import shutil
+import os
+import tempfile
 
 
 logger = logging.getLogger('django')
+
+IMAGE_RESIZE_PERCENT = getattr(settings, 'IMAGE_DEFAULT_RESIZE_PERCENT', '40%')
+
+def resize_pics():
+    logger.debug('starting resize...')
+    pictures_dir = os.path.join(settings.MEDIA_ROOT, 'tmp')
+    logger.debug('chdir into %s' % pictures_dir)
+    os.chdir(pictures_dir)
+    logger.debug('calling mogrify with -resize %s for all *.jpg' % IMAGE_RESIZE_PERCENT)
+    returncode = subprocess.call(["mogrify", "-resize", IMAGE_RESIZE_PERCENT, "*.jpg"])
+    logger.debug('result: %s' % returncode)
+    if returncode == 0:
+        logger.debug('resize completed.')
+    else:
+        logger.warning('resize failed')
+        logger.warning('cleaning temporary folder')
+
+
+def get_extension(img):
+    return os.path.splitext(img)[1].upper()
+
+def get_extension_error(img):
+    return "Image extension is not .JPG (.jpg) or .JPEG (.jpeg): [{0}".format(img)
+
+
+def image_extension_fails(img):
+    ext = get_extension(img)
+    return not ext in ['.JPG', '.JPEG']
+
+
+
+def handle_pics_zip(request):
+    f = request.FILES['pictures_zip']
+    logger.debug('in handle_pics_zip.')
+    pictures_dir = os.path.join(settings.MEDIA_ROOT, 'tmp')
+    file_name = os.path.join(pictures_dir, f.name)
+    logger.debug('filename: %s', file_name)
+    with open(file_name, 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+    logger.debug('file saved. Will unzip')
+
+    with tempfile.TemporaryDirectory() as tempdir:
+        logger.debug('will unpack in tempdir: ', tempdir)
+        shutil.unpack_archive(file_name, tempdir)
+        logger.debug('unzipped in tempdir.')
+        #ZipFile.extractall(file_name, path=tempdir)
+        logger.debug('will walk into ', tempdir)
+        for dirpath, dirnames, filenames in os.walk(tempdir):
+            for filename in filenames:
+                filepath = os.path.join(dirpath, filename)
+                logger.debug('handling %s...' % filepath)
+                if image_extension_fails(filepath):
+                    extension_error = get_extension_error(filepath)
+                    logger.warning(extension_error)
+                    messages.warning(request, extension_error)
+                    logger.warning('not moved file %s.' % filepath)
+                    os.unlink(filepath)
+                    logger.warning('deleted file {0}'.format(filepath))
+                    continue
+                logger.debug('mv %s into tmp.' % filepath)
+                shutil.move(filepath, pictures_dir)
+                logger.debug('end.')
+    logger.debug('rm zip file %s' % file_name)
+    os.unlink(file_name)
+    logger.debug('zip file deleted. Will resize pics now.')
+    resize_pics()
+
+
+@csrf_exempt
+def upload_pictures_zip(request):
+    if request.method == 'POST':
+        logger.debug('upload_pictures_zip is called.')
+        form = UploadPicturesZipForm(request.POST, request.FILES)
+        logger.warning('form is created')
+        if form.is_valid():
+            logger.warning('form is valid. handle_pics_zip will be called...')
+            handle_pics_zip(request)
+            return HttpResponseRedirect("/inventory/handle_pics/")
+        else:
+            return render(request, "inventory/upload_zipics.html", {'form': form})
+    else:
+        form = UploadPicturesZipForm()
+        return render(request, "inventory/upload_zipics.html", {'form': form})
+
+
+def handle_pictures(request):
+    logger.debug("starting pictures handling to make Article's instances.")
+    pictures_dir = os.path.join(settings.MEDIA_ROOT, 'tmp')
+    target_dir = os.path.join(settings.MEDIA_ROOT, 'articles')
+    files = os.listdir(pictures_dir)
+    logger.debug('%s pictures to handle.' % str(len(files)))
+    if Marque.objects.filter(nom='temp').count() == 0:
+        fake_brand = Marque.objects.create(nom='temp')
+    else:
+        fake_brand = Marque.objects.filter(nom='temp')[0]
+    if request.method == 'POST':
+        form = HandlePicturesForm(request.POST)
+        if form.is_valid():
+            nb = 0
+            for f in files:
+                nb += 1
+                source_path = os.path.join(pictures_dir, f)
+
+                target_path = os.path.join(target_dir, f)
+
+                arrival = Arrivage.objects.get(nom=form.cleaned_data['arrival'])
+                logger.warning('arrivage id: %s' % arrival.pk)
+
+                a = Article(branch=form.cleaned_data['branch'],
+                            arrivage=form.cleaned_data['arrival'],
+                            category=form.cleaned_data['category'],
+                            entreprise=arrival.proprietaire,
+                            marque=fake_brand)
+                try:
+
+                    logger.warning('creating article with pic %s' % f)
+                    a.save()
+                    logger.warning('article saved.')
+                    logger.warning('moving the pic from "tmp" into "articles" directory.')
+                    messages.info(request, 'Article with pic %s created.' % f)
+                    os.rename(source_path, target_path)
+                    logger.warning('creating Photo instance...')
+                    photo = Photo.objects.create(photo=os.path.join('articles', f), article=a)
+
+                    logger.warning('photo created.')
+                    logger.info("Article [%s] created." % a)
+
+                except IntegrityError:
+                    msg = 'Some integrity error occurs. Will remove pic %s' % source_path
+                    logger.warning(msg)
+                    messages.warning(request, msg)
+                    os.unlink(source_path)
+
+            logger.debug('handling pics job is ended. Return the articles list.')
+            return HttpResponseRedirect("/inventory/articles/")
+        else:
+            logger.warning('form is not valid. Pictures will not be handled.')
+            return HttpResponse("Will not handle pictures. Form not valid")
+
+
+    else:
+        logger.debug('GET part of handle_pictures.')
+        form = HandlePicturesForm()
+        logger.debug('%s pictures to handle.' % str(len(files)))
+        return render(request, "inventory/handle_pics.html", {'form': form, 'pics_count' : len(files)})
+
 
 class ArticleFilter(FilterSet):
     genre_choices = (
@@ -49,7 +201,7 @@ class ArticleFilter(FilterSet):
     genre_article = ChoiceFilter(choices=genre_choices, label=_(u"Article Type"))
     type_client = ChoiceFilter(choices=clients_choices, label=_('Client Type'))
     solde = ChoiceFilter(choices=solde_choices)
-    quantite__gt = NumberFilter(name='quantite', lookup_expr='gt', label=_('quantity greater than'))
+    quantite__gt = NumberFilter(name='quantity', lookup_expr='gt', label=_('quantity greater than'))
     # selling_price__gte = NumberFilter(name='selling_price', lookup_expr='gte',
     #                                  label=_('prix de vente plus grand ou égal'))
 
@@ -57,11 +209,11 @@ class ArticleFilter(FilterSet):
     class Meta:
         model = Article
         fields = {'marque__nom' : ['icontains'],
-                  'nom': ['icontains'],
+                  'name': ['icontains'],
                   'id' : ['exact'],
-                  'quantite' : ['exact'],
+                  'quantity' : ['exact'],
                   'selling_price' : ['exact'],
-                  'prix_total' : ['exact']
+                  'arrivage__nom' : ['icontains'],
                   }
 
 
@@ -141,6 +293,36 @@ class ArticleUpdateView(UpdateView):
         return reverse('inventory:articles')
 
 
+@method_decorator(login_required, name='dispatch')
+class ArticleDeleteView(DeleteView):
+    template_name = 'inventory/article_delete.html'
+    context_object_name = 'article'
+    model = Article
+
+    def get_success_url(self):
+        return reverse('inventory:articles')
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if CostsCategory.objects.filter(name='Purchasing Price').count() == 0:
+            cat = CostsCategory.objects.create(name='Purchasing Price')
+        else:
+            cat = CostsCategory.objects.filter(name='Purchasing Price')[0]
+        if float(self.object.purchasing_price) > 0:
+            cost = Costs.objects.create(category=cat,
+                                        amount=self.object.purchasing_price,
+                                        name=_('Generated when article was deleted'),
+                                        branch=self.object.branch,
+                                        article_id=self.object.pk
+                                        )
+            logger.info('Purchasing price %s saved in  Cost-ID %s.' % (self.object.purchasing_price, cost.pk))
+        else:
+            logger.info('no costs created because purchasing price is zero')
+        self.object.delete()
+        success_url = self.get_success_url()
+        return HttpResponseRedirect(success_url)
+
+
 class SoldeUpdateView(ArticleUpdateView):
 
     def get_success_url(self):
@@ -170,7 +352,7 @@ class SoldesListView(ListView):
         enterprise_of_current_user = Employee.get_enterprise_of_current_user(self.request.user)
         qs = Article.objects.filter(entreprise=enterprise_of_current_user)
         qs = qs.filter(solde='S')
-        qs = qs.filter(prix_total=0.0)
+        qs = qs.filter(selling_price=0.0)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -202,43 +384,43 @@ class SoldesListView(ListView):
         return context
 
 
-@login_required()
-def articleDeleteView(request, pk):
-
-    article = get_object_or_404(Article, pk=pk)
-    if request.method == 'POST':
-        form = ArticleDeleteForm(request.POST)
-        if form.is_valid():
-            if not form.cleaned_data['delete_purchasing_costs']:
-                logger.debug('Deleting article without its purchasing price.')
-                # The purchasing price of the article will be saved in a Costs.
-                # Create a Cost with the purchasing price
-                cat = None
-                if len(Category.objects.filter(name='Purchasing Price')) == 0:
-                    cat =  CostsCategory.objects.create(name='Purchasing Price')
-                else:
-                    cat = CostsCategory.objects.filter(name='Purchasing Price')[0]
-                logger.debug('Costs Category {0} created or used.'.format(cat.name))
-                cost = Costs.objects.create(category=cat,
-                                     amount=article.purchasing_price,
-                                     name='Generated when article was deleted',
-                                            branch=article.branch,
-                                      )
-                logger.info('Purchasing price {0} saved in  Cost-ID {1}.'.format(article.purchasing_price, cost.pk))
-            else:
-                logger.info('Deleting article without saving its purchasing price.')
-
-            article.delete()
-            return HttpResponseRedirect(reverse('inventory:articles'))
-        else:
-            return render(request, context={'article': article, 'form': form},
-                          template_name='inventory/article_delete.html')
-
-    else:
-        form = ArticleDeleteForm()
-        return render(request, context={'article': article, 'form': form},
-                      template_name='inventory/article_delete.html')
-
+# @login_required()
+# def articleDeleteView(request, pk):
+#
+#     article = get_object_or_404(Article, pk=pk)
+#     if request.method == 'POST':
+#         form = ArticleDeleteForm(request.POST)
+#         if form.is_valid():
+#             if not form.cleaned_data['delete_purchasing_costs']:
+#                 logger.debug('Deleting article without its purchasing price.')
+#                 # The purchasing price of the article will be saved in a Costs.
+#                 # Create a Cost with the purchasing price
+#                 cat = None
+#                 if len(Category.objects.filter(name='Purchasing Price')) == 0:
+#                     cat =  CostsCategory.objects.create(name='Purchasing Price')
+#                 else:
+#                     cat = CostsCategory.objects.filter(name='Purchasing Price')[0]
+#                 logger.debug('Costs Category {0} created or used.'.format(cat.name))
+#                 cost = Costs.objects.create(category=cat,
+#                                      amount=article.purchasing_price,
+#                                      name='Generated when article was deleted',
+#                                             branch=article.branch,
+#                                       )
+#                 logger.info('Purchasing price {0} saved in  Cost-ID {1}.'.format(article.purchasing_price, cost.pk))
+#             else:
+#                 logger.info('Deleting article without saving its purchasing price.')
+#
+#             article.delete()
+#             return HttpResponseRedirect(reverse('inventory:articles'))
+#         else:
+#             return render(request, context={'article': article, 'form': form},
+#                           template_name='inventory/article_delete.html')
+#
+#     else:
+#         form = ArticleDeleteForm()
+#         return render(request, context={'article': article, 'form': form},
+#                       template_name='inventory/article_delete.html')
+#
 
 
 @method_decorator(login_required, name='dispatch')

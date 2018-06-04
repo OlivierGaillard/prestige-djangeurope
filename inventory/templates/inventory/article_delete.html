@@ -3,8 +3,13 @@
 {% load i18n %}
 {% block content %}
 <div class="container">
-  <h3>{% trans "Delete Arrival-ID" %} {{arrival.pk}} / {% trans "Name:" %} {{arrival.nom}} ?</h3>
-  <form action="/inventory/arrival_delete/{{ arrival.pk }}" method="post">
+  <h3>{% trans "Delete Article-ID" %} {{article.pk}} / {% trans "Name:" %} {{article.nom}} ?</h3>
+
+  <div class="jumbotron info-danger">
+    <h4>Cela efface aussi le coût d'achat!</h4>
+  </div>
+
+  <form action="/inventory/article_delete/{{ article.pk }}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Delete" class="btn btn-danger"/>

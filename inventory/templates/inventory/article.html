@@ -81,7 +81,7 @@
      {% endif %}
       <tr>
         <th>{% trans "Quantité en stock" %}</th>
-        <td>{{article.quantite}}</td>
+        <td>{{article.quantity}}</td>
       </tr>
       <tr>
         <th>{% trans "Prix d'achat" %}</th>
@@ -106,7 +106,7 @@
         <td>
     <form method="POST" action="{% url "cart:add_item" article.pk  %}">
        {% csrf_token %}
-            {% if article.quantite > 0 %}
+            {% if article.quantity > 0 %}
             <input type="submit" class="btn btn-primary" value="{% trans "Ajouter au panier" %}"/>
             {% else %}
             <input type="text" class="btn btn-danger disabled" value="{% trans 'Stock épuisé!' %}"/>
@@ -126,6 +126,10 @@
 
     <td>
       <a href="/inventory/article_update/{{article.pk}}"><button class="btn btn-warning" >{% trans "Modifier" %}</button></a>
+    </td>
+
+    <td>
+      <a href="/inventory/article_delete/{{article.pk}}"><button class="btn btn-danger" >{% trans "Delete" %}</button></a>
     </td>
 
     </tr>

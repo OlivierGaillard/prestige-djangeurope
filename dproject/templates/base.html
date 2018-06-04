@@ -80,8 +80,8 @@
                         <li><a href="{% url "inventory:branch_create" %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Create Branch' %}</a> </li>
                         <li><a href="{% url "inventory:category_create" %}" title="{% trans 'Create category' %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Create one Category' %}</a></li>
                         <li><a href="{% url "inventory:arrival_create" %}" title="{% trans 'Create  Arrival' %}"><span class="glyphicon glyphicon-pencil"></span>  {% trans 'Create one Arrival' %}</a></li>
-                        <li><a href="#" title="{% trans 'Upload pictures ZIP' %}">{% trans 'Upload ZIP pictures' %}</a></li>
-                        <li><a href="#" title="{% trans 'Generate articles from pictures' %}">{% trans 'Generate Articles' %}</a></li>
+                        <li><a href="{% url "inventory:upload_zipics" %}" title="{% trans 'Upload pictures ZIP' %}">{% trans 'Upload ZIP pictures' %}</a></li>
+                        <li><a href="{% url "inventory:handle_pics" %}" title="{% trans 'Generate articles from pictures' %}">{% trans 'Generate Articles' %}</a></li>
 
  <!--                       <li><a href="{% url 'inventory:article_create' %}"  title="{% trans "Add an article from workshop" %}"><span class="glyphicon glyphicon-pencil"></span>
                           {% trans 'Add workshop article' %} <span class="glyphicon glyphicon-scissors"></span></a></li>
