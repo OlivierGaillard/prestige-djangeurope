@@ -36,7 +36,7 @@
                    class="btn btn-success"
                    {% endif %}
                    value="{% trans 'Add one payment' %}" />
-            <small class="form-text text-muted">{% trans 'reduced price'%}: {{a.solde_paiements|intcomma}}</small>
+            <small class="form-text text-muted">{{a.solde_paiements|intcomma}}</small>
             </form>
           </td>
           {% else %}
