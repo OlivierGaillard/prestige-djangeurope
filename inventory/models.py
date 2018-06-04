@@ -226,7 +226,7 @@ class Article(models.Model):
     #tailles_vendues = models.CharField(max_length=200, null=True, blank=True, help_text="(XL, 1), (M, 2)")
 
     def __str__(self):
-        return self.nom + ' ID ' + str(self.pk)
+        return self.name + ' ID ' + str(self.pk)
 
     class Meta:
         ordering = ['pk',]
