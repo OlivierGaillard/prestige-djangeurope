@@ -102,7 +102,7 @@ class CartItem(models.Model):
 
     @property
     def nom(self):
-        return self.article.nom
+        return self.article.name
 
 
     def get_absolute_url(self):
