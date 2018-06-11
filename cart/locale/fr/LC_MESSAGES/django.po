@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-02 08:56+0200\n"
+"POT-Creation-Date: 2018-06-11 17:00+0200\n"
 "PO-Revision-Date: 2018-06-02 08:58+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -338,10 +338,6 @@ msgstr "Cliquez pour ajouter un paiement or voir les détails d'une vente"
 #: cart/templates/cart/ventes_workshop.html:46
 msgid "Add one payment"
 msgstr "Ajouter un paiement"
-
-#: cart/templates/cart/ventes.html:39
-msgid "reduced price"
-msgstr ""
 
 #: cart/templates/cart/ventes_workshop.html:14
 msgid "Order-ID"

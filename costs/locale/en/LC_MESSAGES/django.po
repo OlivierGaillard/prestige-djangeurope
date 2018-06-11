@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-02 08:56+0200\n"
+"POT-Creation-Date: 2018-06-11 17:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgid "name"
 msgstr ""
 
 #: costs/models.py:21 costs/models.py:74
-#: costs/templates/costs/costs_details.html:29
+#: costs/templates/costs/costs_details.html:35
 msgid "Enterprise"
 msgstr ""
 
@@ -68,7 +68,7 @@ msgid "Note"
 msgstr ""
 
 #: costs/models.py:75 costs/templates/costs/costs.html:34
-#: costs/templates/costs/costs_details.html:30
+#: costs/templates/costs/costs_details.html:36
 msgid "Billing Date"
 msgstr ""
 
@@ -76,7 +76,7 @@ msgstr ""
 msgid "when the bill was created"
 msgstr ""
 
-#: costs/models.py:76 costs/templates/costs/costs_details.html:31
+#: costs/models.py:76 costs/templates/costs/costs_details.html:37
 msgid "Billing Nr"
 msgstr ""
 
@@ -84,7 +84,11 @@ msgstr ""
 msgid "the bill reference number"
 msgstr ""
 
-#: costs/models.py:85
+#: costs/models.py:79
+msgid "Article-ID"
+msgstr ""
+
+#: costs/models.py:87
 msgid "Costs"
 msgstr ""
 
@@ -152,6 +156,10 @@ msgstr ""
 
 #: costs/templates/costs/costs_details.html:25
 msgid "Link to article"
+msgstr ""
+
+#: costs/templates/costs/costs_details.html:30
+msgid "Article-ID (if deleted)"
 msgstr ""
 
 #: costs/templates/costs/enterprise_create.html:7

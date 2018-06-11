@@ -12,7 +12,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.utils.decorators import method_decorator
 from django.urls import reverse
-from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter
+from django_filters import FilterSet, CharFilter, ChoiceFilter, NumberFilter, ModelChoiceFilter, RangeFilter
 from django.views.generic import ListView, TemplateView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Branch, Article, Employee, Photo, Category, Arrivage, Losses, Marque
 from .forms import  ArticleCreateForm, AddPhotoForm, ArticleUpdateForm, BranchCreateForm, BranchUpdateForm
@@ -201,19 +201,16 @@ class ArticleFilter(FilterSet):
     genre_article = ChoiceFilter(choices=genre_choices, label=_(u"Article Type"))
     type_client = ChoiceFilter(choices=clients_choices, label=_('Client Type'))
     solde = ChoiceFilter(choices=solde_choices)
-    quantite__gt = NumberFilter(name='quantity', lookup_expr='gt', label=_('quantity greater than'))
-    # selling_price__gte = NumberFilter(name='selling_price', lookup_expr='gte',
-    #                                  label=_('prix de vente plus grand ou égal'))
-
+    arrivage = ModelChoiceFilter(queryset=Arrivage.objects.all())
+    marque = ModelChoiceFilter(queryset=Marque.objects.all())
+    quantity = RangeFilter()
 
     class Meta:
         model = Article
-        fields = {'marque__nom' : ['icontains'],
+        fields = {
                   'name': ['icontains'],
                   'id' : ['exact'],
-                  'quantity' : ['exact'],
-                  'selling_price' : ['exact'],
-                  'arrivage__nom' : ['icontains'],
+                  'quantity' : ['lte', 'gte'],
                   }
 
 

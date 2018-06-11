@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-02 08:56+0200\n"
+"POT-Creation-Date: 2018-06-11 17:00+0200\n"
 "PO-Revision-Date: 2018-05-11 17:35+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgid "name"
 msgstr "nom\t"
 
 #: costs/models.py:21 costs/models.py:74
-#: costs/templates/costs/costs_details.html:29
+#: costs/templates/costs/costs_details.html:35
 msgid "Enterprise"
 msgstr "Fournisseur"
 
@@ -69,7 +69,7 @@ msgid "Note"
 msgstr "note"
 
 #: costs/models.py:75 costs/templates/costs/costs.html:34
-#: costs/templates/costs/costs_details.html:30
+#: costs/templates/costs/costs_details.html:36
 msgid "Billing Date"
 msgstr "Date de facturation"
 
@@ -77,7 +77,7 @@ msgstr "Date de facturation"
 msgid "when the bill was created"
 msgstr "date à laquelle la facture a été saisie"
 
-#: costs/models.py:76 costs/templates/costs/costs_details.html:31
+#: costs/models.py:76 costs/templates/costs/costs_details.html:37
 msgid "Billing Nr"
 msgstr "No de facture"
 
@@ -85,7 +85,13 @@ msgstr "No de facture"
 msgid "the bill reference number"
 msgstr "no de référence"
 
-#: costs/models.py:85
+#: costs/models.py:79
+#, fuzzy
+#| msgid "Article link"
+msgid "Article-ID"
+msgstr "Lien sur l'article"
+
+#: costs/models.py:87
 msgid "Costs"
 msgstr "Coûts"
 
@@ -154,6 +160,10 @@ msgstr "Lien sur l'article"
 #: costs/templates/costs/costs_details.html:25
 msgid "Link to article"
 msgstr "Lien sur l'article"
+
+#: costs/templates/costs/costs_details.html:30
+msgid "Article-ID (if deleted)"
+msgstr ""
 
 #: costs/templates/costs/enterprise_create.html:7
 msgid "Adding one Enterprise or Provider"
