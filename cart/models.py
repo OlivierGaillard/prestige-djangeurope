@@ -76,6 +76,7 @@ class Vente(models.Model):
         else:
             if (self.total_paiements() - self.montant) >= 0:
                 self.reglement_termine = True
+                self.montant = self.total_paiements()
             else:
                 self.reglement_termine = False
             super().save(*args, **kwargs)

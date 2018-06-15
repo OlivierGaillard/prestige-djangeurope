@@ -289,7 +289,8 @@ def add_paiement(request, vente_pk):
             p = Paiement.objects.create(payment_amount=montant, date=form.cleaned_data['date'], vente=vente)
             logger.debug('Payment-ID [%s] created.' % p.pk)
             logger.debug('Payment amount: [%s]' % p.payment_amount)
-            vente.save() # the save method will update if the selling is finished or not.
+            vente.save() # the save method will update if the selling is finished or not
+            # the save method will update the selling amount too.
             logger.debug('Vente: %s' % vente)
             url_redirect = reverse('cart:vente', args=[vente.pk])
             return HttpResponseRedirect(url_redirect)

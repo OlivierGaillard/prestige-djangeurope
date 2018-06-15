@@ -72,4 +72,5 @@ class OrderUpdateView(UpdateView):
 
             vente = Vente.objects.create(branch=branch_atelier, montant=selling_price, client=self.object.client)
             self.object.selling = vente
+            self.success_url = reverse_lazy('cart:ventes_workshop')
         return super(OrderUpdateView, self).form_valid(form)

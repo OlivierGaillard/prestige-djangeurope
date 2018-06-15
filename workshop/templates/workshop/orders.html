@@ -11,6 +11,7 @@
           <th>{% trans 'Client' %}</th>
           <th>{% trans 'Product' %}</th>
           <th>{% trans 'Order state' %}</th>
+          <th>{% trans 'Selling' %}</th>
           <th>{% trans 'Deadline' %}</th>
           <th>{% trans 'Start date' %}</th>
           <th>{% trans 'Edit' %}</th>
@@ -24,6 +25,8 @@
         <td>{{ a.client }}</td>
         <td>{{ a.product }}</td>
         <td>{{ a.get_order_state_display }}</td>
+        {% if a.selling %}<td><a href="{% url "cart:vente" a.selling.pk %}">{{ a.selling.pk }}</a> </td>
+        {% else %}<td>&mdash;</td>{% endif %}
         <td>{{ a.deadline }}</td>
         <td>{{ a.start_date }}</td>
         <td><a href="{% url "workshop:order_update" a.pk %}">{% trans 'Edit'%}</a> </td>

@@ -80,6 +80,7 @@ class TestCostsViews(TestCase):
         self.assertEqual(1, Paiement.objects.count())
         vente = Vente.objects.all()[0]
         self.assertTrue(vente.reglement_termine)
+        self.assertEqual(25000, vente.montant)
 
 
     def test_list(self):
