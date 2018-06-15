@@ -79,8 +79,9 @@ class TestModels(TestCase):
         self.assertEqual(200.5, Costs.objects.total_costs())
 
     def test_balance_without_purchases(self):
-        Vente.objects.create(montant=10.50, reglement_termine=True)
-        Vente.objects.create(montant=20.50, reglement_termine=True)
+        v1 = Vente.objects.create(montant=10.50, reglement_termine=True)
+        v2 = Vente.objects.create(montant=20.50, reglement_termine=True)
+
         Costs.objects.create(category=self.c1, amount=10)
         Costs.objects.create(category=self.c1, amount=5.50)
         # 31 - 15.50 = 15.5

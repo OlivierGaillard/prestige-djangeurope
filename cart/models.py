@@ -64,7 +64,22 @@ class Vente(models.Model):
         return total
 
     def solde_paiements(self):
-        return self.montant - self.total_paiements()
+        balance = self.montant - self.total_paiements()
+        if balance > 0:
+            return balance
+        else: # when the total payments is greater than the selling price
+            return 0
+
+    def save(self, *args, **kwargs):
+        if self.reglement_termine:
+            super().save(*args, **kwargs)
+        else:
+            if (self.total_paiements() - self.montant) >= 0:
+                self.reglement_termine = True
+            else:
+                self.reglement_termine = False
+            super().save(*args, **kwargs)
+
 
 
 

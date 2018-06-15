@@ -289,12 +289,7 @@ def add_paiement(request, vente_pk):
             p = Paiement.objects.create(payment_amount=montant, date=form.cleaned_data['date'], vente=vente)
             logger.debug('Payment-ID [%s] created.' % p.pk)
             logger.debug('Payment amount: [%s]' % p.payment_amount)
-            logger.debug('Saved. Will update selling.')
-            if vente.solde_paiements() == 0:
-                vente.reglement_termine = True
-            else:
-                vente.reglement_termine = False
-            vente.save()
+            vente.save() # the save method will update if the selling is finished or not.
             logger.debug('Vente: %s' % vente)
             url_redirect = reverse('cart:vente', args=[vente.pk])
             return HttpResponseRedirect(url_redirect)

@@ -19,9 +19,9 @@ class TestInventory(TestCase):
         self.user_oga = User.objects.create_user(username='golivier', password='mikacherie')
         self.employe = Employee.objects.create(user=self.user_oga, enterprise=self.enterprise)
 
-        self.article1 = Article.objects.create(nom='Article-1', marque=self.marque_Supra,
-                                          entreprise=self.enterprise, quantite=5,
-                                          arrivage=self.arrivage, prix_total=2000)
+        self.article1 = Article.objects.create(name='Article-1', marque=self.marque_Supra,
+                                          entreprise=self.enterprise, quantity=5,
+                                          arrivage=self.arrivage, selling_price=2000)
 
 
     #@isolate_apps('inventory')
@@ -40,13 +40,11 @@ class TestInventory(TestCase):
     def test_createForm(self):
         data = {'type_client': 'F',
                 'genre_article' : 'V',
-                'nom': 'Test-1', 'marque': 'Babar',
+                'name': 'Test-1', 'marque': 'Babar',
                 'marque' : self.marque_Supra.pk,
                 'entreprise' : self.enterprise.pk,
-                'quantite': 5,
+                'quantity': 5,
                 'arrivage': self.arrivage.pk,
-                'prix_unitaire' : '2500',
-                'prix_total' : '2500',
                 'selling_price' : 5000,
                 'remise' : 5.0,
                 }
@@ -57,24 +55,3 @@ class TestInventory(TestCase):
         article = Article.objects.get(pk=self.article1.pk)
         self.assertIsNotNone(article)
 
-    # def test_user_can_access_article_create(self):
-    #     c = Client()
-    #     c.post('/login/', {'username' : 'golivier', 'password' : 'mikacherie'})
-    #     self.assertEqual(200, response.status_code)
-    #     data = {'type_client': 'F',
-    #             'genre_article': 'V',
-    #             'nom': 'Test-1', 'marque': 'Babar',
-    #             'marque': self.marque_Supra.pk,
-    #             'entreprise': self.enterprise.pk,
-    #             'quantite': 5,
-    #             'arrivage': self.arrivage.pk,
-    #             'prix_unitaire': '2500',
-    #             'prix_total': '2500',
-    #             'remise': 5.0,
-    #             }
-    #
-    #     response = c.post(reverse('inventory:article_create'), data=data, follow=False)
-    #     self.assertEqual(200, response.status_code)
-    #     c.logout()
-    #
-    #     self.assertEqual(2, Article.objects.count())

@@ -77,3 +77,9 @@ core
 config/settings/common.py
 config/settings/local.py
 config/settings/production.py
+
+cart/migrations/
+costs/migrations/
+inventory/migrations/
+__init__.py
+

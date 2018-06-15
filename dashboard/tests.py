@@ -1,7 +1,7 @@
 from django.test import TestCase, Client
 from django.contrib.auth.models import User
 from django.shortcuts import reverse
-from cart.models import Vente
+from cart.models import Vente, Paiement
 from costs.models import Costs, Category
 from inventory.models import Article, Arrivage, Branch, Losses, Marque, Enterprise
 from .models import Dashboard
@@ -19,7 +19,9 @@ class TestDashboard(TestCase):
         self.enterprise = Enterprise.objects.create(name='Gogol')
 
     def test_balance_view(self):
-        Vente.objects.create(montant=20, reglement_termine=True)
+        vente = Vente.objects.create(montant=20)
+        Paiement.objects.create(vente=vente, payment_amount=20)
+        vente.save()
         cost_catego = Category.objects.create(name='Divers')
         Costs.objects.create(category=cost_catego, amount=10)
         self.assertEqual(10, Costs.objects.total_costs())
@@ -28,8 +30,10 @@ class TestDashboard(TestCase):
         a2 = Article.objects.create(name='a2', quantity=5, arrivage=self.arrival,  purchasing_price=100,
                                     marque=self.marque_Moix, entreprise=self.enterprise)
         self.assertEqual(200, Article.objects.total_purchasing_price())
-        self.assertEqual(20-210, Costs.objects.get_balance())
         self.assertEqual(20, Vente.objects.total_sellings())
+        # selling total: 20 minus 200 + 10
+        self.assertEqual(20-210, Costs.objects.get_balance())
+
         c = Client()
         c.post('/login/', {'username': 'golivier', 'password': 'mikacherie'})
         response = c.get(reverse('dashboard:main'))
@@ -43,7 +47,9 @@ class TestDashboard(TestCase):
 
 
     def test_balance_view_bad_dates_order(self):
-        Vente.objects.create(montant=20, reglement_termine=True)
+        vente = Vente.objects.create(montant=20)
+        Paiement.objects.create(vente=vente, payment_amount=20)
+        vente.save()
         cost_catego = Category.objects.create(name='Divers')
         Costs.objects.create(category=cost_catego, amount=10)
         self.assertEqual(10, Costs.objects.total_costs())
@@ -66,7 +72,9 @@ class TestDashboard(TestCase):
         d28mars = date(year=2018, month=3, day=28)
         d31mars = date(year=2018, month=3, day=31)
         d3mars = d1mars + timedelta(days=2)
-        Vente.objects.create(montant=20, reglement_termine=True, date=d28mars)
+        v = Vente.objects.create(montant=20, reglement_termine=True, date=d28mars)
+        Paiement.objects.create(payment_amount=20, vente=v)
+        v.save()
         cost_catego = Category.objects.create(name='Divers')
         marque = Marque.objects.create(nom='MoiMeme')
         Costs.objects.create(category=cost_catego, amount=10, billing_date=d1mars)
@@ -77,8 +85,9 @@ class TestDashboard(TestCase):
 
 
         self.assertEqual(200, Article.objects.total_purchasing_price(start_date=d1mars, end_date=d31mars))
-        self.assertEqual(20 - 210, Costs.objects.get_balance())
         self.assertEqual(20, Vente.objects.total_sellings())
+        self.assertEqual(20 - 210, Costs.objects.get_balance())
+
         c = Client()
         c.post('/login/', {'username': 'golivier', 'password': 'mikacherie'})
         data = {'start_date': '2018-02-01', 'end_date': '2018-03-31'}
@@ -97,7 +106,9 @@ class TestDashboard(TestCase):
     def test_branch_balance_view(self):
         b1 = Branch.objects.create(name='B1')
         b2 = Branch.objects.create(name='B2')
-        Vente.objects.create(montant=20, reglement_termine=True, branch=b1)
+        v = Vente.objects.create(montant=20, branch=b1)
+        Paiement.objects.create(vente=v, payment_amount=20)
+        v.save()
         cost_catego = Category.objects.create(name='Divers')
         Costs.objects.create(category=cost_catego, amount=10, branch=b1)
         a1 = Article.objects.create(name='a1', branch=b1, quantity=10, arrivage=self.arrival, purchasing_price=100,
@@ -187,8 +198,13 @@ class TestDashboard(TestCase):
         Costs.objects.create(category=cost_catego, amount=10, branch=b1)
         Costs.objects.create(category=cost_catego, amount=15, branch=b2)
 
-        Vente.objects.create(montant=20, reglement_termine=True, branch=b1)
-        Vente.objects.create(montant=10, reglement_termine=True, branch=b2)
+        v1 = Vente.objects.create(montant=20, branch=b1)
+        Paiement.objects.create(vente=v1, payment_amount=20)
+        v1.save()
+        v2 = Vente.objects.create(montant=10, branch=b2)
+        Paiement.objects.create(vente=v2, payment_amount=10)
+        v2.save()
+
 
         self.assertEqual(30.00-1400-25.00, Costs.objects.get_balance())
         self.assertEqual(20.00-400-10, Costs.objects.get_balance(branch=b1))
@@ -212,9 +228,12 @@ class TestDashboard(TestCase):
         Costs.objects.create(category=cost_catego, amount=10, branch=b1)
         Costs.objects.create(category=cost_catego, amount=15, branch=b2)
 
-        Vente.objects.create(montant=20, reglement_termine=True, branch=b1)
-        Vente.objects.create(montant=10, reglement_termine=True, branch=b2)
-
+        v1 = Vente.objects.create(montant=20, reglement_termine=True, branch=b1)
+        Paiement.objects.create(payment_amount=20, vente=v1)
+        v1.save()
+        v2 = Vente.objects.create(montant=10, reglement_termine=True, branch=b2)
+        Paiement.objects.create(payment_amount=20, vente=v2)
+        v2.save()
 
         self.assertEqual(400, Dashboard.total_purchasing_prices(branch=b1))
         self.assertEqual(1400, Dashboard.total_purchasing_prices())

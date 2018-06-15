@@ -43,7 +43,7 @@ class TestCostsViews(TestCase):
         self.assertTrue(f.is_valid(), f.errors.as_data())
 
 
-    def test_add_payment(self):
+    def test_add_payment_payments_not_finished(self):
         c = Client()
         c.post('/login/', {'username': 'golivier', 'password': 'fleurdelys'})
         c.post(reverse('cart:vente_create'), data={'date': date.today(), 'montant': 15000, 'branch': self.atelier.pk})
@@ -51,6 +51,35 @@ class TestCostsViews(TestCase):
         data = {'payment_amount' : 100, 'date' : date.today(), 'vente' : vente.pk}
         c.post(reverse('cart:paiement_add', args=[vente.pk]), data=data)
         self.assertEqual(1, Paiement.objects.count())
+        self.assertFalse(vente.reglement_termine)
+
+    def test_add_payment_payments_finished(self):
+        c = Client()
+        c.post('/login/', {'username': 'golivier', 'password': 'fleurdelys'})
+        c.post(reverse('cart:vente_create'), data={'date': date.today(), 'montant': 15000, 'branch': self.atelier.pk})
+        vente = Vente.objects.all()[0]
+        data = {'payment_amount' : 15000, 'date' : date.today(), 'vente' : vente.pk}
+        c.post(reverse('cart:paiement_add', args=[vente.pk]), data=data)
+        self.assertEqual(1, Paiement.objects.count())
+        vente = Vente.objects.all()[0] # new request is neeed to get updated values
+        self.assertTrue(vente.reglement_termine)
+
+
+    def test_add_payment_selling_price_greater_greater_than_defined(self):
+        """
+        When a product / article is sold to a price greater than the article's or
+        product's (workshop) selling price, the balance should be zero too.
+        :return:
+        """
+        c = Client()
+        c.post('/login/', {'username': 'golivier', 'password': 'fleurdelys'})
+        c.post(reverse('cart:vente_create'), data={'date': date.today(), 'montant': 15000, 'branch': self.atelier.pk})
+        vente = Vente.objects.all()[0]
+        data = {'payment_amount': 25000, 'date': date.today(), 'vente': vente.pk}
+        c.post(reverse('cart:paiement_add', args=[vente.pk]), data=data)
+        self.assertEqual(1, Paiement.objects.count())
+        vente = Vente.objects.all()[0]
+        self.assertTrue(vente.reglement_termine)
 
 
     def test_list(self):
