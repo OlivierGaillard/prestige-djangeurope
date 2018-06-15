@@ -8,7 +8,7 @@
       <tr>
           <th>{% trans 'Name' %}</th>
           <th>{% trans 'Edit' %}</th>
-          <th>{% trans 'Delete' %}</th>
+          <!--<th>{% trans 'Delete' %}</th>-->
       </tr>
       </thead>
 
@@ -16,8 +16,8 @@
       {% for a in categories %}
       <tr>
           <td>{{ a.name }}</td>
-          <td><a href="#">{% trans 'Edit'%}</a> </td>
-          <td><a href="#">{% trans 'Delete'%}</a> </td>
+          <td><a href="{% url "workshop:product_category_update" a.pk %}">{% trans 'Edit'%}</a> </td>
+          <!--<td><a href="#">{% trans 'Delete'%}</a> </td>-->
       </tr>
       {% endfor %}
     </table>

@@ -6,6 +6,7 @@ from cart.models import Vente
 from inventory.models import Branch
 from .models import Product, ProductCategory, Order
 from .forms import ProductCreateForm, ProductCategoryCreateForm, ProductUpdateForm, OrderCreateForm, OrderUpdateForm
+from .forms import ProductCategoryUpdateForm
 
 
 
@@ -41,6 +42,13 @@ class ProductCategoryListView(ListView):
     model = ProductCategory
     template_name = 'workshop/product_categories.html'
     context_object_name = 'categories'
+
+class ProductCategoryUpdateView(UpdateView):
+    model = ProductCategory
+    template_name = 'workshop/product_category_update.html'
+    context_object_name = 'category'
+    form_class = ProductCategoryUpdateForm
+    success_url = reverse_lazy('workshop:product_categories')
 
 
 class OrderCreateView(CreateView):

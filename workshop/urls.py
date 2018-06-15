@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^product_detail/(?P<pk>[0-9]+)$', views.ProductDetailView.as_view(), name='product_detail'),
     url(r'^product_categories/$', views.ProductCategoryListView.as_view(), name='product_categories'),
     url(r'^product_category_create/$', views.ProductCategoryCreateView.as_view(), name='product_category_create'),
+    url(r'^product_category_update/(?P<pk>[0-9]+)$', views.ProductCategoryUpdateView.as_view(), name='product_category_update'),
     url(r'^sell_product/(?P<pk>[0-9]+)$', views.ProductUpdateView.as_view(), name='sell_product'),
     url(r'^order_create/$', views.OrderCreateView.as_view(), name='order_create'),
     url(r'^orders/$', views.OrderListView.as_view(), name='orders'),

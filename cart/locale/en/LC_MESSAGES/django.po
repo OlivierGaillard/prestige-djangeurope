@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 17:00+0200\n"
+"POT-Creation-Date: 2018-06-15 16:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -56,22 +56,22 @@ msgstr ""
 msgid "Selling closed"
 msgstr ""
 
-#: cart/models.py:74 cart/templates/cart/vente.html:71
+#: cart/models.py:90 cart/templates/cart/vente.html:71
 #: cart/templates/cart/vente.html:122
 msgid "Montant"
 msgstr "Amount"
 
-#: cart/models.py:75 cart/models.py:87
+#: cart/models.py:91 cart/models.py:103
 msgid "Vente"
 msgstr "Selling"
 
-#: cart/models.py:86 cart/templates/cart/cart_content.html:39
+#: cart/models.py:102 cart/templates/cart/cart_content.html:39
 #: cart/templates/cart/checkout.html:48 cart/templates/cart/vente.html:82
 #: cart/templates/cart/vente_update.html:18
 msgid "Prix"
 msgstr "Price"
 
-#: cart/models.py:90
+#: cart/models.py:106
 msgid "Panier validé"
 msgstr "Cart validated"
 

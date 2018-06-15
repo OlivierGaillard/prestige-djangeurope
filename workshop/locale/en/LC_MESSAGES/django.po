@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-11 17:00+0200\n"
+"POT-Creation-Date: 2018-06-15 16:56+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -81,11 +81,11 @@ msgstr ""
 msgid "Date order"
 msgstr ""
 
-#: workshop/models.py:46 workshop/templates/workshop/orders.html:14
+#: workshop/models.py:46 workshop/templates/workshop/orders.html:15
 msgid "Deadline"
 msgstr ""
 
-#: workshop/models.py:47 workshop/templates/workshop/orders.html:15
+#: workshop/models.py:47 workshop/templates/workshop/orders.html:16
 msgid "Start date"
 msgstr ""
 
@@ -93,7 +93,7 @@ msgstr ""
 msgid "Order state"
 msgstr ""
 
-#: workshop/models.py:49
+#: workshop/models.py:49 workshop/templates/workshop/orders.html:14
 msgid "Selling"
 msgstr ""
 
@@ -109,8 +109,8 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: workshop/templates/workshop/orders.html:16
-#: workshop/templates/workshop/orders.html:29
+#: workshop/templates/workshop/orders.html:17
+#: workshop/templates/workshop/orders.html:32
 #: workshop/templates/workshop/product_categories.html:10
 #: workshop/templates/workshop/product_categories.html:19
 #: workshop/templates/workshop/product_detail.html:42
