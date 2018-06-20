@@ -8,6 +8,7 @@ from dashboard.utils import TimeSliceHelper
 
 
 class Client(models.Model):
+    title = models.CharField(_('Title'), max_length=20, null=True, blank=True)
     nom = models.CharField(_('Nom'), max_length=80)
     prenom = models.CharField(_('Prénom'), max_length=80)
     phone_regex = RegexValidator(regex=r'^\+?1?\d{9,20}$',

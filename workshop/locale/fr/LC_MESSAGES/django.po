@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 16:56+0200\n"
+"POT-Creation-Date: 2018-06-20 07:35+0200\n"
 "PO-Revision-Date: 2018-06-01 18:17+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -18,15 +18,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.7\n"
 
-#: workshop/forms.py:110
+#: workshop/forms.py:128
 msgid "YES"
 msgstr "Oui"
 
-#: workshop/forms.py:110
+#: workshop/forms.py:128
 msgid "NO"
 msgstr "Non"
 
-#: workshop/forms.py:110
+#: workshop/forms.py:128
 msgid "generate_selling"
 msgstr "ajouter une vente"
 
@@ -37,7 +37,7 @@ msgstr "ajouter une vente"
 msgid "Name"
 msgstr "Nom"
 
-#: workshop/models.py:7 workshop/models.py:14 workshop/models.py:17
+#: workshop/models.py:7
 msgid "n.d."
 msgstr "n.d."
 
