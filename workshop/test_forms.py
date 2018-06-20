@@ -9,7 +9,7 @@ class TestWorkshopForms(TestCase):
         pass
 
     def test_product_category_create_form(self):
-        data = {'name' : 'Wonderland'}
+        data = {'name' : 'Wonderland', 'selling_price' : 2000}
         form = ProductCreateForm(data=data)
         self.assertTrue(form.is_valid(), form.errors.as_data())
         form.save()

@@ -15,7 +15,7 @@ class TestWorkshopViews(TestCase):
         #pcat = ProductCategory.objects.create(name='retouches')
         c = Client()
         c.post('/login/', {'username': 'golivier', 'password': 'gogol'})
-        c.post(reverse('workshop:product_create'), data={'name' : 'robe'}) #, 'product_category' : pcat.pk})
+        c.post(reverse('workshop:product_create'), data={'name' : 'robe', 'selling_price' : 3444}) #, 'product_category' : pcat.pk})
         c.logout()
         self.assertEqual(1, Product.objects.count())
 

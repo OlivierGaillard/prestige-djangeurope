@@ -13,7 +13,7 @@ class ProductCategory(models.Model):
 class Product(models.Model):
     name = models.CharField(_('Name'), max_length=100, null=True, blank=True, default=_('n.d.'))
     product_category = models.ForeignKey(ProductCategory, on_delete=models.SET_NULL, verbose_name=_('Category'), null=True, blank=True)
-    selling_price = models.DecimalField(_("Selling Price"), max_digits=10, decimal_places=2, default=0.0, blank=True)
+    selling_price = models.DecimalField(_("Selling Price"), max_digits=10, decimal_places=2, default=0.0)
     note          = models.TextField(_("Notes"), null=True, blank=True, default=_('n.d.'))
     photo = models.ImageField(upload_to='products', null=True, blank=True)
 
