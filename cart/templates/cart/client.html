@@ -11,7 +11,7 @@
       </tr>
       <tr>
           <th>{% trans 'Title' %}</th>
-          <td>{{ client.title }}</td>
+          <td>{{ client.title|default_if_none:"" }}</td>
       </tr>
       <tr>
           <th>Nom</th>
