@@ -18,6 +18,7 @@ class Client(models.Model):
 
     class Meta:
         unique_together = ['nom', 'prenom']
+        ordering = ['nom']
 
     def __str__(self):
         return self.nom + ' ' + self.prenom
