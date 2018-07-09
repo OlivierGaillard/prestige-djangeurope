@@ -372,7 +372,7 @@ class SoldesListView(ListView):
         context['articles'] = articles
 
 
-        no_selling_prices = qs.filter(prix_total = 0.0)
+        no_selling_prices = qs.filter(selling_price = 0.0)
         summary['selling_price_zero'] = no_selling_prices_count = len(no_selling_prices)
         summary['no_selling_price_percent'] = int((no_selling_prices_count / summary['count']) * 100)
 
